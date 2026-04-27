@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Thông tin cá nhân - LAPZONE</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        body { font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; background: #f4f7f6; margin: 0; padding: 20px; }
+        .profile-container { max-width: 600px; margin: 50px auto; background: white; padding: 30px; border-radius: 15px; box-shadow: 0 5px 20px rgba(0,0,0,0.05); }
+        .header-profile { border-bottom: 2px solid #f0f0f0; padding-bottom: 20px; margin-bottom: 30px; display: flex; align-items: center; gap: 20px; }
+        .avatar-circle { width: 80px; height: 80px; background: #0884d1; color: white; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 30px; font-weight: bold; }
+        .info-group { margin-bottom: 20px; }
+        .info-label { font-size: 13px; color: #888; margin-bottom: 5px; text-transform: uppercase; letter-spacing: 1px; }
+        .info-value { font-size: 17px; color: #333; font-weight: 500; padding: 10px; background: #f9f9f9; border-radius: 8px; border: 1px solid #eee; }
+        .btn-edit { display: inline-block; width: 100%; padding: 12px; background: #0884d1; color: white; text-align: center; text-decoration: none; border-radius: 8px; font-weight: bold; transition: 0.3s; margin-top: 20px; }
+        .btn-edit:hover { background: #0665a0; }
+        .back-link { display: block; text-align: center; margin-top: 20px; color: #999; text-decoration: none; font-size: 14px; }
+    </style>
+</head>
+<body>
+
+    <div class="profile-container">
+        <div class="header-profile">
+            <div class="avatar-circle" th:text="${#strings.substring(user.fullName, 0, 1)}">D</div>
+            <div>
+                <h2 style="margin: 0;" th:text="${user.fullName}">Nguyễn Mạnh Dũng</h2>
+                <p style="margin: 5px 0 0; color: #777;" th:text="${user.role}">ADMIN</p>
+            </div>
+        </div>
+
+        <div class="info-group">
+            <div class="info-label">Email tài khoản</div>
+            <div class="info-value" th:text="${user.email}">dung@example.com</div>
+        </div>
+
+        <div class="info-group">
+            <div class="info-label">Số điện thoại</div>
+            <div class="info-value" th:text="${user.phone}">0328xxxxxx</div>
+        </div>
+
+        <div class="info-group">
+            <div class="info-label">Địa chỉ mặc định</div>
+            <div class="info-value" th:text="${user.address != null ? user.address : 'Chưa cập nhật'}">Hà Nội</div>
+        </div>
+
+        <a href="#" class="btn-edit"><i class="fas fa-user-edit"></i> Chỉnh sửa hồ sơ</a>
+        
+        <a th:href="@{/}" class="back-link"><i class="fas fa-arrow-left"></i> Quay lại cửa hàng</a>
+    </div>
+
+</body>
+</html>
