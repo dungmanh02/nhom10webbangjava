@@ -1,14 +1,17 @@
 package com.lapzone.lapzoneweb.controller;
 
+import com.lapzone.lapzoneweb.model.dto.UserUpdateDTO;
 import com.lapzone.lapzoneweb.model.entity.User;
 import com.lapzone.lapzoneweb.model.service.UserService;
 import jakarta.servlet.http.HttpSession;
+import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PostMapping;
 
 @Controller
 public class UserController {
@@ -21,44 +24,66 @@ public class UserController {
     // ==========================================
     @GetMapping("/profile")
     public String showProfile(HttpSession session, Model model) {
-        // Lấy User từ Session
         User sessionUser = (User) session.getAttribute("currentUser");
 
-        // Nếu chưa đăng nhập, đá về trang đăng nhập
         if (sessionUser == null) {
             return "redirect:/dangnhap";
         }
 
-        // Lấy lại dữ liệu mới nhất từ Database thông qua Service
         User currentUser = userService.findById(sessionUser.getId());
-        
-        // Đưa dữ liệu sang HTML
-        model.addAttribute("user", currentUser);
-        
-        return "profile"; 
+
+        // Tạo DTO từ dữ liệu DB rồi đưa vào form (tên "userForm" để khớp th:object)
+        UserUpdateDTO dto = new UserUpdateDTO(
+            currentUser.getId(),
+            currentUser.getFullName(),
+            currentUser.getPhone(),
+            currentUser.getAddress()
+        );
+        model.addAttribute("userForm", dto);
+        model.addAttribute("user", currentUser); // dùng để hiển thị email (readonly)
+
+        return "profile";
     }
 
     // ==========================================
     // 2. XỬ LÝ CẬP NHẬT THÔNG TIN CÁ NHÂN
     // ==========================================
     @PostMapping("/profile/update")
-    public String handleUpdateProfile(@ModelAttribute User userFromForm, 
-                                      HttpSession session, 
+    public String handleUpdateProfile(@Valid @ModelAttribute("userForm") UserUpdateDTO dto,
+                                      BindingResult result,
+                                      HttpSession session,
                                       Model model) {
-        
-        // Gọi Service xử lý logic cập nhật
-        User updatedUser = userService.updateProfile(userFromForm);
 
-        if (updatedUser != null) {
-            // Cập nhật lại Session để hiển thị tên mới trên Header ngay lập tức
-            session.setAttribute("currentUser", updatedUser);
-            model.addAttribute("success", "Cập nhật thông tin thành công!");
-        } else {
-            model.addAttribute("error", "Có lỗi xảy ra khi cập nhật!");
+        User sessionUser = (User) session.getAttribute("currentUser");
+        if (sessionUser == null) {
+            return "redirect:/dangnhap";
         }
 
-        // Quay lại trang profile để xem kết quả
-        model.addAttribute("user", updatedUser);
+        // Ép id từ session, không tin id từ form (tránh IDOR)
+        dto.setId(sessionUser.getId());
+
+        if (result.hasErrors()) {
+            User currentUser = userService.findById(sessionUser.getId());
+            model.addAttribute("user", currentUser);
+            return "profile";
+        }
+
+        User updatedUser = userService.updateProfileFromDTO(dto);
+
+        if (updatedUser != null) {
+            session.setAttribute("currentUser", updatedUser);
+            model.addAttribute("success", "Cập nhật thông tin thành công!");
+            model.addAttribute("user", updatedUser);
+            model.addAttribute("userForm", new UserUpdateDTO(
+                updatedUser.getId(), updatedUser.getFullName(),
+                updatedUser.getPhone(), updatedUser.getAddress()
+            ));
+        } else {
+            model.addAttribute("error", "Có lỗi xảy ra khi cập nhật!");
+            model.addAttribute("user", userService.findById(sessionUser.getId()));
+            model.addAttribute("userForm", dto);
+        }
+
         return "profile";
     }
 }

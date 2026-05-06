@@ -1,61 +1,87 @@
 function ShowDesc(){
- const mainImage = document.getElementById("desc_img_0");
-
-    const thumbnails = document.querySelectorAll('.list_desc_img_product img'); 
+    const mainImage = document.getElementById("desc_img_0");
+    const thumbnails = document.querySelectorAll('.list_desc_img_product img');
 
     if (!mainImage || thumbnails.length === 0) {
-        console.warn("Không tìm thấy ảnh chính hoặc ảnh phụ. Đã dừng logic ShowDesc.");
         return;
     }
-    
-    thumbnails.forEach((thumbnail) => {
+
+    let currentIndex = 0;
+    let autoSlideTimer = null;
+    const SLIDE_INTERVAL = 3000; // đổi ảnh mỗi 3 giây
+
+    function goToSlide(index) {
+        thumbnails.forEach(function(t) { t.classList.remove("active-thumb"); });
+        currentIndex = (index + thumbnails.length) % thumbnails.length;
+        mainImage.style.opacity = "0";
+        setTimeout(function() {
+            mainImage.src = thumbnails[currentIndex].src;
+            mainImage.style.opacity = "1";
+        }, 150);
+        thumbnails[currentIndex].classList.add("active-thumb");
+    }
+
+    function startAutoSlide() {
+        autoSlideTimer = setInterval(function() {
+            goToSlide(currentIndex + 1);
+        }, SLIDE_INTERVAL);
+    }
+
+    function resetAutoSlide() {
+        clearInterval(autoSlideTimer);
+        startAutoSlide();
+    }
+
+    // Click thumbnail: chuyển ảnh và reset bộ đếm tự động
+    thumbnails.forEach(function(thumbnail, index) {
         thumbnail.addEventListener("click", function() {
-
-            const newImageUrl = thumbnail.src; 
-
- 
-            mainImage.src = newImageUrl;
+            goToSlide(index);
+            resetAutoSlide();
         });
     });
+
+    // Khởi động: active thumbnail đầu tiên rồi bắt đầu tự chạy
+    goToSlide(0);
+    startAutoSlide();
 }
+
 function CountTime(){
-     let endDate=new Date("Dec 31,2025 23:59:59").getTime();
-    let x=setInterval(function(){
-        let now=new Date().getTime();
-        let distance=endDate-now;
-        let days=Math.floor(distance/(1000*60*60*24));
-        let hours=Math.floor((distance%(1000*60*60*24))/(1000*60*60));
-        let minutes=Math.floor((distance%(1000*60*60))/(1000*60));
-        let seconds=Math.floor((distance%(1000*60))/1000);
-        document.getElementById("counttime").innerHTML=""+
-        days+" Ngày "+hours+" Giờ "+minutes+" Phút "+seconds+" Giây ";
-        if(distance<0){
-        clearInterval(x);
-        document.getElementById("counttime").innerHTML="hết hạn";
-    }
-    },1000);
+    let endDate = new Date("2026-12-31T23:59:59").getTime();
+    let countEl = document.getElementById("counttime");
+    if (!countEl) return;
+
+    let x = setInterval(function(){
+        let now = new Date().getTime();
+        let distance = endDate - now;
+
+        if (distance < 0) {
+            clearInterval(x);
+            countEl.innerHTML = "Hết hạn";
+            return;
+        }
+
+        let days    = Math.floor(distance / (1000 * 60 * 60 * 24));
+        let hours   = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+        let minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+        let seconds = Math.floor((distance % (1000 * 60)) / 1000);
+        countEl.innerHTML = days + " Ngày " + hours + " Giờ " + minutes + " Phút " + seconds + " Giây";
+    }, 1000);
 }
 
 function totalPrice(){
-    var earphone=document.getElementById("earphone").checked;
-    var keyboard=document.getElementById("keyboard").checked;
-    var mouse=document.getElementById("mouse").checked;
-    var ram=document.getElementById("RAM").checked;
-    var monitor=document.getElementById("monitor").checked;
-
-
-    localStorage.setItem("earphone",earphone);
-    localStorage.setItem("keyboard",keyboard);
-    localStorage.setItem("mouse",mouse);
-    localStorage.setItem("ram",ram);
-    localStorage.setItem("monitor",monitor);
+    const ids = ["earphone", "keyboard", "mouse", "RAM", "monitor"];
+    ids.forEach(function(id) {
+        const el = document.getElementById(id);
+        if (el) localStorage.setItem(id, el.checked);
+    });
 }
+
 function attachCheckboxListeners() {
-    document.getElementById("earphone").addEventListener("change", totalPrice);
-    document.getElementById("keyboard").addEventListener("change", totalPrice);
-    document.getElementById("mouse").addEventListener("change", totalPrice);
-    document.getElementById("RAM").addEventListener("change", totalPrice);
-    document.getElementById("monitor").addEventListener("change", totalPrice);
+    const ids = ["earphone", "keyboard", "mouse", "RAM", "monitor"];
+    ids.forEach(function(id) {
+        const el = document.getElementById(id);
+        if (el) el.addEventListener("change", totalPrice);
+    });
 }
 
 function init(){
@@ -64,4 +90,4 @@ function init(){
     totalPrice();
     attachCheckboxListeners();
 }
-window.onload=init;
+window.onload = init;

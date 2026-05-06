@@ -1,5 +1,6 @@
 package com.lapzone.lapzoneweb.model.service;
 
+import com.lapzone.lapzoneweb.model.dto.UserUpdateDTO;
 import com.lapzone.lapzoneweb.model.entity.User;
 import com.lapzone.lapzoneweb.model.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -16,22 +17,15 @@ public class UserService {
         return userRepository.findById(id).orElse(null);
     }
 
-    // 2. Logic cập nhật thông tin cá nhân
-    public User updateProfile(User updatedUser) {
-        // Tìm user cũ trong DB để so sánh
-        User existingUser = userRepository.findById(updatedUser.getId()).orElse(null);
-        
-        if (existingUser != null) {
-            // Chỉ cập nhật các trường được phép sửa
-            existingUser.setFullName(updatedUser.getFullName());
-            existingUser.setPhone(updatedUser.getPhone());
-            existingUser.setAddress(updatedUser.getAddress());
-            
-            // Giữ nguyên Email và Role (Vì thường không cho phép khách tự đổi Email/Quyền)
-            // existingUser.setEmail(existingUser.getEmail());
-            // existingUser.setRole(existingUser.getRole());
+    // 2. Logic cập nhật thông tin cá nhân (dùng DTO có validate)
+    public User updateProfileFromDTO(UserUpdateDTO dto) {
+        User existingUser = userRepository.findById(dto.getId()).orElse(null);
 
-            // Lưu lại thông tin đã thay đổi
+        if (existingUser != null) {
+            // Chỉ cập nhật các trường được phép sửa, giữ nguyên email & role
+            existingUser.setFullName(dto.getFullName());
+            existingUser.setPhone(dto.getPhone());
+            existingUser.setAddress(dto.getAddress());
             return userRepository.save(existingUser);
         }
         return null;

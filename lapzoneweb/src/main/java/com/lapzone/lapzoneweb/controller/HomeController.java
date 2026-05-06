@@ -9,6 +9,7 @@ import com.lapzone.lapzoneweb.model.entity.Product;
 import com.lapzone.lapzoneweb.model.repository.CategoryRepository;
 import java.util.List;
 
+
 @Controller
 public class HomeController {
 
@@ -35,23 +36,7 @@ public String showHomePage(Model model) {
 
     return "index";
 }
-    @GetMapping("/product_detail")
-    public String showProductDetail(@RequestParam("id") Long id, Model model) {
-        
-        // Gọi Service lấy đúng 1 sản phẩm theo ID (Tí nữa mình hướng dẫn viết hàm này trong Service)
-        Product product = productService.getProductById(id);
-        
-        if (product != null) {
-            // Ném sản phẩm đó qua cho HTML
-            model.addAttribute("product", product);
-            return "product_detail"; // Trả về trang product_detail.html
-        } else {
-            return "redirect:/"; // Nếu tìm không thấy ID thì đá về trang chủ
-        }
-    }
-
-
-  @GetMapping("/search")
+    @GetMapping("/search")
     public String searchPage(
             @RequestParam(value = "query", required = false, defaultValue = "") String query,
             @RequestParam(value = "categoryId", required = false) Long categoryId,
