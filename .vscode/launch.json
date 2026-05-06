@@ -1,0 +1,14 @@
+{
+    "configurations": [
+        {
+            "type": "java",
+            "name": "Spring Boot-LapzonewebApplication<lapzoneweb>",
+            "request": "launch",
+            "cwd": "${workspaceFolder}",
+            "mainClass": "com.lapzone.lapzoneweb.LapzonewebApplication",
+            "projectName": "lapzoneweb",
+            "args": "",
+            "envFile": "${workspaceFolder}/.env"
+        }
+    ]
+}

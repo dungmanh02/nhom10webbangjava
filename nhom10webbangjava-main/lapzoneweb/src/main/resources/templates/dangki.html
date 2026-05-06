@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" th:href="@{/css/css.css}">
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <title>Đăng ký tài khoản - LAPZONE</title>
+    <style>
+        body {
+            font-family: 'Roboto', Arial, sans-serif;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+            background-color: #f4f4f4;
+        }
+        .register-container {
+            background-color: white;
+            padding: 30px 20px;
+            border-radius: 8px;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+            width: 350px;
+            text-align: center;
+        }
+        .register-container h2 {
+            margin-bottom: 20px;
+            color: #333;
+        }
+        .register-container input {
+            width: 100%;
+            padding: 12px 10px;
+            margin: 10px 0;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            box-sizing: border-box;
+            outline: none;
+            transition: border-color 0.3s;
+        }
+        .register-container input:focus {
+            border-color: #0884d1;
+        }
+        .register-container button {
+            width: 100%;
+            padding: 12px;
+            background-color: #0884d1;
+            color: white;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 16px;
+            font-weight: bold;
+            margin-top: 10px;
+            transition: background-color 0.3s;
+        }
+        .register-container button:hover {
+            background-color: #0665a0;
+        }
+        .error {
+            color: #d32f2f;
+            font-size: 14px;
+            margin-top: 15px;
+            background-color: #ffebee;
+            padding: 8px;
+            border-radius: 4px;
+        }
+        .login-link {
+            margin-top: 20px;
+            font-size: 14px;
+        }
+        .login-link a {
+            color: #0884d1;
+            text-decoration: none;
+            font-weight: bold;
+        }
+        .login-link a:hover {
+            text-decoration: underline;
+        }
+        .home-link {
+            display: block;
+            margin-top: 15px;
+            font-size: 13px;
+            color: #666;
+            text-decoration: none;
+        }
+        .home-link:hover {
+            color: #333;
+        }
+    </style>
+</head>
+<body>
+    <div class="register-container">
+        <h2>Đăng Ký Tài Khoản</h2>
+
+        <form th:action="@{/dangki}" method="post" onsubmit="return validatePassword()">
+            <input type="text" name="fullName" placeholder="Họ và Tên đầy đủ" required>
+            <input type="email" name="email" placeholder="Email (dùng để đăng nhập)" required>
+            <input type="tel" name="phone" placeholder="Số điện thoại" required>
+            <input type="text" name="address" placeholder="Địa chỉ của bạn" required>
+            <input type="password" id="password" name="password" placeholder="Mật khẩu" required>
+            <input type="password" id="confirmPassword" name="confirmPassword" placeholder="Xác nhận mật khẩu" required>
+            
+            <button type="submit">Đăng Ký</button>
+
+            <div th:if="${error != null}" class="error" th:text="${error}"></div>
+            <div id="js-error" class="error" style="display: none;"></div>
+        </form>
+
+        <div class="login-link">
+            Đã có tài khoản? <a th:href="@{/dangnhap}">Đăng nhập ngay</a>
+        </div>
+        
+        <a th:href="@{/}" class="home-link"><i class="fas fa-arrow-left"></i> Quay lại trang chủ</a>
+    </div>
+
+    <script>
+        function validatePassword() {
+            var password = document.getElementById("password").value;
+            var confirmPassword = document.getElementById("confirmPassword").value;
+            var errorDiv = document.getElementById("js-error");
+            
+            if (password !== confirmPassword) {
+                errorDiv.style.display = "block";
+                errorDiv.innerHTML = "Mật khẩu xác nhận không khớp!";
+                return false; // Ngăn không cho form submit
+            }
+            errorDiv.style.display = "none";
+            return true; // Cho phép form submit
+        }
+    </script>
+</body>
+</html>
