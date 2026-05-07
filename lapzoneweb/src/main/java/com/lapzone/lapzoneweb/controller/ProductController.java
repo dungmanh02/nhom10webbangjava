@@ -41,8 +41,6 @@ public class ProductController {
     public String searchPage(
             @RequestParam(value = "query", required = false, defaultValue = "") String query,
             @RequestParam(value = "categoryId", required = false) Long categoryId,
-            @RequestParam(value = "minPrice", required = false) Double minPrice,
-            @RequestParam(value = "maxPrice", required = false) Double maxPrice,
             @RequestParam(value = "cpu", required = false) String cpu,      // THÊM ĐÓN CPU
             @RequestParam(value = "gpu", required = false) String gpu,      // THÊM ĐÓN GPU
             Model model) {
