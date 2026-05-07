@@ -1,5 +1,6 @@
 package com.lapzone.lapzoneweb.model.service;
 
+import com.lapzone.lapzoneweb.model.dto.UserRegisterDTO;
 import com.lapzone.lapzoneweb.model.entity.User;
 import com.lapzone.lapzoneweb.model.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -23,16 +24,25 @@ public class AuthService {
         return null;
     }
 
-    // Logic đăng ký người dùng mới
-    public boolean register(User newUser) {
+    // Logic đăng ký người dùng mới từ DTO
+    public boolean register(UserRegisterDTO registerDTO) {
         // Kiểm tra trùng lặp email hoặc số điện thoại
-        if (userRepository.existsByEmail(newUser.getEmail()) || 
-            userRepository.existsByPhone(newUser.getPhone())) {
+        if (userRepository.existsByEmail(registerDTO.getEmail()) || 
+            userRepository.existsByPhone(registerDTO.getPhone())) {
             return false;
         }
+
+        // Mapping dữ liệu từ DTO sang Entity
+        User newUser = new User();
+        newUser.setFullName(registerDTO.getFullName());
+        newUser.setEmail(registerDTO.getEmail());
+        newUser.setPhone(registerDTO.getPhone());
+        newUser.setAddress(registerDTO.getAddress());
+        newUser.setPassword(registerDTO.getPassword());
         
-        // Thiết lập các giá trị mặc định cho khách hàng mới
+        // Thiết lập role mặc định
         newUser.setRole("USER"); 
+        
         userRepository.save(newUser);
         return true;
     }

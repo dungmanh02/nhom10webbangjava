@@ -132,6 +132,14 @@
             text-align: left;
         }
 
+        .error-text {
+            color: #e03131;
+            font-size: 12px;
+            display: block;
+            margin-top: 5px;
+            font-weight: 500;
+        }
+
         .login-link {
             margin-top: 25px;
             font-size: 14px;
@@ -172,35 +180,41 @@
         <h2>Đăng Ký</h2>
         <p class="subtitle">Tham gia cộng đồng LAPZONE ngay hôm nay</p>
 
-        <form th:action="@{/dangki}" method="post" onsubmit="return validatePassword()">
+        <form th:action="@{/dangki}" th:object="${registerDTO}" method="post" onsubmit="return validatePassword()">
             <div class="input-group">
                 <i class="fas fa-user"></i>
-                <input type="text" name="fullName" placeholder="Họ và Tên đầy đủ" required>
+                <input type="text" th:field="*{fullName}" placeholder="Họ và Tên đầy đủ" required>
+                <span class="error-text" th:if="${#fields.hasErrors('fullName')}" th:errors="*{fullName}"></span>
             </div>
             
             <div class="input-group">
                 <i class="fas fa-envelope"></i>
-                <input type="email" name="email" placeholder="Email đăng nhập" required>
+                <input type="email" th:field="*{email}" placeholder="Email đăng nhập" required>
+                <span class="error-text" th:if="${#fields.hasErrors('email')}" th:errors="*{email}"></span>
             </div>
 
             <div class="input-group">
                 <i class="fas fa-phone"></i>
-                <input type="tel" name="phone" placeholder="Số điện thoại" required>
+                <input type="tel" th:field="*{phone}" placeholder="Số điện thoại" required>
+                <span class="error-text" th:if="${#fields.hasErrors('phone')}" th:errors="*{phone}"></span>
             </div>
 
             <div class="input-group">
                 <i class="fas fa-map-marker-alt"></i>
-                <input type="text" name="address" placeholder="Địa chỉ của bạn" required>
+                <input type="text" th:field="*{address}" placeholder="Địa chỉ của bạn" required>
+                <span class="error-text" th:if="${#fields.hasErrors('address')}" th:errors="*{address}"></span>
             </div>
 
             <div class="input-group">
                 <i class="fas fa-lock"></i>
-                <input type="password" id="password" name="password" placeholder="Mật khẩu" required>
+                <input type="password" id="password" th:field="*{password}" placeholder="Mật khẩu" required>
+                <span class="error-text" th:if="${#fields.hasErrors('password')}" th:errors="*{password}"></span>
             </div>
 
             <div class="input-group">
                 <i class="fas fa-shield-alt"></i>
-                <input type="password" id="confirmPassword" name="confirmPassword" placeholder="Xác nhận mật khẩu" required>
+                <input type="password" id="confirmPassword" th:field="*{confirmPassword}" placeholder="Xác nhận mật khẩu" required>
+                <span class="error-text" th:if="${#fields.hasErrors('confirmPassword')}" th:errors="*{confirmPassword}"></span>
             </div>
             
             <button type="submit">Tạo tài khoản</button>

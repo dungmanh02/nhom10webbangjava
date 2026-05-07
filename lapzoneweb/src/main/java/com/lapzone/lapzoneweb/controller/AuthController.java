@@ -1,12 +1,16 @@
 package com.lapzone.lapzoneweb.controller;
 
+import com.lapzone.lapzoneweb.model.dto.UserRegisterDTO;
 import com.lapzone.lapzoneweb.model.entity.User;
 import com.lapzone.lapzoneweb.model.service.AuthService;
 import jakarta.servlet.http.HttpSession;
+import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
@@ -23,7 +27,8 @@ public class AuthController {
     }
 
     @GetMapping("/dangki")
-    public String registerPage() {
+    public String registerPage(Model model) {
+        model.addAttribute("registerDTO", new UserRegisterDTO());
         return "dangki";
     }
 
@@ -47,21 +52,23 @@ public class AuthController {
 
     // API Tiếp nhận xử lý Đăng ký
     @PostMapping("/dangki")
-    public String handleRegister(@RequestParam String fullName, 
-                                 @RequestParam String email,
-                                 @RequestParam String phone,
-                                 @RequestParam String address,
-                                 @RequestParam String password,
+    public String handleRegister(@Valid @ModelAttribute("registerDTO") UserRegisterDTO registerDTO, 
+                                 BindingResult result, 
                                  Model model) {
         
-        User newUser = new User();
-        newUser.setFullName(fullName);
-        newUser.setEmail(email);
-        newUser.setPhone(phone);
-        newUser.setAddress(address);
-        newUser.setPassword(password);
+        // 1. Kiểm tra lỗi định dạng từ DTO
+        if (result.hasErrors()) {
+            return "dangki";
+        }
 
-        if (authService.register(newUser)) {
+        // 2. Kiểm tra mật khẩu khớp nhau
+        if (!registerDTO.getPassword().equals(registerDTO.getConfirmPassword())) {
+            model.addAttribute("error", "Mật khẩu xác nhận không khớp!");
+            return "dangki";
+        }
+
+        // 3. Thực hiện đăng ký qua Service
+        if (authService.register(registerDTO)) {
             model.addAttribute("success", "Đăng ký thành công! Hãy đăng nhập.");
             return "dangnhap";
         }
