@@ -14,7 +14,7 @@
         
         /* Hover cho nút Đăng nhập / Đăng ký */
         .lapzone-auth-link { text-decoration: none; color: #333; font-weight: 500; transition: color 0.3s; }
-        .lapzone-auth-link:hover { color: #ff6600; } /* Đổi sang màu cam e-commerce */
+        .lapzone-auth-link:hover { color: #ff6600; } 
         
         /* Hover cho 3 icon Trái tim, Giỏ hàng, User */
         .lapzone-icon-btn { position: relative; text-decoration: none; color: #333; transition: transform 0.3s, color 0.3s; }
@@ -43,7 +43,7 @@
             </div>
 
             <div style="flex-grow: 1; max-width: 400px; margin: 0 30px;">
-                <form th:action="@{/search}" method="get" style="display: flex; position: relative; width: 100%;">
+                <form th:action="@{/search}" method="get" onsubmit="if(this.query.value.trim() === '') { alert('Mời bạn nhập tên sản phẩm cần tìm!'); return false; }" style="display: flex; position: relative; width: 100%;">
                     <input type="text" name="query" placeholder="Tìm kiếm laptop và phụ kiện..." style="width: 100%; padding: 10px 40px 10px 20px; border-radius: 20px; border: 1px solid #ccc; outline: none; transition: border-color 0.3s;" onfocus="this.style.borderColor='#0884d1'" onblur="this.style.borderColor='#ccc'">
                     <button type="submit" class="lapzone-search-btn" style="position: absolute; right: 15px; top: 50%; transform: translateY(-50%);">
                         <i class="fas fa-search"></i>
@@ -70,7 +70,7 @@
                     </a>
                     <a th:href="@{/cart}" class="lapzone-icon-btn">
                         <i class="fas fa-shopping-cart"></i>
-                        <span style="position: absolute; top: -8px; right: -12px; background: #0884d1; color: white; font-size: 11px; padding: 2px 6px; border-radius: 10px; font-weight: bold;">0</span>
+                        <span th:text="${cartItemCount}" style="position: absolute; top: -8px; right: -12px; background: #0884d1; color: white; font-size: 11px; padding: 2px 6px; border-radius: 10px; font-weight: bold;">0</span>
                     </a>
                     <a th:href="@{/profile}" class="lapzone-icon-btn">
                         <i class="fas fa-user"></i>

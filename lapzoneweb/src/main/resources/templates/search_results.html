@@ -44,11 +44,12 @@
         <!-- CỘT BÊN TRÁI: BỘ LỌC (FILTER) -->
         <div class="filter-sidebar">
             <h3><i class="fa fa-filter"></i> Lọc Sản Phẩm</h3>
-            <form th:action="@{/search}" method="get">
-                <!-- Giữ lại từ khóa tìm kiếm -->
+          <form th:action="@{/search}" method="get">
+                <!-- Giữ lại từ khóa tìm kiếm (ẩn đi) -->
                 <input type="hidden" name="query" th:value="${keyword}">
                 
-                <div class="filter-group">
+                <!-- Khối chọn Hãng (Chỉ hiện ra khi bấm Xem tất cả / Từ khóa rỗng) -->
+                <div class="filter-group" th:if="${keyword == null or keyword.trim() == ''}">
                     <label>Hãng sản xuất:</label>
                     <select name="categoryId">
                         <option value="">-- Tất cả các hãng --</option>
@@ -59,10 +60,39 @@
                     </select>
                 </div>
 
+                <!-- Lọc Giá -->
                 <div class="filter-group">
                     <label>Mức giá (VNĐ):</label>
                     <input type="number" name="minPrice" placeholder="Giá từ..." th:value="${selectedMinPrice}">
                     <input type="number" name="maxPrice" placeholder="Đến giá..." th:value="${selectedMaxPrice}">
+                </div>
+
+                <!-- Lọc CPU -->
+                <div class="filter-group">
+                    <label>Vi xử lý (CPU):</label>
+                    <select name="cpu">
+                        <option value="">-- Tất cả CPU --</option>
+                        <option value="Core i5" th:selected="${selectedCpu == 'Core i5'}">Intel Core i5</option>
+                        <option value="Core i7" th:selected="${selectedCpu == 'Core i7'}">Intel Core i7</option>
+                        <option value="Ryzen 5" th:selected="${selectedCpu == 'Ryzen 5'}">AMD Ryzen 5</option>
+                        <option value="Ryzen 7" th:selected="${selectedCpu == 'Ryzen 7'}">AMD Ryzen 7</option>
+                        <option value="Apple M" th:selected="${selectedCpu == 'Apple M'}">Apple M-Series</option>
+                    </select>
+                </div>
+
+                <!-- Lọc GPU siêu chi tiết -->
+                <div class="filter-group">
+                    <label>Card đồ họa (GPU):</label>
+                    <select name="gpu">
+                        <option value="">-- Tất cả GPU --</option>
+                        <option value="RTX 3050" th:selected="${selectedGpu == 'RTX 3050'}">NVIDIA RTX 3050</option>
+                        <option value="RTX 4050" th:selected="${selectedGpu == 'RTX 4050'}">NVIDIA RTX 4050</option>
+                        <option value="RTX 4060" th:selected="${selectedGpu == 'RTX 4060'}">NVIDIA RTX 4060</option>
+                        <option value="RTX 4070" th:selected="${selectedGpu == 'RTX 4070'}">NVIDIA RTX 4070</option>
+                        <option value="Intel Iris" th:selected="${selectedGpu == 'Intel Iris'}">Card Onboard Intel</option>
+                        <option value="Radeon" th:selected="${selectedGpu == 'Radeon'}">Card Onboard AMD Radeon</option>
+                        <option value="Apple" th:selected="${selectedGpu == 'Apple'}">Apple GPU</option>
+                    </select>
                 </div>
 
                 <button type="submit" class="btn-filter">Áp dụng bộ lọc</button>

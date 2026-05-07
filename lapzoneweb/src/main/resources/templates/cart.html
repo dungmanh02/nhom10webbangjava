@@ -1,0 +1,163 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <title>Giỏ hàng của bạn - Lapzone</title>
+     <link rel="stylesheet" th:href="@{/css/css.css}">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&display=swap" rel="stylesheet">
+    
+    <style>
+        /* Reset & Cơ bản */
+        body { font-family: 'Roboto', sans-serif; background-color: #f4f7f6; margin: 0; padding: 0; color: #333; }
+        
+        /* Layout Giỏ Hàng */
+        .cart-wrapper { max-width: 1200px; margin: 40px auto; padding: 0 20px; min-height: 60vh; }
+        .cart-container { background: #fff; border-radius: 12px; box-shadow: 0 5px 20px rgba(0,0,0,0.05); overflow: hidden; }
+        
+/* Header Giỏ hàng (Đã được buff !important để chống xung đột) */
+        .cart-header { 
+            background: #034b94 !important; 
+            color: white !important; 
+            padding: 20px 30px !important; 
+            display: flex !important; 
+            align-items: center !important; 
+            gap: 15px !important; 
+        }
+        .cart-header h2 { 
+            margin: 0 !important; 
+            font-size: 24px !important; 
+            font-weight: 500 !important; 
+            background-color: transparent !important; /* Triệt tiêu cái cục nền trắng */
+            color: white !important; /* Ép chữ phải hiện màu trắng */
+        }
+        .cart-header i { 
+            font-size: 28px !important; 
+            color: #ff6600 !important; 
+            background-color: transparent !important;
+        }
+
+        /* Trạng thái trống */
+        .empty-cart { text-align: center; padding: 80px 20px; }
+        .empty-cart i { font-size: 80px; color: #ccc; margin-bottom: 20px; }
+        .empty-cart p { font-size: 18px; color: #666; margin-bottom: 30px; }
+        .btn-continue { background: #0884d1; color: white; padding: 12px 30px; text-decoration: none; border-radius: 25px; font-weight: bold; transition: all 0.3s; display: inline-block; }
+        .btn-continue:hover { background: #034b94; transform: translateY(-3px); box-shadow: 0 5px 15px rgba(3, 75, 148, 0.3); }
+
+        /* Bảng Giỏ hàng */
+        .cart-table { width: 100%; border-collapse: collapse; }
+        .cart-table th { background: #f8f9fa; color: #555; padding: 15px; text-align: center; font-weight: 600; border-bottom: 2px solid #eee; }
+        .cart-table td { padding: 20px 15px; text-align: center; border-bottom: 1px solid #eee; vertical-align: middle; }
+        .cart-table tbody tr { transition: background 0.3s; }
+        .cart-table tbody tr:hover { background: #fafbfc; }
+
+        /* Cột Sản phẩm */
+        .product-col { display: flex; align-items: center; gap: 20px; text-align: left; }
+        .product-col img { width: 80px; height: 80px; object-fit: contain; border: 1px solid #eee; border-radius: 8px; padding: 5px; background: white; }
+        .product-col .info { display: flex; flex-direction: column; gap: 5px; }
+        .product-col .name { font-weight: 600; color: #333; text-decoration: none; transition: color 0.3s; }
+        .product-col .name:hover { color: #0884d1; }
+        
+        .price-text { color: #d32f2f; font-weight: bold; font-size: 16px; }
+
+        /* Nút Số lượng */
+        .qty-input { width: 60px; padding: 8px; text-align: center; border: 1px solid #ccc; border-radius: 5px; font-weight: bold; outline: none; transition: border 0.3s; }
+        .qty-input:focus { border-color: #0884d1; }
+
+        /* Nút Xóa */
+        .btn-delete { background: #fff; color: #d32f2f; border: 1px solid #d32f2f; width: 35px; height: 35px; border-radius: 5px; cursor: pointer; transition: all 0.3s; display: flex; align-items: center; justify-content: center; margin: 0 auto; }
+        .btn-delete:hover { background: #d32f2f; color: #fff; transform: scale(1.1); box-shadow: 0 3px 8px rgba(211, 47, 47, 0.3); }
+
+        /* Khu vực Tổng tiền & Thanh toán */
+        .cart-footer { padding: 30px; display: flex; justify-content: space-between; align-items: center; background: #fcfcfc; border-top: 1px solid #eee; }
+        .total-box { font-size: 20px; color: #333; }
+        .total-box span { color: #d32f2f; font-size: 28px; font-weight: bold; margin-left: 15px; }
+        
+        .btn-checkout { background: #ff6600; color: white; padding: 15px 40px; text-decoration: none; border-radius: 30px; font-weight: bold; font-size: 16px; text-transform: uppercase; transition: all 0.3s; box-shadow: 0 4px 15px rgba(255, 102, 0, 0.3); }
+        .btn-checkout:hover { background: #e65c00; transform: translateY(-3px); box-shadow: 0 6px 20px rgba(255, 102, 0, 0.4); }
+    </style>
+</head>
+<body>
+
+    <div th:replace="~{fragments/header :: header_lapzone}"></div>
+
+    <div class="cart-wrapper">
+        <div class="cart-container">
+            
+            <div class="cart-header">
+                <i class="fas fa-shopping-cart"></i>
+                <h2>Giỏ hàng của bạn</h2>
+            </div>
+
+            <div class="empty-cart" th:if="${cartItems == null or cartItems.isEmpty()}">
+                <i class="fas fa-box-open"></i>
+                <p>Giỏ hàng của bạn đang trống. Hãy chọn cho mình một chiếc Laptop ưng ý nhé!</p>
+                <a th:href="@{/}" class="btn-continue">← Tiếp tục mua sắm</a>
+            </div>
+
+            <div th:unless="${cartItems == null or cartItems.isEmpty()}">
+                <table class="cart-table">
+                    <thead>
+                        <tr>
+                            <th style="text-align: left; padding-left: 30px;">Sản phẩm</th>
+                            <th>Đơn giá</th>
+                            <th>Số lượng</th>
+                            <th>Thành tiền</th>
+                            <th>Xóa</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr th:each="item : ${cartItems}">
+                            
+                            <td>
+                                <div class="product-col" style="padding-left: 15px;">
+                                    <img th:src="@{'/' + ${item.product.image}}" th:alt="${item.product.name}">
+                                    <div class="info">
+                                        <a th:href="@{/product_detail(id=${item.product.id})}" class="name" th:text="${item.product.name}">Tên SP</a>
+                                        <span style="font-size: 12px; color: #888;" th:text="${item.product.category.name}">Hãng</span>
+                                    </div>
+                                </div>
+                            </td>
+
+                            <td class="price-text" th:text="${#numbers.formatDecimal(item.product.price, 0, 'COMMA', 0, 'POINT')} + ' ₫'">Giá</td>
+
+                            <td>
+                                <form th:action="@{/cart/update}" method="post" style="margin: 0;">
+                                    <input type="hidden" name="cartItemId" th:value="${item.id}">
+                                    <input type="number" name="quantity" class="qty-input" th:value="${item.quantity}" min="1" onchange="this.form.submit()">
+                                </form>
+                            </td>
+
+                            <td class="price-text" th:text="${#numbers.formatDecimal(item.product.price * item.quantity, 0, 'COMMA', 0, 'POINT')} + ' ₫'">Thành tiền</td>
+
+                            <td>
+                                <form th:action="@{/cart/remove}" method="post" style="margin: 0;" onsubmit="return confirm('Bạn có chắc chắn muốn bỏ sản phẩm này khỏi giỏ?');">
+                                    <input type="hidden" name="cartItemId" th:value="${item.id}">
+                                    <button type="submit" class="btn-delete" title="Xóa khỏi giỏ hàng">
+                                        <i class="fas fa-trash-alt"></i>
+                                    </button>
+                                </form>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+
+                <div class="cart-footer">
+                    <a th:href="@{/}" class="btn-continue" style="background: #f1f1f1; color: #333;">← Mua thêm máy khác</a>
+                    
+                    <div style="display: flex; align-items: center; gap: 30px;">
+                        <div class="total-box">
+                            Tổng thanh toán: 
+                            <span th:text="${#numbers.formatDecimal(total, 0, 'COMMA', 0, 'POINT')} + ' ₫'">0 ₫</span>
+                        </div>
+                        
+                        <a th:href="@{/checkout}" class="btn-checkout">Tiến hành đặt hàng <i class="fas fa-arrow-right" style="margin-left: 5px;"></i></a>
+                    </div>
+                </div>
+            </div> </div>
+    </div>
+
+    <div th:replace="~{fragments/footer :: footer_lapzone}"></div>
+
+</body>
+</html>

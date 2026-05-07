@@ -34,10 +34,12 @@ public class ProductService {
         return productRepository.findById(id).orElse(null);
     }
 
-    // Thêm hàm này vào dưới cùng của ProductService
-    public List<Product> searchProducts(String keyword, Long categoryId, Double minPrice, Double maxPrice) {
-        // Nếu keyword null thì gán bằng chuỗi rỗng để tìm tất cả
+   public List<Product> searchProducts(String keyword, Long categoryId, Double minPrice, Double maxPrice, String cpu, String gpu) {
         String kw = (keyword != null) ? keyword : ""; 
-        return productRepository.searchAndFilterProducts(kw, categoryId, minPrice, maxPrice);
+        // Lọc khoảng trắng, nếu người dùng không chọn gì thì gán thành null để bỏ qua điều kiện lọc
+        String cpuFilter = (cpu != null && !cpu.trim().isEmpty()) ? cpu : null;
+        String gpuFilter = (gpu != null && !gpu.trim().isEmpty()) ? gpu : null;
+        
+        return productRepository.searchAndFilterProducts(kw, categoryId, minPrice, maxPrice, cpuFilter, gpuFilter);
     }
 }
