@@ -16,18 +16,15 @@ public class AuthController {
     @Autowired
     private AuthService authService;
 
-    // Hiển thị form
+
     @GetMapping("/dangnhap")
     public String loginPage() {
         return "dangnhap";
     }
-
     @GetMapping("/dangki")
     public String registerPage() {
         return "dangki";
     }
-
-    // API Tiếp nhận xử lý Đăng nhập
     @PostMapping("/dangnhap")
     public String handleLogin(@RequestParam String emailOrPhone, 
                               @RequestParam String password, 
@@ -37,15 +34,12 @@ public class AuthController {
 
         if (user != null) {
             session.setAttribute("currentUser", user);
-            // Phân luồng điều hướng ngay tại Controller
             return "ADMIN".equals(user.getRole()) ? "redirect:/admin/dashboard" : "redirect:/";
         }
         
         model.addAttribute("error", "Sai tài khoản hoặc mật khẩu!");
         return "dangnhap";
     }
-
-    // API Tiếp nhận xử lý Đăng ký
     @PostMapping("/dangki")
     public String handleRegister(@RequestParam String fullName, 
                                  @RequestParam String email,
@@ -71,10 +65,7 @@ public class AuthController {
     }
     @GetMapping("/logout")
     public String logout(HttpSession session) {
-        // Hủy bỏ phiên làm việc (xóa session.setAttribute("currentUser", user) ở trên)
         session.invalidate(); 
-        
-        // Điều hướng người dùng quay trở lại trang chủ
         return "redirect:/"; 
     }
 }

@@ -7,7 +7,7 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     
     <style>
-        /* Tông màu chủ đạo của Lapzone */
+     
         :root {
             --primary-color: #0884d1;
             --primary-hover: #066aab;
@@ -28,7 +28,7 @@
             min-height: 100vh;
         }
 
-        /* Khung hiển thị profile */
+
         .profile-container {
             background: white;
             width: 100%;
@@ -40,7 +40,7 @@
         }
 
         .profile-container:hover {
-            transform: translateY(-5px); /* Hiệu ứng nổi lên khi di chuột */
+            transform: translateY(-5px); 
         }
 
         .profile-header {
@@ -68,7 +68,7 @@
             font-size: 24px;
         }
 
-        /* Thông báo thành công / lỗi */
+     
         .alert {
             padding: 12px;
             border-radius: 8px;
@@ -87,7 +87,7 @@
             border: 1px solid #f5c6cb;
         }
 
-        /* Form styling */
+   
         .form-group {
             margin-bottom: 20px;
         }
@@ -121,14 +121,14 @@
             box-shadow: 0 0 0 3px rgba(8, 132, 209, 0.2);
         }
 
-        /* Email không cho sửa nên làm mờ đi */
+  
         .form-control[readonly] {
             background-color: #e9ecef;
             cursor: not-allowed;
             color: #666;
         }
 
-        /* Nút bấm */
+   
         .btn-group {
             display: flex;
             gap: 15px;
@@ -189,10 +189,10 @@
         <div th:if="${error}" th:text="${error}" class="alert alert-error"></div>
 
         <form th:action="@{/profile/update}" method="post" th:object="${userForm}">
-
+              <input type="hidden" th:field="*{id}">
             <div class="form-group">
                 <label><i class="fas fa-envelope"></i> Địa chỉ Email</label>
-                <!-- Email chỉ hiển thị, không cho sửa, lấy từ biến user (User entity) -->
+    
                 <input type="email" class="form-control" th:value="${user.email}" readonly title="Email đăng nhập không thể thay đổi">
             </div>
 

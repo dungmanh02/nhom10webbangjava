@@ -5,7 +5,7 @@ import com.lapzone.lapzoneweb.model.repository.ProductRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import java.util.List;
-
+import org.springframework.transaction.annotation.Transactional;
 @Service
 public class ProductService {
 
@@ -29,7 +29,7 @@ public class ProductService {
     }
 
     
-    // Tìm 1 sản phẩm theo ID (trả về null nếu không tìm thấy)
+
     public Product getProductById(Long id) {
         return productRepository.findById(id).orElse(null);
     }
@@ -41,5 +41,15 @@ public class ProductService {
         String gpuFilter = (gpu != null && !gpu.trim().isEmpty()) ? gpu : null;
         
         return productRepository.searchAndFilterProducts(kw, categoryId, minPrice, maxPrice, cpuFilter, gpuFilter);
+    }
+    @Transactional
+    public void saveProduct(Product product) {
+        productRepository.save(product);
+    }
+
+   
+    @Transactional
+    public void deleteProduct(Long id) {
+        productRepository.deleteById(id);
     }
 }

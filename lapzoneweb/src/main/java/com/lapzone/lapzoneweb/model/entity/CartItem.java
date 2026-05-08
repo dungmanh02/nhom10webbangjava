@@ -15,7 +15,6 @@ public class CartItem {
     @Column(name = "user_id")
     private Long userId;
 
-    // BÍ QUYẾT: Kết nối trực tiếp với bảng Product (Nhiều CartItem có thể chứa 1 Product)
     @ManyToOne
     @JoinColumn(name = "product_id")
     private Product product;

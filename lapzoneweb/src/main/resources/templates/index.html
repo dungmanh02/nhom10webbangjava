@@ -196,7 +196,7 @@
     <div class="part2_content">
    
             <div class="product1">
-                 <!-- VÒNG LẶP SẢN PHẨM THAM KHẢO (Giới hạn 4 cái) -->
+             
                  <div class="product_items" th:each="product, iterStat : ${referenceProducts}" th:if="${iterStat.index < 4}">
                      <img class="product_img" th:src="@{'/' + ${product.image}}">
                      <div class="product_title">
@@ -309,7 +309,7 @@
                         </div>
                     </div>
                   </a>
-                  <!-- END VÒNG LẶP -->
+       
 
                </div>
     <div class="part5_content">
@@ -356,22 +356,23 @@
                 <div th:each="p, iterStat : ${newProducts}" th:if="${iterStat.index < 8}" style="width:280px; background:white; border-radius:16px; overflow:hidden; box-shadow:0 10px 30px rgba(0,0,0,0.15); transition:0.3s; border:1px solid #eee;">
                     <a th:href="@{/product_detail(id=${p.id})}" style="text-decoration:none; color:inherit; display:block;">
                         
-                        <!-- Đã sửa tên biến cho chuẩn với CSDL mới (p.image) -->
-                        <img th:src="@{${p.image != null and !p.image.isEmpty() ? '/' + p.image : '/assets/no-image.jpg'}}" 
-                             th:alt="${p.name}" style="width:100%; height:200px; object-fit:cover;">
+                      
+                       <img th:src="${p.image != null and !p.image.isEmpty() ? (p.image.startsWith('assets/') ? '/' + p.image : '/assets/' + p.image) : '/assets/no-image.jpg'}" 
+                        th:alt="${p.name}" 
+                        style="width:100%; height:200px; object-fit:cover;">
                              
                         <div style="padding:18px;">
-                            <!-- Đã sửa p.product_title thành p.name -->
+                       
                             <h3 th:text="${p.name}" style="font-size:15px; font-weight:bold; height:50px; overflow:hidden; margin:0 0 12px 0; color:#333; line-height:1.4;">
                                 Tên sản phẩm
                             </h3>
                             
-                            <!-- Đã sửa p.product_price thành p.price -->
+                         
                             <div th:text="${#numbers.formatDecimal(p.price, 0, 'COMMA', 0, 'POINT')} + ' đ'" style="color:#d32f2f; font-size:22px; font-weight:bold; margin:10px 0;">
                                 Giá
                             </div>
                             
-                            <!-- Đã sửa p.amount_of_product thành p.stock -->
+                       
                             <div style="color:#666; font-size:14px; margin-bottom:10px;">
                                 Còn lại: <strong th:text="${p.stock}">0</strong> sản phẩm
                             </div>

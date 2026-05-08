@@ -18,10 +18,6 @@ public class UserController {
 
     @Autowired
     private UserService userService;
-
-    // ==========================================
-    // 1. HIỂN THỊ TRANG THÔNG TIN CÁ NHÂN
-    // ==========================================
     @GetMapping("/profile")
     public String showProfile(HttpSession session, Model model) {
         User sessionUser = (User) session.getAttribute("currentUser");
@@ -31,8 +27,6 @@ public class UserController {
         }
 
         User currentUser = userService.findById(sessionUser.getId());
-
-        // Tạo DTO từ dữ liệu DB rồi đưa vào form (tên "userForm" để khớp th:object)
         UserUpdateDTO dto = new UserUpdateDTO(
             currentUser.getId(),
             currentUser.getFullName(),
@@ -40,14 +34,9 @@ public class UserController {
             currentUser.getAddress()
         );
         model.addAttribute("userForm", dto);
-        model.addAttribute("user", currentUser); // dùng để hiển thị email (readonly)
-
+        model.addAttribute("user", currentUser); 
         return "profile";
     }
-
-    // ==========================================
-    // 2. XỬ LÝ CẬP NHẬT THÔNG TIN CÁ NHÂN
-    // ==========================================
     @PostMapping("/profile/update")
     public String handleUpdateProfile(@Valid @ModelAttribute("userForm") UserUpdateDTO dto,
                                       BindingResult result,
@@ -58,8 +47,6 @@ public class UserController {
         if (sessionUser == null) {
             return "redirect:/dangnhap";
         }
-
-        // Ép id từ session, không tin id từ form (tránh IDOR)
         dto.setId(sessionUser.getId());
 
         if (result.hasErrors()) {

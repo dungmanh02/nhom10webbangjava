@@ -11,18 +11,13 @@ public class UserService {
 
     @Autowired
     private UserRepository userRepository;
-
-    // 1. Lấy thông tin mới nhất từ Database (Đảm bảo dữ liệu luôn đúng)
     public User findById(Long id) {
         return userRepository.findById(id).orElse(null);
     }
-
-    // 2. Logic cập nhật thông tin cá nhân (dùng DTO có validate)
     public User updateProfileFromDTO(UserUpdateDTO dto) {
         User existingUser = userRepository.findById(dto.getId()).orElse(null);
 
         if (existingUser != null) {
-            // Chỉ cập nhật các trường được phép sửa, giữ nguyên email & role
             existingUser.setFullName(dto.getFullName());
             existingUser.setPhone(dto.getPhone());
             existingUser.setAddress(dto.getAddress());

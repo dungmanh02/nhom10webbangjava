@@ -8,16 +8,9 @@ import java.util.List;
 
 @Repository
 public interface ProductRepository extends JpaRepository<Product, Long> {
-    
-    // Hàm 1: Lấy 8 sản phẩm mới nhất (cho mục "Hàng mới cập nhật")
     List<Product> findTop8ByOrderByIdDesc();
-
-    // Hàm 2: Lấy 4 sản phẩm tham khảo ngẫu nhiên hoặc mới nhất (cho mục "Sản phẩm tham khảo")
     List<Product> findTop4ByOrderByIdDesc();
-    
-    // Hàm 3: Lấy sản phẩm theo tên hãng (Cho mục "Apple", "Dell",...)
     List<Product> findByCategory_Name(String categoryName);
-    // Tìm kiếm động: Có từ khóa thì tìm, có bộ lọc thì lọc, không có thì bỏ qua
    @Query("SELECT p FROM Product p LEFT JOIN p.productDetail pd WHERE " +
            "(p.name LIKE %:keyword%) " +
            "AND (:categoryId IS NULL OR p.category.id = :categoryId) " +

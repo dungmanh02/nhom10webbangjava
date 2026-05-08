@@ -1,6 +1,6 @@
 package com.lapzone.lapzoneweb.model.entity;
 
-// BẮT BUỘC PHẢI CÓ CÁC IMPORT NÀY
+
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
@@ -8,18 +8,18 @@ import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.Table;
 
-@Entity // Đánh dấu đây là một Entity (Thực thể) kết nối với Database
-@Table(name = "users") // Chỉ định nó sẽ nối với bảng tên là "users" trong DB
+@Entity 
+@Table(name = "users") 
 public class User {
     
-    @Id // Đánh dấu đây là Khóa chính (Primary Key)
-    @GeneratedValue(strategy = GenerationType.IDENTITY) // Tự động tăng (AUTO_INCREMENT)
+    @Id 
+    @GeneratedValue(strategy = GenerationType.IDENTITY) 
     private Long id;
 
-    @Column(name = "full_name") // Nối với cột full_name trong DB
+    @Column(name = "full_name")
     private String fullName;
 
-    @Column(unique = true) // Cột email không được trùng nhau
+    @Column(unique = true) 
     private String email;
 
     @Column
@@ -34,7 +34,7 @@ public class User {
     @Column
     private String role;
 
-    // --- Giữ nguyên các hàm khởi tạo và Getter/Setter của bạn ---
+   
 
     public User() {}
 
