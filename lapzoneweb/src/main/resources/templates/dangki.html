@@ -8,101 +8,216 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <title>Đăng ký tài khoản - LAPZONE</title>
     <style>
+        :root {
+            --primary-blue: #4dabf7;
+            --dark-blue: #1971c2;
+            --light-blue: #e7f5ff;
+            --glass-bg: rgba(255, 255, 255, 0.8);
+            --text-main: #212529;
+            --text-muted: #868e96;
+            --shadow: 0 10px 25px rgba(0, 0, 0, 0.08);
+            --transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
         body {
-            font-family: 'Roboto', Arial, sans-serif;
+            font-family: 'Roboto', sans-serif;
+            background: linear-gradient(135deg, #f0f8ff 0%, #d0e7ff 100%);
             display: flex;
             justify-content: center;
             align-items: center;
-            height: 100vh;
+            min-height: 100vh;
             margin: 0;
-            background-color: #f4f4f4;
+            overflow-x: hidden;
         }
+
         .register-container {
-            background-color: white;
-            padding: 30px 20px;
-            border-radius: 8px;
-            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
-            width: 350px;
+            background: var(--glass-bg);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            border: 1px solid rgba(255, 255, 255, 0.3);
+            padding: 40px;
+            border-radius: 20px;
+            box-shadow: var(--shadow);
+            width: 100%;
+            max-width: 400px;
             text-align: center;
+            animation: fadeIn 0.8s ease-out;
+            margin: 20px;
         }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
         .register-container h2 {
-            margin-bottom: 20px;
-            color: #333;
+            margin: 0 0 10px 0;
+            color: var(--dark-blue);
+            font-size: 28px;
+            font-weight: 700;
         }
+
+        .register-container p.subtitle {
+            color: var(--text-muted);
+            margin-bottom: 30px;
+            font-size: 14px;
+        }
+
+        .input-group {
+            position: relative;
+            margin-bottom: 15px;
+            text-align: left;
+        }
+
+        .input-group i {
+            position: absolute;
+            left: 15px;
+            top: 50%;
+            transform: translateY(-50%);
+            color: var(--primary-blue);
+            font-size: 16px;
+        }
+
         .register-container input {
             width: 100%;
-            padding: 12px 10px;
-            margin: 10px 0;
-            border: 1px solid #ccc;
-            border-radius: 4px;
+            padding: 14px 15px 14px 45px;
+            border: 1.5px solid #dee2e6;
+            border-radius: 12px;
             box-sizing: border-box;
             outline: none;
-            transition: border-color 0.3s;
+            font-size: 15px;
+            transition: var(--transition);
+            background: rgba(255, 255, 255, 0.9);
         }
+
         .register-container input:focus {
-            border-color: #0884d1;
+            border-color: var(--primary-blue);
+            box-shadow: 0 0 0 4px rgba(77, 171, 247, 0.15);
+            background: #fff;
         }
+
         .register-container button {
             width: 100%;
-            padding: 12px;
-            background-color: #0884d1;
+            padding: 14px;
+            background: linear-gradient(135deg, var(--primary-blue) 0%, var(--dark-blue) 100%);
             color: white;
             border: none;
-            border-radius: 4px;
+            border-radius: 12px;
             cursor: pointer;
             font-size: 16px;
-            font-weight: bold;
-            margin-top: 10px;
-            transition: background-color 0.3s;
+            font-weight: 600;
+            margin-top: 15px;
+            transition: var(--transition);
+            box-shadow: 0 4px 12px rgba(25, 113, 194, 0.3);
         }
+
         .register-container button:hover {
-            background-color: #0665a0;
+            transform: translateY(-2px);
+            box-shadow: 0 6px 18px rgba(25, 113, 194, 0.4);
+            filter: brightness(1.1);
         }
+
+        .register-container button:active {
+            transform: translateY(0);
+        }
+
         .error {
-            color: #d32f2f;
-            font-size: 14px;
-            margin-top: 15px;
-            background-color: #ffebee;
-            padding: 8px;
-            border-radius: 4px;
-        }
-        .login-link {
-            margin-top: 20px;
-            font-size: 14px;
-        }
-        .login-link a {
-            color: #0884d1;
-            text-decoration: none;
-            font-weight: bold;
-        }
-        .login-link a:hover {
-            text-decoration: underline;
-        }
-        .home-link {
-            display: block;
-            margin-top: 15px;
+            color: #e03131;
             font-size: 13px;
-            color: #666;
-            text-decoration: none;
+            margin-top: 15px;
+            background-color: #fff5f5;
+            padding: 10px;
+            border-radius: 8px;
+            border-left: 4px solid #e03131;
+            text-align: left;
         }
+
+        .error-text {
+            color: #e03131;
+            font-size: 12px;
+            display: block;
+            margin-top: 5px;
+            font-weight: 500;
+        }
+
+        .login-link {
+            margin-top: 25px;
+            font-size: 14px;
+            color: var(--text-main);
+        }
+
+        .login-link a {
+            color: var(--dark-blue);
+            text-decoration: none;
+            font-weight: 700;
+            transition: var(--transition);
+        }
+
+        .login-link a:hover {
+            color: var(--primary-blue);
+        }
+
+        .home-link {
+            display: inline-flex;
+            align-items: center;
+            margin-top: 20px;
+            font-size: 13px;
+            color: var(--text-muted);
+            text-decoration: none;
+            transition: var(--transition);
+        }
+
+        .home-link i { margin-right: 8px; }
+
         .home-link:hover {
-            color: #333;
+            color: var(--dark-blue);
+            transform: translateX(-3px);
         }
     </style>
 </head>
 <body>
     <div class="register-container">
-        <h2>Đăng Ký Tài Khoản</h2>
+        <h2>Đăng Ký</h2>
+        <p class="subtitle">Tham gia cộng đồng LAPZONE ngay hôm nay</p>
 
-        <form th:action="@{/dangki}" method="post" onsubmit="return validatePassword()">
-            <input type="text" name="fullName" placeholder="Họ và Tên đầy đủ" required>
-            <input type="email" name="email" placeholder="Email (dùng để đăng nhập)" required>
-            <input type="tel" name="phone" placeholder="Số điện thoại" required>
-            <input type="text" name="address" placeholder="Địa chỉ của bạn" required>
-            <input type="password" id="password" name="password" placeholder="Mật khẩu" required>
-            <input type="password" id="confirmPassword" name="confirmPassword" placeholder="Xác nhận mật khẩu" required>
+        <form th:action="@{/dangki}" th:object="${registerDTO}" method="post" onsubmit="return validatePassword()">
+            <div class="input-group">
+                <i class="fas fa-user"></i>
+                <input type="text" th:field="*{fullName}" placeholder="Họ và Tên đầy đủ" required>
+                <span class="error-text" th:if="${#fields.hasErrors('fullName')}" th:errors="*{fullName}"></span>
+            </div>
             
-            <button type="submit">Đăng Ký</button>
+            <div class="input-group">
+                <i class="fas fa-envelope"></i>
+                <input type="email" th:field="*{email}" placeholder="Email đăng nhập" required>
+                <span class="error-text" th:if="${#fields.hasErrors('email')}" th:errors="*{email}"></span>
+            </div>
+
+            <div class="input-group">
+                <i class="fas fa-phone"></i>
+                <input type="tel" th:field="*{phone}" placeholder="Số điện thoại" required>
+                <span class="error-text" th:if="${#fields.hasErrors('phone')}" th:errors="*{phone}"></span>
+            </div>
+
+            <div class="input-group">
+                <i class="fas fa-map-marker-alt"></i>
+                <input type="text" th:field="*{address}" placeholder="Địa chỉ của bạn" required>
+                <span class="error-text" th:if="${#fields.hasErrors('address')}" th:errors="*{address}"></span>
+            </div>
+
+            <div class="input-group">
+                <i class="fas fa-lock"></i>
+                <input type="password" id="password" th:field="*{password}" placeholder="Mật khẩu" required>
+                <span class="error-text" th:if="${#fields.hasErrors('password')}" th:errors="*{password}"></span>
+            </div>
+
+            <div class="input-group">
+                <i class="fas fa-shield-alt"></i>
+                <input type="password" id="confirmPassword" th:field="*{confirmPassword}" placeholder="Xác nhận mật khẩu" required>
+                <span class="error-text" th:if="${#fields.hasErrors('confirmPassword')}" th:errors="*{confirmPassword}"></span>
+            </div>
+            
+            <button type="submit">Tạo tài khoản</button>
 
             <div th:if="${error != null}" class="error" th:text="${error}"></div>
             <div id="js-error" class="error" style="display: none;"></div>
@@ -112,7 +227,7 @@
             Đã có tài khoản? <a th:href="@{/dangnhap}">Đăng nhập ngay</a>
         </div>
         
-        <a th:href="@{/}" class="home-link"><i class="fas fa-arrow-left"></i> Quay lại trang chủ</a>
+        <a th:href="@{/}" class="home-link"><i class="fas fa-chevron-left"></i> Quay lại trang chủ</a>
     </div>
 
     <script>
