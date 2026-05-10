@@ -13,21 +13,21 @@
     
 <div>
     <div class="container1">
-        <!-- Tái sử dụng Header của bạn -->
+     
         <div th:replace="~{fragments/header :: header_lapzone}"></div>
     </div>
 
     <div class="desc_of_product_page">
-        <!-- Khối hiển thị ảnh và tên (Bên Trái) -->
+     
        <div class="desc_img_product">
           <h3 th:text="${product.name}">Tên Laptop</h3>
             
-            <!-- Ảnh chính -->
+       
             <img id="desc_img_0" th:src="@{'/' + ${product.image}}" alt="Main Image">
             
-            <!-- Danh sách ảnh phụ -->
+           
           <div class="list_desc_img_product" th:if="${product.images != null and !product.images.isEmpty()}">
-                <!-- Dùng #strings.equals để so sánh chuỗi chính xác tuyệt đối, gạt bỏ ảnh chính ra -->
+               
                 <img th:each="imgObj, iterStat : ${product.images}" 
                      th:if="${!#strings.equals(imgObj.imageUrl, product.image)}"
                      th:id="'desc_img_' + ${iterStat.count}" 
@@ -61,7 +61,7 @@
             </div>
         </div>
 
-        <!-- Khối giá, khuyến mãi và mua hàng (Bên Phải) -->
+    
         <div class="right_sale">
             <h2>Ưu đãi sẽ kết thúc trong</h2>
             <div id="counttime" class="counttime"></div>
@@ -80,7 +80,7 @@
                 </a>
             </div>
             <br><br>
-            <!-- Khối Ưu Đãi (Giữ nguyên tĩnh) -->
+      
             <div class="promotion_subsidy">
                 <div class="promotion">
                     <span class="label-uu-dai">ƯU ĐÃI</span>
@@ -96,7 +96,7 @@
                 </div>
             </div>
 
-            <!-- Form Mua Hàng & Thêm Giỏ Hàng -->
+          
             <div class="container_buy_now">
                 <a class="buy_now" href="#">
                     Mua Ngay<br>
@@ -129,16 +129,16 @@
                 </button>
             </form>
              
-            <!-- Khối Phụ kiện (Giữ nguyên tĩnh) -->
+        
             <div class="send_cmt">
                 <input type="text" placeholder="Để lại số điện thoại để được tư vấn">
                 <button type="submit">Gửi</button>
             </div>
-            <!-- ... (Phần Option Phụ Kiện checkbox của bạn giữ nguyên, mình lược bớt cho đỡ dài màn hình copy) ... -->
+          
         </div>
     </div>
 
-    <!-- Bảng thông số chi tiết (Gọi biến qua ProductDetail) -->
+
     <div class="configuration_rating">
         <div class="detail_configuration" th:if="${product.productDetail != null}">
             <span>Thông số kỹ thuật</span>
@@ -159,15 +159,15 @@
             </table>
         </div>
         
-        <!-- ... (Phần Đánh giá chuyên gia và form comment giữ nguyên) ... -->
+
     </div>
 </div>
 <br><br>
 
-<!-- Tái sử dụng Footer -->
+
 <div th:replace="~{fragments/footer :: footer_lapzone}"></div>
 
-<!-- JS đặt cuối body để DOM load xong trước khi script chạy -->
+
 <script th:src="@{/js/product.js}"></script>
 </body>
 </html>

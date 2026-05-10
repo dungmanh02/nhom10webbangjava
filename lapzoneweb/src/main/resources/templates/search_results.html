@@ -3,12 +3,12 @@
 <head>
     <meta charset="UTF-8">
     <title th:text="'Kết Quả Tìm Kiếm: ' + ${keyword}">Kết Quả Tìm Kiếm</title>
-    <!-- Tái sử dụng CSS cũ của bạn -->
+
     <link rel="stylesheet" th:href="@{/css/css.css}">
     <link rel="stylesheet" th:href="@{/css/product.css}">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
     <style>
-        /* Thêm chút CSS cho cái Layout Bộ Lọc */
+        
         .search-container {
             display: flex;
             max-width: 1200px;
@@ -33,7 +33,7 @@
 </head>
 <body>
 
-    <!-- Chèn Header dùng chung (Đảm bảo form tìm kiếm trên Header action="/search" và method="get") -->
+   
     <div th:replace="~{fragments/header :: header_lapzone}"></div>
 
     <div class="content" style="text-align: center; margin-top: 20px;">
@@ -41,14 +41,14 @@
     </div>
 
     <div class="search-container">
-        <!-- CỘT BÊN TRÁI: BỘ LỌC (FILTER) -->
+    
         <div class="filter-sidebar">
             <h3><i class="fa fa-filter"></i> Lọc Sản Phẩm</h3>
           <form th:action="@{/search}" method="get">
-                <!-- Giữ lại từ khóa tìm kiếm (ẩn đi) -->
+                
                 <input type="hidden" name="query" th:value="${keyword}">
                 
-                <!-- Khối chọn Hãng (Chỉ hiện ra khi bấm Xem tất cả / Từ khóa rỗng) -->
+               
                 <div class="filter-group" th:if="${keyword == null or keyword.trim() == ''}">
                     <label>Hãng sản xuất:</label>
                     <select name="categoryId">
@@ -60,14 +60,14 @@
                     </select>
                 </div>
 
-                <!-- Lọc Giá -->
+                
                 <div class="filter-group">
                     <label>Mức giá (VNĐ):</label>
                     <input type="number" name="minPrice" placeholder="Giá từ..." th:value="${selectedMinPrice}">
                     <input type="number" name="maxPrice" placeholder="Đến giá..." th:value="${selectedMaxPrice}">
                 </div>
 
-                <!-- Lọc CPU -->
+               
                 <div class="filter-group">
                     <label>Vi xử lý (CPU):</label>
                     <select name="cpu">
@@ -80,7 +80,7 @@
                     </select>
                 </div>
 
-                <!-- Lọc GPU siêu chi tiết -->
+             
                 <div class="filter-group">
                     <label>Card đồ họa (GPU):</label>
                     <select name="gpu">
@@ -99,13 +99,13 @@
             </form>
         </div>
 
-        <!-- CỘT BÊN PHẢI: DANH SÁCH SẢN PHẨM -->
+     
         <div th:if="${products == null or products.isEmpty()}" style="flex: 1; text-align: center; font-size: 1.2em; color: red;">
             <p th:text="'Không tìm thấy sản phẩm nào phù hợp với từ khóa \'' + ${keyword} + '\'.'">Không tìm thấy</p>
         </div>
 
         <div class="search-results-grid" th:if="${products != null and !products.isEmpty()}">
-            <!-- Vòng lặp Thymeleaf in sản phẩm -->
+       
             <div class="product_item" th:each="p : ${products}">
                 <a th:href="@{/product_detail(id=${p.id})}" style="text-decoration: none; color: black;">
                     
@@ -125,7 +125,7 @@
         </div>
     </div>
 
-    <!-- Chèn Footer dùng chung -->
+
     <div th:replace="~{fragments/footer :: footer_lapzone}"></div>
 
 </body>

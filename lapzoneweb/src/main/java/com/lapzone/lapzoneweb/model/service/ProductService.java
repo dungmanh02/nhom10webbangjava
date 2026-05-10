@@ -36,7 +36,6 @@ public class ProductService {
 
    public List<Product> searchProducts(String keyword, Long categoryId, Double minPrice, Double maxPrice, String cpu, String gpu) {
         String kw = (keyword != null) ? keyword : ""; 
-        // Lọc khoảng trắng, nếu người dùng không chọn gì thì gán thành null để bỏ qua điều kiện lọc
         String cpuFilter = (cpu != null && !cpu.trim().isEmpty()) ? cpu : null;
         String gpuFilter = (gpu != null && !gpu.trim().isEmpty()) ? gpu : null;
         
