@@ -51,4 +51,8 @@ public class AuthServiceTest {
         User result = authService.authenticate("dung2xvp@gmail.com", "dung17032005");
         assertNull(result);
     }
+<<<<<<< HEAD
 }
+=======
+}
+>>>>>>> 4dae159 (update admin, checkout and order management features)

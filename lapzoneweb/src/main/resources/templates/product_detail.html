@@ -97,11 +97,12 @@
             </div>
 
           
-            <div class="container_buy_now">
-                <a class="buy_now" href="#">
+                    <div class="container_buy_now">
+                <a class="buy_now" href="javascript:void(0);" onclick="handleBuyNow()">
                     Mua Ngay<br>
                     <span>(Giao tận nơi hoặc nhận tại cửa hàng)</span>
                 </a>
+                
                 <div class="payment_method">
                     <a class="tragop" href="#">
                         Trả góp nhanh<br>
@@ -112,7 +113,30 @@
                         <span>(Visa,Master Card,JCB,Amex)</span>
                     </a>
                 </div>
+
+                <form id="buyNowForm" th:action="@{/buy-now}" method="POST" style="display: none;">
+                    <input type="hidden" name="productId" th:value="${product.id}">
+                    <input type="hidden" name="quantity" id="buyNowQty" value="1">
+                </form>
             </div>
+
+                <script>
+                    function handleBuyNow() {
+                        // Tìm ô nhập số lượng trên trang của bạn (đảm bảo ô đó có id="quantity")
+                        var quantityInput = document.getElementById('quantity');
+                        var buyNowQty = document.getElementById('buyNowQty');
+                        
+                        if (quantityInput) {
+                            buyNowQty.value = quantityInput.value;
+                        } else {
+                            // Nếu không tìm thấy ô id="quantity", mặc định là 1
+                            buyNowQty.value = 1;
+                        }
+                        
+                        // Gửi lệnh xuống Server
+                        document.getElementById('buyNowForm').submit();
+                    }
+                </script>
             
             <form th:action="@{/cart/add}" method="post" id="addToCartForm" style="margin-top: 15px;">
                 <input type="hidden" name="productId" th:value="${product.id}">

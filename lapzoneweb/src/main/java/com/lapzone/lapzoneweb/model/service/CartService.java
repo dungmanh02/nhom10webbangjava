@@ -62,4 +62,18 @@ public class CartService {
         }
         return total;
     }
+            // Lấy danh sách các CartItem dựa trên danh sách ID được truyền vào
+        public List<CartItem> getSelectedCartItems(List<Long> cartItemIds) {
+            return cartItemRepository.findAllById(cartItemIds);
+        }
+
+        // Tính tổng tiền chỉ cho những món được chọn
+        public Double getSelectedCartTotal(List<Long> cartItemIds) {
+            List<CartItem> selectedItems = cartItemRepository.findAllById(cartItemIds);
+            double total = 0.0;
+            for (CartItem item : selectedItems) {
+                total += item.getProduct().getPrice() * item.getQuantity();
+            }
+            return total;
+        }
 }

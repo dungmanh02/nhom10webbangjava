@@ -26,4 +26,5 @@ public interface ProductRepository extends JpaRepository<Product, Long> {
             @Param("cpu") String cpu,
             @Param("gpu") String gpu
     );
+    List<Product> findByCategoryId(Long categoryId);
 }

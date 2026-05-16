@@ -79,4 +79,8 @@ public class CartServiceTest {
 
         verify(cartItemRepository, times(1)).save(mockCartItem);
     }
+<<<<<<< HEAD
 }
+=======
+}
+>>>>>>> 4dae159 (update admin, checkout and order management features)

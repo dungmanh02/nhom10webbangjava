@@ -1,489 +1,464 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org" lang="vi">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" th:href="@{/css/css.css}">
-    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    <script th:src="@{/js/js.js}"></script>
-    <title>Trang chủ - LAPZONE</title>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<link rel="stylesheet" th:href="@{/css/css.css}">
+<link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+<script th:src="@{/js/js.js}"></script>
+<title>Trang chủ - LAPZONE</title>
 </head>
 <body>
 <div>
 <div class="container1">
 <div th:replace="~{fragments/header :: header_lapzone}"></div>
 </div>
-  <div class="content">
-    <div class="part1_content">
-           
-            <nav class="menu3">
-                             <div class="social_link">
-                                  <a href="#"><img th:src="@{/assets/FaceBook.jpg}" alt="facebook"></a>
-                                  <a href="#"><img th:src="@{/assets/tiktok.jpg}" alt="Youtube"></a>
-                                  <a href="#"><img th:src="@{/assets/YouTube.jpg}" alt="Tiktok"></a>
-                             </div>
-                <ul>
-                    <li><a href="#">Máy Tính xách tay &#10217;</a>
-                            <ul>
-                                <li><a href="#" class="title1_submenu3a">Laptop theo hãng </a></li>
-                                <li><a href="#">Acer &#10217;</a>
-                                          <ul>
-                                            <li><a href="#">Acer Aspire</a></li>
-                                            <li><a href="#">Acer Nitro</a></li>
-                                            <li><a href="#">Acer Predator</a></li>
-                                            <li><a href="#">Acer Swift</a></li>
-                                          </ul>  
-                                </li>
-                                <li><a href="#">Gigabyte </a></li>
-                                <li><a href="#">APPLE &#10217;</a>
-                                          <ul>
-                                            <li><a href="#">Macbook Air</a></li>
-                                            <li><a href="#">Macbook Pro</a></li>
-                                            <li><a href="#">iMac</a></li>
-                                          </ul>
-                                </li>
-                                <li><a href="#">ASUS &#10217;</a>
-                                           <ul>
-                                            <li><a href="#">Asus Zenbook Series</a></li>
-                                            <li><a href="#">Asus Vivobook Series</a></li>
-                                            <li><a href="#">Asus TUF</a></li>
-                                            <li><a href="#">Aus ROG</a></li>
-                                           </ul>
-                                </li>
-                                <li><a href="#">DELL &#10217;</a>
-                                           <ul>
-                                            <li><a href="#">Dell Inspiron</a></li>
-                                            <li><a href="#">Dell Alienware</a></li>
-                                            <li><a href="#">Dell Vostro</a></li>
-                                            <li><a href="#">Dell Latitude</a></li>
-                                            <li><a href="#">Dell Precision</a></li>
-                                            <li><a href="#">Dell Gaming</a></li>
-                                            <li><a href="#">Dell XPS</a></li>
-                                           </ul>
-                                </li>
-                                <li><a href="#">HP &#10217;</a>
-                                             <ul>
-                                             <li><a href="#">HP Zbook</a></li>
-                                             <li><a href="#">HP Elitebook</a></li>
-                                             <li><a href="#">HP Envy</a></li>
-                                             <li><a href="#">HP Pavilion</a></li>
-                                             <li><a href="#">HP Probook</a></li>
-                                             <li><a href="#">HP Gaming</a></li>
-                                            </ul>
-                                </li>
-                                <li><a href="#">LENOVO &#10217;</a>
-                                             <ul>
-                                            <li><a href="#">Lenovo Ideapad</a></li>
-                                            <li><a href="#">Lenovo LOQ</a></li>
-                                            <li><a href="#">Lenovo Legion</a></li>
-                                            <li><a href="#">Lenovo Thinkbook</a></li>
-                                            <li><a href="#">Lenovo Yoga Seies</a></li>
-                                            </ul>
-                                </li>
-                                <li><a href="#">MICROSOFT </a></li>
-                                <li><a href="#">THINKPAD </a></li>
-                                <li><a href="#">THINKBOOK </a></li>
-                                <li><a href="#">Tình Trạng </a></li>
-                                <li><a href="#">Brand New 100% </a></li>
-                                <li><a href="#">Outlet/Referbished </a></li>
-                                <li><a href="#">Like New</a></li>
-                            </ul>
-                    </li>
-                    <li><a href="#">Laptop Gaming &#10217;</a>
-                            <ul>
-                                <li><a href="#">Laptop gaming Acer &#10217; </a>
-                                            <ul>
-                                                <li><a href="#">Acer Nitro</a></li>
-                                                <li><a href="#">Acer Predator</a></li>
-                                            </ul>
-                                </li>
-                                <li><a href="#">Laptop gaming Lenovo &#10217; </a>
-                                            <ul>
-                                                <li><a href="#">Lenovo Legion</a></li>
-                                                <li><a href="#">Lenovo Ideapad Gaming</a></li>
-                                                <li><a href="#">Lenovo LOQ</a></li>
-                                            </ul>
-                                </li>
-                                <li><a href="#">Laptop gaming HP &#10217; </a>
-                                             <ul>
-                                                <li><a href="#">HP Omen</a></li>
-                                                <li><a href="#">HP Victus</a></li>
-                                             </ul>
-                                </li>
-                                <li><a href="#">Laptop gaming ASUS &#10217; </a>
-                                             <ul>
-                                                <li><a href="#">Asus ROG</a></li>
-                                                <li><a href="#">Asus TUF</a></li>
-                                             </ul>
-                                </li>
-                                <li><a href="#">Laptop gaming DELL  &#10217;</a>
-                                             <ul>
-                                                <li><a href="#">Dell Alienware</a></li>
-                                                <li><a href="#">Dell Gaming</a></li>
-                                             </ul>
-                                </li>
-                            </ul>
-                    </li>
-                    <li><a href="#">Laptop Văn Phòng  &#10217;</a>
-                            <ul>
-                                <li><a href="#">Acer  &#10217; </a>
-                                             <ul>
-                                                <li><a href="#">Acer Aspire</a></li>
-                                                <li><a href="#">Acer Swift</a></li>
-                                             </ul>
-                                </li>
-                                <li><a href="#">Dell &#10217;</a>
-                                             <ul>
-                                                <li><a href="#">Dell Ispiron</a></li>
-                                                <li><a href="#">Dell Latitude</a></li>
-                                                <li><a href="#">Dell Vostro</a></li>
-                                                <li><a href="#">Dell XPS</a></li>
-                                             </ul>
-                                </li>
-                                <li><a href="#">Asus &#10217;</a>
-                                             <ul>
-                                                <li><a href="#">Asus Zenbook</a></li>
-                                                <li><a href="#">Asus Vivobook</a></li>
-                                             </ul>
-                                </li>
-                                <li><a href="#">Apple &#10217;</a>
-                                             <ul>
-                                                <li><a href="#">Macbook Air</a></li>
-                                                <li><a href="#">Macbook Pro</a></li>
-                                             </ul>
-                                </li>
-                            </ul>
-                    </li>
-                    <li><a href="#">Laptop Lập Trình</a></li>
-                    <li><a href="#">Laptop Đồ họa</a></li>
-                    <li><a href="#">Laptop Cao cấp</a></li>
-                    <li><a href="#">Apple MacBook</a></li>
-                    <li><a href="#">Ram-SSD</a></li>
-                    <li><a href="#">Kho Phụ Kiện</a></li>
-                    <li><a href="#">Cổng Chuyển</a></li>
-                    <li><a href="#">Tản Nhiệt Laptop</a></li>
-                </ul>
-            </nav>  
-          <div class="reviewimage">
-            <img id="slider" alt="ảnh"  th:src="@{/assets/reviewimage.webp}">
-            <nav class="menu_beneath_picture">
-                <ul>
-                    <li><a href="#">Tạm Ngưng Hỗ Trợ Kĩ Thuật,Bảo Dưỡng, Bảo Trì</a></li>
-                    <li><a href="#">Đặt Lịch Hẹn Trước Để Được Hỗ Trợ Tốt hơn</a></li>
-                    <li><a href="#">Thông Báo Lịch Làm Việc Dịp Đại Lễ 30/4-01/05</a></li>
-                    <li><a href="#">Thông Báo Bảo Trì Website</a></li>
-                </ul>
-            </nav>
-          </div>
+<div class="content">
+<div class="part1_content">
 
-            <div class="news">
-              <p class="news_title">TIN MỚI NHẤT</p>
-              <nav class="news_menu">
-                <ul>
-                    <li><a href="#">Tạm Ngưng Hỗ Trợ Kĩ Thuật,Bảo Dưỡng, Bảo Trì</a></li>
-                    <li><a href="#">Đặt Lịch Hẹn Trước Để Được Hỗ Trợ Tốt hơn</a></li>
-                    <li><a href="#">Thông Báo Lịch Làm Việc Dịp Đại Lễ 30/4-01/05</a></li>
-                    <li><a class="all_news" href="#">Tất cả tin tức</a></li>
-                </ul>
-              </nav>
+<nav class="menu3">
+<div class="social_link">
+<a href="#"><img th:src="@{/assets/FaceBook.jpg}" alt="facebook"></a>
+<a href="#"><img th:src="@{/assets/tiktok.jpg}" alt="Youtube"></a>
+<a href="#"><img th:src="@{/assets/YouTube.jpg}" alt="Tiktok"></a>
+</div>
+<ul>
+<li><a href="#">Máy Tính xách tay &#10217;</a>
+<ul>
+<li><a href="#" class="title1_submenu3a">Laptop theo hãng </a></li>
+
+<li th:each="cat : ${categories}">
+    <a th:href="@{/(categoryId=${cat.id})}" th:text="${cat.name}">Tên Hãng</a>
+</li>
+
+<li><a href="#">Tình Trạng </a></li>
+<li><a href="#">Brand New 100% </a></li>
+<li><a href="#">Outlet/Referbished </a></li>
+<li><a href="#">Like New</a></li>
+</ul>
+</li>
+<li><a href="#">Laptop Gaming &#10217;</a>
+<ul>
+<li><a href="#">Laptop gaming Acer &#10217; </a>
+<ul>
+<li><a href="#">Acer Nitro</a></li>
+<li><a href="#">Acer Predator</a></li>
+</ul>
+</li>
+<li><a href="#">Laptop gaming Lenovo &#10217; </a>
+<ul>
+<li><a href="#">Lenovo Legion</a></li>
+<li><a href="#">Lenovo Ideapad Gaming</a></li>
+<li><a href="#">Lenovo LOQ</a></li>
+</ul>
+</li>
+<li><a href="#">Laptop gaming HP &#10217; </a>
+<ul>
+<li><a href="#">HP Omen</a></li>
+<li><a href="#">HP Victus</a></li>
+</ul>
+</li>
+<li><a href="#">Laptop gaming ASUS &#10217; </a>
+<ul>
+<li><a href="#">Asus ROG</a></li>
+<li><a href="#">Asus TUF</a></li>
+</ul>
+</li>
+<li><a href="#">Laptop gaming DELL  &#10217;</a>
+<ul>
+<li><a href="#">Dell Alienware</a></li>
+<li><a href="#">Dell Gaming</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li><a href="#">Laptop Văn Phòng  &#10217;</a>
+<ul>
+<li><a href="#">Acer  &#10217; </a>
+<ul>
+<li><a href="#">Acer Aspire</a></li>
+<li><a href="#">Acer Swift</a></li>
+</ul>
+</li>
+<li><a href="#">Dell &#10217;</a>
+<ul>
+<li><a href="#">Dell Ispiron</a></li>
+<li><a href="#">Dell Latitude</a></li>
+<li><a href="#">Dell Vostro</a></li>
+<li><a href="#">Dell XPS</a></li>
+</ul>
+</li>
+<li><a href="#">Asus &#10217;</a>
+<ul>
+<li><a href="#">Asus Zenbook</a></li>
+<li><a href="#">Asus Vivobook</a></li>
+</ul>
+</li>
+<li><a href="#">Apple &#10217;</a>
+<ul>
+<li><a href="#">Macbook Air</a></li>
+<li><a href="#">Macbook Pro</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li><a href="#">Laptop Lập Trình</a></li>
+<li><a href="#">Laptop Đồ họa</a></li>
+<li><a href="#">Laptop Cao cấp</a></li>
+<li><a href="#">Apple MacBook</a></li>
+<li><a href="#">Ram-SSD</a></li>
+<li><a href="#">Kho Phụ Kiện</a></li>
+<li><a href="#">Cổng Chuyển</a></li>
+<li><a href="#">Tản Nhiệt Laptop</a></li>
+</ul>
+</nav>
+<div class="reviewimage">
+<img id="slider" alt="ảnh"  th:src="@{/assets/reviewimage.webp}">
+<nav class="menu_beneath_picture">
+<ul>
+<li><a href="#">Tạm Ngưng Hỗ Trợ Kĩ Thuật,Bảo Dưỡng, Bảo Trì</a></li>
+<li><a href="#">Đặt Lịch Hẹn Trước Để Được Hỗ Trợ Tốt hơn</a></li>
+<li><a href="#">Thông Báo Lịch Làm Việc Dịp Đại Lễ 30/4-01/05</a></li>
+<li><a href="#">Thông Báo Bảo Trì Website</a></li>
+</ul>
+</nav>
+</div>
+<div class="news">
+<p class="news_title">TIN MỚI NHẤT</p>
+<nav class="news_menu">
+<ul>
+<li><a href="#">Tạm Ngưng Hỗ Trợ Kĩ Thuật,Bảo Dưỡng, Bảo Trì</a></li>
+<li><a href="#">Đặt Lịch Hẹn Trước Để Được Hỗ Trợ Tốt hơn</a></li>
+<li><a href="#">Thông Báo Lịch Làm Việc Dịp Đại Lễ 30/4-01/05</a></li>
+<li><a class="all_news" href="#">Tất cả tin tức</a></li>
+</ul>
+</nav>
+</div>
+</div>
+<div id="counttime" class="counttime"> <h2>Khuyến Mãi</h2></div><br><br>
+
+<th:block th:if="${selectedCatId != null}">
+    <div class="part4_content" style="margin-bottom: 50px;">
+        <br><br><h1 style="color: #d32f2f;">Kết Quả Tìm Kiếm Theo Hãng</h1>
+        <div class="product3">
+            <div th:if="${#lists.isEmpty(products)}" style="text-align: center; width: 100%; padding: 40px; color: #666; font-size: 18px;">
+                Hiện tại chưa có sản phẩm nào thuộc thương hiệu này.
             </div>
-        </div>
-        <div id="counttime" class="counttime"> <h2>Khuyến Mãi</h2></div><br><br>
-        <div>
-            <h2 class="title_part2_content">Một số sản phẩm tham khảo</h2>
-        </div>
-    <div class="part2_content">
-   
-            <div class="product1">
-             
-                 <div class="product_items" th:each="product, iterStat : ${referenceProducts}" th:if="${iterStat.index < 4}">
-                     <img class="product_img" th:src="@{'/' + ${product.image}}">
-                     <div class="product_title">
-                         <a th:href="@{/product_detail(id=${product.id})}" style="text-decoration: none;color: black;" th:text="${product.name}">Tên sản phẩm</a>
-                     </div>
-                     <div class="product_price" th:text="${#numbers.formatDecimal(product.price, 0, 'COMMA', 0, 'POINT')} + ' đ'">Giá</div>
-                     <div class="amount_of_product" th:text="${product.stock} + ' phiên bản'">1 phiên bản</div>
-                     
-                     <div class="more_infor_product" th:if="${product.productDetail != null}">
-                        Chi Tiết Cấu Hình:<br> 
+            <a th:each="product : ${products}" th:href="@{/product_detail(id=${product.id})}">
+                <div class="product_item3">
+                    <div class="badge_product3" th:if="${product.stock > 0}">HOT!</div>
+                    <div class="badge_product3" th:if="${product.stock == 0}" style="background-color: #d32f2f;">Hết Hàng !</div>
+                    <img class="product_img" th:src="@{'/' + ${product.image}}">
+                    <div class="product_title" th:text="${product.name}">Tên sản phẩm</div>
+                    <div class="product_price" th:text="${#numbers.formatDecimal(product.price, 0, 'COMMA', 0, 'POINT')} + ' đ'">Giá tiền</div>
+                    <div class="container_favourite">
+                        <div class="amount_of_product" th:text="${product.stock} + ' phiên bản'">1 phiên bản</div>
+                        <div class="favourite_product">&#9825; Yêu thích</div>
+                    </div>
+                    <div class="more_infor_product" th:if="${product.productDetail != null}">
+                        Chi Tiết Cấu Hình:<br>
                         - CPU: <span th:text="${product.productDetail.cpu}"></span><br>
                         - RAM: <span th:text="${product.productDetail.ram}"></span><br>
                         - Màn hình: <span th:text="${product.productDetail.screen}"></span><br>
-                        - Card Đồ họa: <span th:text="${product.productDetail.gpu}"></span> 
-                     </div>
-                 </div>
-                 <!-- END VÒNG LẶP -->
-             </div>
-                 <div class="shortyoutube">
-                     <iframe width="250" height="444" class="videoshort" src="https://www.youtube.com/embed/XpD21zVWNqY?autoplay=1&loop=1&playlist=XpD21zVWNqY&mute=1" allowfullscreen ></iframe>
-                     <iframe width="250" height="444" class="videoshort" src="https://www.youtube.com/embed/Gc0XVYBrYAw?autoplay=1&loop=1&playlist=Gc0XVYBrYAw&mute=1" allowfullscreen></iframe>
-                 </div>
+                        - Đồ họa: <span th:text="${product.productDetail.gpu}"></span>
+                        <div class="product3_shopping">
+                            <i class="fa fa-shopping-cart"></i>
+                            <button class="button_comparation">So Sánh</button>
+                        </div>
+                    </div>
+                </div>
+            </a>
+        </div>
     </div>
-    <div class="part3_content">
-                <br><br><br><h1>Laptop theo nhu cầu</h1>
-            <div class="product2"> 
-                 <a href="#"><div class="product_items2"> 
-                       <img class="product_img2" th:src="@{/assets/vanphonghoctap.webp}">
-                       <div class="application_icon">
-                           <img th:src="@{/assets/photoshop.jpg}">
-                           <img th:src="@{/assets/word.jpg}">
-                           <img th:src="@{/assets/Google.jpg}">
-                       </div>
-                       <div class="product_title">Học Tập,Văn Phòng</div>
-                       <div class="more_infor_product">Được thiết kế cho việc xử lí các công việc văn phòng, học tập trên trường, không thích hợp để chơi game hay làm đồ họa</div>
-                     </div></a> 
-               <a href="#"><div class="product_items2"> 
-                       <img class="product_img2" th:src="@{/assets/dohoakythuat.webp}">
-                       <div class="application_icon">
-                           <img th:src="@{/assets/pr.jpg}">
-                           <img th:src="@{/assets/autocad.jpg}">
-                           <img th:src="@{/assets/solidwork.jpg}">
-                       </div>
-                       <div class="product_title">Đồ Họa, Kỹ Thuật</div>
-                       <div class="more_infor_product">Được thiết kế cho việc xử lí các công việc đồ họa chuyên dụng</div>
-                     </div></a>
-                 <a href="#"> <div class="product_items2">  
-                       <img class="product_img2" th:src="@{/assets/laptoplaptrinh.webp}">
-                        <div class="application_icon">
-                           <img th:src="@{/assets/Visualstudiocode.jpg}">
-                           <img th:src="@{/assets/react.jpg}">
-                           <img th:src="@{/assets/csharp.jpg}">
-                       </div>
-                       <div class="product_title">Lập Trình</div>
-                       <div class="more_infor_product">Được thiết kế phù hợp cho việc lập trình,các tác vụ liên quan đến ngành lập trình</div>
-                     </div></a>
-              
-               <a href="#"> <div class="product_items2"> 
-                       <img class="product_img2" th:src="@{/assets/gamelaptop.webp}">
-                        <div class="application_icon">
-                           <img th:src="@{/assets/lmht.jpg}">
-                           <img th:src="@{/assets/pubg.jpg}">
-                           <img th:src="@{/assets/blackwukong.jpg}">
-                       </div>
-                       <div class="product_title">Game</div>
-                       <div class="more_infor_product">Được thiết kế để chơi các tựa game esport, AAA, những tựa game nặng một cách mượt mà</div>
-                     </div></a>
-               
-                <a href="#"> <div class="product_items2"> 
-                       <img class="product_img2" th:src="@{/assets/sieuphamlaptop.webp}">
-                        <div class="application_icon">
-                           <img th:src="@{/assets/word.jpg}">
-                           <img th:src="@{/assets/Visualstudiocode.jpg}">
-                           <img th:src="@{/assets/lmht.jpg}">
-                       </div>
-                       <div class="product_title">Siêu Phẩm</div>
-                       <div class="more_infor_product">Là những con laptop thuộc phân khúc cao cấp,cân bằng giữa thiết kế và hiệu năng</div>
-                     </div></a>       
-            </div>
-        </div>
-        <div class="part4_content">
-               <br><br><h1>Máy Tính Xách Tay</h1>
-               <div class="product3">
-                   
-                   <!-- VÒNG LẶP SẢN PHẨM MÁY TÍNH XÁCH TAY -->
-                   <a th:each="product : ${laptopProducts}" th:href="@{/product_detail(id=${product.id})}">
-                       <div class="product_item3">
-                        <div class="badge_product3" th:if="${product.stock > 0}">HOT!</div>
-                        <div class="badge_product3" th:if="${product.stock == 0}" style="background-color: #d32f2f;">Hết Hàng !</div>
-                        
-                         <img class="product_img" th:src="@{'/' + ${product.image}}">
-                         <div class="product_title" th:text="${product.name}">Tên sản phẩm</div>
-                         <div class="product_price" th:text="${#numbers.formatDecimal(product.price, 0, 'COMMA', 0, 'POINT')} + ' đ'">Giá tiền</div>
-                         
-                         <div class="container_favourite">
-                            <div class="amount_of_product" th:text="${product.stock} + ' phiên bản'">1 phiên bản</div>
-                            <div class="favourite_product">&#9825; Yêu thích</div>
-                         </div>
-                         
-                         <div class="more_infor_product" th:if="${product.productDetail != null}">
-                            Chi Tiết Cấu Hình:<br>
-                            - CPU: <span th:text="${product.productDetail.cpu}"></span><br>
-                            - RAM: <span th:text="${product.productDetail.ram}"></span><br>
-                            - Màn hình: <span th:text="${product.productDetail.screen}"></span><br>
-                            - Đồ họa: <span th:text="${product.productDetail.gpu}"></span>
-                              <div class="product3_shopping">
-                                 <i class="fa fa-shopping-cart"></i>
-                                 <button class="button_comparation">So Sánh</button>
-                              </div>
-                        </div>
-                    </div>
-                  </a>
-       
+</th:block>
 
-               </div>
-    <div class="part5_content">
-                 <br><br><h1>Apple</h1>
-                  <div class="product4">
-                    
-                      <!-- VÒNG LẶP SẢN PHẨM APPLE -->
-                      <a th:each="product : ${appleProducts}" th:href="@{/product_detail(id=${product.id})}">
-                          <div class="product_item4">
-                             <div class="badge_product4">HOT!</div>
-                             <img class="product_img" th:src="@{'/' + ${product.image}}">
-                             <div class="product_title" th:text="${product.name}">Tên Macbook</div>
-                             <div class="product_price" th:text="${#numbers.formatDecimal(product.price, 0, 'COMMA', 0, 'POINT')} + ' đ'">Giá</div>
-                             
-                              <div class="container_favourite">
-                                <div class="amount_of_product" th:text="${product.stock} + ' phiên bản'">1 phiên bản</div>
-                                <div class="favourite_product">&#9825; Yêu thích</div>
-                             </div>
-                             
-                             <div class="more_infor_product" th:if="${product.productDetail != null}">
-                                Chi Tiết Cấu Hình<br>
-                                - CPU: <span th:text="${product.productDetail.cpu}"></span><br>
-                                - RAM: <span th:text="${product.productDetail.ram}"></span><br>
-                                - Màn hình: <span th:text="${product.productDetail.screen}"></span><br>
-                                - Đồ họa: <span th:text="${product.productDetail.gpu}"></span>
-                                <div class="product4_shopping">
-                                    <i class="fa fa-shopping-cart"></i>
-                                     <button class="button_comparation">So Sánh</button>
-                                </div>
-                            </div>
-                          </div>
-                      </a>
-                      <!-- END VÒNG LẶP -->
+<th:block th:if="${selectedCatId == null}">
+<div>
+<h2 class="title_part2_content">Một số sản phẩm tham khảo</h2>
+</div>
+<div class="part2_content">
 
-                  </div>
-         
-         
-                 
-        <th:block th:if="${newProducts != null and !newProducts.isEmpty()}">
-        <br><br><h1>Hàng mới cập nhật từ cửa hàng</h1>
-        <div style="padding:60px 20px; background:#fff; margin:50px 0; border-top:4px solid #d32f2f; width: 100%; box-sizing: border-box;">  
-            <div style="display:flex; flex-wrap:wrap; justify-content:center; gap:30px; max-width:1400px; margin:0 auto;">
-                
-                <div th:each="p, iterStat : ${newProducts}" th:if="${iterStat.index < 8}" style="width:280px; background:white; border-radius:16px; overflow:hidden; box-shadow:0 10px 30px rgba(0,0,0,0.15); transition:0.3s; border:1px solid #eee;">
-                    <a th:href="@{/product_detail(id=${p.id})}" style="text-decoration:none; color:inherit; display:block;">
-                        
-                      
-                       <img th:src="${p.image != null and !p.image.isEmpty() ? (p.image.startsWith('assets/') ? '/' + p.image : '/assets/' + p.image) : '/assets/no-image.jpg'}" 
-                        th:alt="${p.name}" 
-                        style="width:100%; height:200px; object-fit:cover;">
-                             
-                        <div style="padding:18px;">
-                       
-                            <h3 th:text="${p.name}" style="font-size:15px; font-weight:bold; height:50px; overflow:hidden; margin:0 0 12px 0; color:#333; line-height:1.4;">
-                                Tên sản phẩm
-                            </h3>
-                            
-                         
-                            <div th:text="${#numbers.formatDecimal(p.price, 0, 'COMMA', 0, 'POINT')} + ' đ'" style="color:#d32f2f; font-size:22px; font-weight:bold; margin:10px 0;">
-                                Giá
-                            </div>
-                            
-                       
-                            <div style="color:#666; font-size:14px; margin-bottom:10px;">
-                                Còn lại: <strong th:text="${p.stock}">0</strong> sản phẩm
-                            </div>
-                            <div th:if="${p.stock == 0}" style="background:#d32f2f; color:white; text-align:center; padding:10px; border-radius:8px; font-weight:bold;">
-                                HẾT HÀNG
-                            </div>
-                            <div th:if="${p.stock > 0 and p.stock <= 3}" style="background:#ff9800; color:white; text-align:center; padding:8px; border-radius:8px; font-size:13px;">
-                                SẮP HẾT HÀNG
-                            </div>
-                        </div>
-                    </a>
-                </div>
-            </div>
-            <div style="text-align:center; margin-top:50px;">
-                <a th:href="@{/search}" class="btn btn-primary" style="display:inline-block; background:#1976d2; color:white; padding:16px 50px; border-radius:50px; text-decoration:none; font-weight:bold; font-size:18px;">
-                   XEM TẤT CẢ SẢN PHẨM
-                </a>
-            </div>
-        </div>
-        </th:block>
-                 
-        </div><br><br>
-        <div class="promise_to_the_customer">
-            <br><br>
-            <div class="main_idea">
-                <h1>Bạn Xứng Đáng Với Những Điều Tốt Nhất</h1>
-                <h3>Lapzone có điều gì?</h3>
-                <div class="container_promise_items">
-                <div class="promise-items">
-                     <i class="fa-solid fa-award" style="font-size: 60px;color:#13a1ed;"></i>
-                     <h3>Chất Lượng Cao&Giá Thành Tốt Nhất</h3>
-                     <p>Đem đến những chiếc latop nhập khẩu cao cấp với chất lượng dịch vụ không ngừng được nâng cao</p>
-                </div>
-                <div class="promise-items">
-                     <i class="fa-solid fa-handshake" style="font-size: 60px;color:#13a1ed;"></i>
-                     <h3>Bảo Dưỡng Trọn Đời</h3>
-                     <p>Miễn phí vệ sinh – bôi keo tản nhiệt – kiểm tra định kỳ trọn đời sử dụng.</p>
-                </div>
-                <div class="promise-items">
-                     <i class="fa-solid fa-hand-holding-heart" style="font-size: 60px;color:#13a1ed;"></i>
-                     <h3>Giao Hàng Nhanh – Đóng Gói An Toàn</h3>
-                     <p>Giao nhanh toàn quốc, đóng gói chống sốc đảm bảo an toàn tuyệt đối.</p>
-                </div>
-                <div class="desc_promise">
-                     <h1>9000+</h1>
-                     <p>Khách hàng tin tưởng</p>
-                </div>
-                 <div class="desc_promise">
-                     <h1>15 năm+</h1>
-                     <p>Trên thị trường từ năm 2008</p>
-                </div>
-                 <div class="desc_promise">
-                     <h1>80+</h1>
-                     <p>đối tác</p>
-                </div>
-                </div>
-            </div>
-        </div>
-        <br><br><br>
-        <h1 class="title_video_trungtran">Video lapzone</h1>
-        <br>
-        <div class="container_video_truntran">
-                    <div class="video_trungtran">
-                        <iframe
-                        class="video_after_promise"
-                        src="https://www.youtube.com/embed/Gc0XVYBrYAw?autoplay=1&loop=1&playlist=Gc0XVYBrYAw&mute=1" allowfullscreen
-                            ></iframe>    
-                    </div>
-                       <div class="video_trungtran2">
-                        <iframe
-                        class="video_after_promise2"
-                        src="https://www.youtube.com/embed/Gc0XVYBrYAw?autoplay=1&loop=1&playlist=Gc0XVYBrYAw&mute=1" allowfullscreen
-                            ></iframe>    
-                    </div>
-                       <div class="video_trungtran3">
-                        <iframe
-                        class="video_after_promise3"
-                        src="https://www.youtube.com/embed/Gc0XVYBrYAw?autoplay=1&loop=1&playlist=Gc0XVYBrYAw&mute=1" allowfullscreen
-                            ></iframe>    
-                    </div>
-        </div><br><br><br>
-                          <div class="container_desc_of_store">
-                      <div class="desc_of_store_title">
-                         <h1>Hệ Thống Showroom</h1>
-                         <p>Thời Gian Mở Cửa:8h20-20h(T2-CN)<p>
-                      </div>
-               <div class="desc_of_store">
-                    <div class="location_and_time_working">
-                            <h3>01 THÁI HÀ</h3>
-                                <p>Số 3 Ngõ 117 Thái Hà, Đống Đa, Hà Nội (có chỗ gửi ô tô thuận tiện)
-                                <br>Bán hàng: 093 669 3388
-                                <br>Kỹ thuật: 0911 992 995
-                                <br>Zalo OA: zalo.manhdung.vn
-                                <br>Lắng nghe góp ý: 0969.819.818</p>
-                            <h3> 02 Phòng bán hàng Online</h3>
-                                <p>Phục vụ đơn hàng online trên toàn quốc
-                                <br>Bán hàng: 093 669 3388
-                                <br>Kỹ thuật: 0911 992 995
-                                <br>Zalo OA: zalo.manhdung.vn</p> 
-                </div> 
-                       <div class="img_of_store">
-                        <div class="Duongde_reviewimage">
-                        <img  alt="ảnh"  th:src="@{/assets/lapzone_banner_footer.png}"></div>
-                        </div>
-                       </div>   
-          </div>
-     </div>
-  </div>
-  <br><br>
-  
-  <div th:replace="~{fragments/footer :: footer_lapzone}"></div>
-  
+<div class="product1">
+
+<div class="product_items" th:each="product, iterStat : ${referenceProducts}" th:if="${iterStat.index < 4}">
+<img class="product_img" th:src="@{'/' + ${product.image}}">
+<div class="product_title">
+<a th:href="@{/product_detail(id=${product.id})}" style="text-decoration: none;color: black;" th:text="${product.name}">Tên sản phẩm</a>
+</div>
+<div class="product_price" th:text="${#numbers.formatDecimal(product.price, 0, 'COMMA', 0, 'POINT')} + ' đ'">Giá</div>
+<div class="amount_of_product" th:text="${product.stock} + ' phiên bản'">1 phiên bản</div>
+
+<div class="more_infor_product" th:if="${product.productDetail != null}">
+Chi Tiết Cấu Hình:<br>
+- CPU: <span th:text="${product.productDetail.cpu}"></span><br>
+- RAM: <span th:text="${product.productDetail.ram}"></span><br>
+- Màn hình: <span th:text="${product.productDetail.screen}"></span><br>
+- Card Đồ họa: <span th:text="${product.productDetail.gpu}"></span>
+</div>
+</div>
+</div>
+<div class="shortyoutube">
+<iframe width="250" height="444" class="videoshort" src="https://www.youtube.com/embed/XpD21zVWNqY?autoplay=1&loop=1&playlist=XpD21zVWNqY&mute=1" allowfullscreen ></iframe>
+<iframe width="250" height="444" class="videoshort" src="https://www.youtube.com/embed/Gc0XVYBrYAw?autoplay=1&loop=1&playlist=Gc0XVYBrYAw&mute=1" allowfullscreen></iframe>
+</div>
+</div>
+<div class="part3_content">
+<br><br><br><h1>Laptop theo nhu cầu</h1>
+<div class="product2">
+<a href="#"><div class="product_items2">
+<img class="product_img2" th:src="@{/assets/vanphonghoctap.webp}">
+<div class="application_icon">
+<img th:src="@{/assets/photoshop.jpg}">
+<img th:src="@{/assets/word.jpg}">
+<img th:src="@{/assets/Google.jpg}">
+</div>
+<div class="product_title">Học Tập,Văn Phòng</div>
+<div class="more_infor_product">Được thiết kế cho việc xử lí các công việc văn phòng, học tập trên trường, không thích hợp để chơi game hay làm đồ họa</div>
+</div></a>
+<a href="#"><div class="product_items2">
+<img class="product_img2" th:src="@{/assets/dohoakythuat.webp}">
+<div class="application_icon">
+<img th:src="@{/assets/pr.jpg}">
+<img th:src="@{/assets/autocad.jpg}">
+<img th:src="@{/assets/solidwork.jpg}">
+</div>
+<div class="product_title">Đồ Họa, Kỹ Thuật</div>
+<div class="more_infor_product">Được thiết kế cho việc xử lí các công việc đồ họa chuyên dụng</div>
+</div></a>
+<a href="#"> <div class="product_items2">
+<img class="product_img2" th:src="@{/assets/laptoplaptrinh.webp}">
+<div class="application_icon">
+<img th:src="@{/assets/Visualstudiocode.jpg}">
+<img th:src="@{/assets/react.jpg}">
+<img th:src="@{/assets/csharp.jpg}">
+</div>
+<div class="product_title">Lập Trình</div>
+<div class="more_infor_product">Được thiết kế phù hợp cho việc lập trình,các tác vụ liên quan đến ngành lập trình</div>
+</div></a>
+
+<a href="#"> <div class="product_items2">
+<img class="product_img2" th:src="@{/assets/gamelaptop.webp}">
+<div class="application_icon">
+<img th:src="@{/assets/lmht.jpg}">
+<img th:src="@{/assets/pubg.jpg}">
+<img th:src="@{/assets/blackwukong.jpg}">
+</div>
+<div class="product_title">Game</div>
+<div class="more_infor_product">Được thiết kế để chơi các tựa game esport, AAA, những tựa game nặng một cách mượt mà</div>
+</div></a>
+
+<a href="#"> <div class="product_items2">
+<img class="product_img2" th:src="@{/assets/sieuphamlaptop.webp}">
+<div class="application_icon">
+<img th:src="@{/assets/word.jpg}">
+<img th:src="@{/assets/Visualstudiocode.jpg}">
+<img th:src="@{/assets/lmht.jpg}">
+</div>
+<div class="product_title">Siêu Phẩm</div>
+<div class="more_infor_product">Là những con laptop thuộc phân khúc cao cấp,cân bằng giữa thiết kế và hiệu năng</div>
+</div></a>
+</div>
+</div>
+<div class="part4_content">
+<br><br><h1>Máy Tính Xách Tay</h1>
+<div class="product3">
+
+<a th:each="product : ${laptopProducts}" th:href="@{/product_detail(id=${product.id})}">
+<div class="product_item3">
+<div class="badge_product3" th:if="${product.stock > 0}">HOT!</div>
+<div class="badge_product3" th:if="${product.stock == 0}" style="background-color: #d32f2f;">Hết Hàng !</div>
+
+<img class="product_img" th:src="@{'/' + ${product.image}}">
+<div class="product_title" th:text="${product.name}">Tên sản phẩm</div>
+<div class="product_price" th:text="${#numbers.formatDecimal(product.price, 0, 'COMMA', 0, 'POINT')} + ' đ'">Giá tiền</div>
+
+<div class="container_favourite">
+<div class="amount_of_product" th:text="${product.stock} + ' phiên bản'">1 phiên bản</div>
+<div class="favourite_product">&#9825; Yêu thích</div>
+</div>
+
+<div class="more_infor_product" th:if="${product.productDetail != null}">
+Chi Tiết Cấu Hình:<br>
+- CPU: <span th:text="${product.productDetail.cpu}"></span><br>
+- RAM: <span th:text="${product.productDetail.ram}"></span><br>
+- Màn hình: <span th:text="${product.productDetail.screen}"></span><br>
+- Đồ họa: <span th:text="${product.productDetail.gpu}"></span>
+<div class="product3_shopping">
+<i class="fa fa-shopping-cart"></i>
+<button class="button_comparation">So Sánh</button>
+</div>
+</div>
+</div>
+</a>
+
+</div>
+<div class="part5_content">
+<br><br><h1>Apple</h1>
+<div class="product4">
+
+<a th:each="product : ${appleProducts}" th:href="@{/product_detail(id=${product.id})}">
+<div class="product_item4">
+<div class="badge_product4">HOT!</div>
+<img class="product_img" th:src="@{'/' + ${product.image}}">
+<div class="product_title" th:text="${product.name}">Tên Macbook</div>
+<div class="product_price" th:text="${#numbers.formatDecimal(product.price, 0, 'COMMA', 0, 'POINT')} + ' đ'">Giá</div>
+
+<div class="container_favourite">
+<div class="amount_of_product" th:text="${product.stock} + ' phiên bản'">1 phiên bản</div>
+<div class="favourite_product">&#9825; Yêu thích</div>
+</div>
+
+<div class="more_infor_product" th:if="${product.productDetail != null}">
+Chi Tiết Cấu Hình<br>
+- CPU: <span th:text="${product.productDetail.cpu}"></span><br>
+- RAM: <span th:text="${product.productDetail.ram}"></span><br>
+- Màn hình: <span th:text="${product.productDetail.screen}"></span><br>
+- Đồ họa: <span th:text="${product.productDetail.gpu}"></span>
+<div class="product4_shopping">
+<i class="fa fa-shopping-cart"></i>
+<button class="button_comparation">So Sánh</button>
+</div>
+</div>
+</div>
+</a>
+</div>
+
+<th:block th:if="${newProducts != null and !newProducts.isEmpty()}">
+<br><br><h1>Hàng mới cập nhật từ cửa hàng</h1>
+<div style="padding:60px 20px; background:#fff; margin:50px 0; border-top:4px solid #d32f2f; width: 100%; box-sizing: border-box;">
+<div style="display:flex; flex-wrap:wrap; justify-content:center; gap:30px; max-width:1400px; margin:0 auto;">
+
+<div th:each="p, iterStat : ${newProducts}" th:if="${iterStat.index < 8}" style="width:280px; background:white; border-radius:16px; overflow:hidden; box-shadow:0 10px 30px rgba(0,0,0,0.15); transition:0.3s; border:1px solid #eee;">
+<a th:href="@{/product_detail(id=${p.id})}" style="text-decoration:none; color:inherit; display:block;">
+
+<img th:src="${p.image != null and !p.image.isEmpty() ? (p.image.startsWith('assets/') ? '/' + p.image : '/assets/' + p.image) : '/assets/no-image.jpg'}"
+th:alt="${p.name}"
+style="width:100%; height:200px; object-fit:cover;">
+
+<div style="padding:18px;">
+
+<h3 th:text="${p.name}" style="font-size:15px; font-weight:bold; height:50px; overflow:hidden; margin:0 0 12px 0; color:#333; line-height:1.4;">
+Tên sản phẩm
+</h3>
+
+<div th:text="${#numbers.formatDecimal(p.price, 0, 'COMMA', 0, 'POINT')} + ' đ'" style="color:#d32f2f; font-size:22px; font-weight:bold; margin:10px 0;">
+Giá
+</div>
+
+<div style="color:#666; font-size:14px; margin-bottom:10px;">
+Còn lại: <strong th:text="${p.stock}">0</strong> sản phẩm
+</div>
+<div th:if="${p.stock == 0}" style="background:#d32f2f; color:white; text-align:center; padding:10px; border-radius:8px; font-weight:bold;">
+HẾT HÀNG
+</div>
+<div th:if="${p.stock > 0 and p.stock <= 3}" style="background:#ff9800; color:white; text-align:center; padding:8px; border-radius:8px; font-size:13px;">
+SẮP HẾT HÀNG
+</div>
+</div>
+</a>
+</div>
+</div>
+<div style="text-align:center; margin-top:50px;">
+<a th:href="@{/search}" class="btn btn-primary" style="display:inline-block; background:#1976d2; color:white; padding:16px 50px; border-radius:50px; text-decoration:none; font-weight:bold; font-size:18px;">
+XEM TẤT CẢ SẢN PHẨM
+</a>
+</div>
+</div>
+</th:block>
+
+</div><br><br>
+</th:block>
+
+<div class="promise_to_the_customer">
+<br><br>
+<div class="main_idea">
+<h1>Bạn Xứng Đáng Với Những Điều Tốt Nhất</h1>
+<h3>Lapzone có điều gì?</h3>
+<div class="container_promise_items">
+<div class="promise-items">
+<i class="fa-solid fa-award" style="font-size: 60px;color:#13a1ed;"></i>
+<h3>Chất Lượng Cao&Giá Thành Tốt Nhất</h3>
+<p>Đem đến những chiếc latop nhập khẩu cao cấp với chất lượng dịch vụ không ngừng được nâng cao</p>
+</div>
+<div class="promise-items">
+<i class="fa-solid fa-handshake" style="font-size: 60px;color:#13a1ed;"></i>
+<h3>Bảo Dưỡng Trọn Đời</h3>
+<p>Miễn phí vệ sinh – bôi keo tản nhiệt – kiểm tra định kỳ trọn đời sử dụng.</p>
+</div>
+<div class="promise-items">
+<i class="fa-solid fa-hand-holding-heart" style="font-size: 60px;color:#13a1ed;"></i>
+<h3>Giao Hàng Nhanh – Đóng Gói An Toàn</h3>
+<p>Giao nhanh toàn quốc, đóng gói chống sốc đảm bảo an toàn tuyệt đối.</p>
+</div>
+<div class="desc_promise">
+<h1>9000+</h1>
+<p>Khách hàng tin tưởng</p>
+</div>
+<div class="desc_promise">
+<h1>15 năm+</h1>
+<p>Trên thị trường từ năm 2008</p>
+</div>
+<div class="desc_promise">
+<h1>80+</h1>
+<p>đối tác</p>
+</div>
+</div>
+</div>
+</div>
+<br><br><br>
+<h1 class="title_video_trungtran">Video lapzone</h1>
+<br>
+<div class="container_video_truntran">
+<div class="video_trungtran">
+<iframe
+class="video_after_promise"
+src="https://www.youtube.com/embed/Gc0XVYBrYAw?autoplay=1&loop=1&playlist=Gc0XVYBrYAw&mute=1" allowfullscreen
+></iframe>
+</div>
+<div class="video_trungtran2">
+<iframe
+class="video_after_promise2"
+src="https://www.youtube.com/embed/Gc0XVYBrYAw?autoplay=1&loop=1&playlist=Gc0XVYBrYAw&mute=1" allowfullscreen
+></iframe>
+</div>
+<div class="video_trungtran3">
+<iframe
+class="video_after_promise3"
+src="https://www.youtube.com/embed/Gc0XVYBrYAw?autoplay=1&loop=1&playlist=Gc0XVYBrYAw&mute=1" allowfullscreen
+></iframe>
+</div>
+</div><br><br><br>
+<div class="container_desc_of_store">
+<div class="desc_of_store_title">
+<h1>Hệ Thống Showroom</h1>
+<p>Thời Gian Mở Cửa:8h20-20h(T2-CN)<p>
+</div>
+<div class="desc_of_store">
+<div class="location_and_time_working">
+<h3>01 THÁI HÀ</h3>
+<p>Số 3 Ngõ 117 Thái Hà, Đống Đa, Hà Nội (có chỗ gửi ô tô thuận tiện)
+<br>Bán hàng: 093 669 3388
+<br>Kỹ thuật: 0911 992 995
+<br>Zalo OA: zalo.manhdung.vn
+<br>Lắng nghe góp ý: 0969.819.818</p>
+<h3> 02 Phòng bán hàng Online</h3>
+<p>Phục vụ đơn hàng online trên toàn quốc
+<br>Bán hàng: 093 669 3388
+<br>Kỹ thuật: 0911 992 995
+<br>Zalo OA: zalo.manhdung.vn</p>
+</div>
+<div class="img_of_store">
+<div class="Duongde_reviewimage">
+<img  alt="ảnh"  th:src="@{/assets/lapzone_banner_footer.png}"></div>
+</div>
+</div>
+</div>
+</div>
+</div>
+<br><br>
+
+<div th:replace="~{fragments/footer :: footer_lapzone}"></div>
+
 </body>
 </html>

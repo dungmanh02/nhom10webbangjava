@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Chi tiết hóa đơn | Lapzone</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+</head>
+<body style="background-color: #f4f7f6;">
+
+<div th:replace="~{fragments/header :: header_lapzone}"></div>
+
+<div class="container mt-5 mb-5">
+    <div class="invoice-box" style="max-width: 800px; margin: auto; padding: 40px; border: 1px solid #eee; background: #fff; box-shadow: 0 10px 30px rgba(0, 0, 0, 0.05); border-radius: 10px;">
+        <table cellpadding="0" cellspacing="0" style="width: 100%; text-align: left; font-size: 16px; line-height: 24px; color: #555;">
+            <tr class="top">
+                <td colspan="2" style="padding-bottom: 20px;">
+                    <table style="width: 100%;">
+                        <tr>
+                            <td class="title" style="font-size: 40px; line-height: 45px; color: #0d6efd; font-weight: bold;">
+                                LAPZONE
+                            </td>
+                            <td style="text-align: right;">
+                                Hóa đơn số: <strong>#[[${order.id}]]</strong><br>
+                                Ngày tạo: [[${#dates.format(order.orderDate, 'dd/MM/yyyy HH:mm')}]]<br>
+                                Trạng thái: <strong th:text="${order.status}" class="text-danger"></strong>
+                            </td>
+                        </tr>
+                    </table>
+                </td>
+            </tr>
+            <tr class="information">
+                <td colspan="2" style="padding-top: 20px; padding-bottom: 20px; border-top: 2px solid #eee;">
+                    <table style="width: 100%;">
+                        <tr>
+                            <td>
+                                <strong class="text-dark">Thông tin khách hàng:</strong><br>
+                                [[${order.customerName}]]<br>
+                                SĐT: [[${order.customerPhone}]]<br>
+                                ĐC: [[${order.address}]]
+                            </td>
+                            <td style="text-align: right;">
+                                <strong class="text-dark">Phương thức thanh toán:</strong><br>
+                                [[${order.paymentMethod}]]
+                            </td>
+                        </tr>
+                    </table>
+                </td>
+            </tr>
+            
+            <tr class="heading" style="background: #f8f9fa; font-weight: bold; text-align: center;">
+                <td style="padding: 12px; border-bottom: 2px solid #ddd; text-align: left;">Sản phẩm</td>
+                <td style="padding: 12px; border-bottom: 2px solid #ddd; text-align: right;">Thành tiền</td>
+            </tr>
+            
+            <tr th:each="detail : ${order.orderDetails}" class="item">
+                <td style="padding: 12px; border-bottom: 1px solid #eee;">
+                    <strong>[[${detail.product.name}]]</strong> <br>
+                    <small class="text-muted">Đơn giá: [[${#numbers.formatDecimal(detail.price, 0, 'COMMA', 0, 'POINT')}]] ₫ x [[${detail.quantity}]]</small>
+                </td>
+                <td style="text-align: right; padding: 12px; border-bottom: 1px solid #eee; font-weight: 500;">
+                    [[${#numbers.formatDecimal(detail.price * detail.quantity, 0, 'COMMA', 0, 'POINT')}]] ₫
+                </td>
+            </tr>
+            
+            <tr class="total">
+                <td></td>
+                <td style="text-align: right; padding-top: 20px; font-size: 22px; color: #d32f2f; font-weight: bold;">
+                   TỔNG CỘNG: [[${#numbers.formatDecimal(order.totalAmount, 0, 'COMMA', 0, 'POINT')}]] ₫
+                </td>
+            </tr>
+        </table>
+        
+        <div class="text-center mt-5">
+            <button onclick="window.print()" class="btn btn-outline-secondary px-4 py-2">
+                <i class="fas fa-print me-2"></i> In hóa đơn
+            </button>
+            <a th:href="@{/}" class="btn btn-primary px-4 py-2 ms-2">
+                Tiếp tục mua sắm
+            </a>
+        </div>
+    </div>
+</div>
+
+<div th:replace="~{fragments/footer :: footer_lapzone}"></div>
+
+</body>
+</html>

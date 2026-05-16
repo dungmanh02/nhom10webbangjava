@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Quản lý Khách hàng | Lapzone Admin</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+</head>
+<body class="bg-light">
+
+<div class="container-fluid py-4">
+    <div class="card shadow border-0">
+        <div class="card-header bg-white py-3">
+            <h5 class="m-0 fw-bold text-dark"><i class="fas fa-users-cog me-2"></i> QUẢN LÝ NGƯỜI DÙNG & PHÂN QUYỀN</h5>
+        </div>
+
+        <div class="card-body">
+            <div th:if="${success}" class="alert alert-success alert-dismissible fade show">
+                <span th:text="${success}"></span><button type="button" class="btn-close" data-bs-dismiss="alert"></button>
+            </div>
+            <div th:if="${error}" class="alert alert-danger alert-dismissible fade show">
+                <span th:text="${error}"></span><button type="button" class="btn-close" data-bs-dismiss="alert"></button>
+            </div>
+
+            <div class="table-responsive">
+                <table class="table table-hover align-middle table-bordered">
+                    <thead class="table-light text-center">
+                        <tr>
+                            <th>ID</th>
+                            <th>Họ và Tên</th>
+                            <th>Thông tin liên hệ</th>
+                            <th>Phân quyền</th>
+                            <th>Thao tác</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr th:each="user : ${users}">
+                            <td class="text-center fw-bold">[[${user.id}]]</td>
+                            <td>
+                                <strong>[[${user.fullName}]]</strong>
+                            </td>
+                            <td>
+                                <i class="fas fa-envelope text-muted"></i> [[${user.email}]]<br>
+                                <i class="fas fa-phone text-muted"></i> [[${user.phone}]]
+                            </td>
+                            <td>
+                                <form th:action="@{/admin/users/update-role}" method="POST" class="d-flex justify-content-center gap-1">
+                                    <input type="hidden" name="userId" th:value="${user.id}">
+                                    <select name="role" class="form-select form-select-sm" style="width: 140px;">
+                                        <option value="ROLE_USER" th:selected="${user.role == 'ROLE_USER'}">Khách hàng</option>
+                                        <option value="ROLE_ADMIN" th:selected="${user.role == 'ROLE_ADMIN'}">Quản trị (Admin)</option>
+                                    </select>
+                                    <button type="submit" class="btn btn-sm btn-success" title="Lưu phân quyền"><i class="fas fa-save"></i></button>
+                                </form>
+                            </td>
+                            <td class="text-center">
+                                <form th:action="@{/admin/users/delete}" method="POST" class="d-inline"
+                                      onsubmit="return confirm('Xóa tài khoản này vĩnh viễn? Cảnh báo: Việc này không thể hoàn tác!')">
+                                    <input type="hidden" name="userId" th:value="${user.id}">
+                                    <button type="submit" class="btn btn-sm btn-outline-danger"><i class="fas fa-user-times"></i> Xóa</button>
+                                </form>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>

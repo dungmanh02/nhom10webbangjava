@@ -59,11 +59,10 @@
                 </div>
 
                 <div style="display: flex; gap: 20px; font-size: 20px;">
-                    <a href="#" class="lapzone-icon-btn">
-                        <i class="fas fa-heart"></i>
-                        <span style="position: absolute; top: -8px; right: -12px; background: #0884d1; color: white; font-size: 11px; padding: 2px 6px; border-radius: 10px; font-weight: bold;">0</span>
-                    </a>
-                    <a th:href="@{/cart}" class="lapzone-icon-btn">
+                   <a th:href="@{/tracuudonhang}" class="lapzone-icon-btn" title="Tra cứu đơn hàng">
+                    <i class="fas fa-file-invoice"></i>
+                   </a>
+                        <a th:href="@{/cart}" class="lapzone-icon-btn">
                         <i class="fas fa-shopping-cart"></i>
                         <span th:text="${cartItemCount}" style="position: absolute; top: -8px; right: -12px; background: #0884d1; color: white; font-size: 11px; padding: 2px 6px; border-radius: 10px; font-weight: bold;">0</span>
                     </a>
