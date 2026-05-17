@@ -54,17 +54,23 @@ public class AdminController {
     @PostMapping("/products/save")
     public String saveProduct(@ModelAttribute("product") Product product,
                               @RequestParam(value = "imageFile", required = false) MultipartFile imageFile,
-                              @RequestParam(value = "subImages", required = false) MultipartFile[] subImages) {
+                              @RequestParam(value = "subImages", required = false) MultipartFile[] subImages,
+                              org.springframework.web.servlet.mvc.support.RedirectAttributes redirectAttributes) {
         
-   
-        if (product.getProductDetail() != null) {
-            product.getProductDetail().setProduct(product);
-        }
-        if (product.getStock() == null) {
-        product.setStock(1); 
-    }
+        try {
+            if (product.getProductDetail() != null) {
+                product.getProductDetail().setProduct(product);
+            }
+            if (product.getStock() == null) {
+                product.setStock(1); 
+            }
 
-        adminService.saveProductWithImages(product, imageFile, subImages);
+            adminService.saveProductWithImages(product, imageFile, subImages);
+            redirectAttributes.addFlashAttribute("successMessage", "Thêm/Cập nhật sản phẩm thành công!");
+        } catch (Exception e) {
+            e.printStackTrace();
+            redirectAttributes.addFlashAttribute("errorMessage", "Lỗi khi lưu sản phẩm: " + e.getMessage());
+        }
 
         return "redirect:/admin/products";
     }
@@ -88,8 +94,15 @@ public class AdminController {
 
 
     @GetMapping("/products/delete/{id}")
-    public String deleteProduct(@PathVariable("id") Long id) {
-        adminService.deleteProduct(id);
+    public String deleteProduct(@PathVariable("id") Long id, org.springframework.web.servlet.mvc.support.RedirectAttributes redirectAttributes) {
+        try {
+            adminService.deleteProduct(id);
+            redirectAttributes.addFlashAttribute("successMessage", "Xóa sản phẩm thành công!");
+        } catch (org.springframework.dao.DataIntegrityViolationException e) {
+            redirectAttributes.addFlashAttribute("errorMessage", "Không thể xóa sản phẩm vì đang có trong đơn hàng hoặc giỏ hàng.");
+        } catch (Exception e) {
+            redirectAttributes.addFlashAttribute("errorMessage", "Lỗi khi xóa sản phẩm: " + e.getMessage());
+        }
         return "redirect:/admin/products";
     }
 

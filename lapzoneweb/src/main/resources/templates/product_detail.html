@@ -75,7 +75,7 @@
                     <div class="product_price" th:text="${#numbers.formatDecimal(product.price, 0, 'COMMA', 0, 'POINT')} + ' VND'"></div>
                     <!-- Đảm bảo productDetail không bị null trước khi gọi để tránh lỗi -->
                     <p class="guarantee_promise" th:if="${product.productDetail != null}" 
-                       th:text="${product.productDetail.conditionStatus} + ' bảo hành ' + ${product.productDetail.warranty}"></p>
+                       th:text="${(product.productDetail.conditionStatus != null ? product.productDetail.conditionStatus : 'Mới 100%') + ' - Bảo hành ' + (product.productDetail.warranty != null ? product.productDetail.warranty : '12 tháng chính hãng')}"></p>
                     <div class="amount_of_product" th:text="${product.stock} + ' phiên bản'"></div>
                 </a>
             </div>
@@ -167,19 +167,19 @@
         <div class="detail_configuration" th:if="${product.productDetail != null}">
             <span>Thông số kỹ thuật</span>
             <table>
-                <tr><td>CPU (Bộ xử lý)</td><td th:text="${product.productDetail.cpu}"></td></tr>
-                <tr><td>RAM (Bộ nhớ trong)</td><td th:text="${product.productDetail.ram}"></td></tr>
-                <tr><td>Storage (Ổ cứng)</td><td th:text="${product.productDetail.storage}"></td></tr>
-                <tr><td>Card đồ họa</td><td th:text="${product.productDetail.gpu}"></td></tr>
-                <tr><td>Màn hình</td><td th:text="${product.productDetail.screen}"></td></tr>
-                <tr><td>Pin</td><td th:text="${product.productDetail.battery}"></td></tr>
-                <tr><td>Âm thanh</td><td th:text="${product.productDetail.audio}"></td></tr>
-                <tr><td>Cổng kết nối vật lý</td><td th:text="${product.productDetail.ports}"></td></tr>
-                <tr><td>Kết nối không dây</td><td th:text="${product.productDetail.wireless}"></td></tr>
-                <tr><td>Trọng lượng</td><td th:text="${product.productDetail.weight}"></td></tr>
-                <tr><td>Màu sắc</td><td th:text="${product.productDetail.color}"></td></tr>
-                <tr><td>Tình trạng sản phẩm</td><td th:text="${product.productDetail.conditionStatus}"></td></tr>
-                <tr><td>Bảo Hành</td><td th:text="${product.productDetail.warranty}"></td></tr>
+                <tr><td>CPU (Bộ xử lý)</td><td th:text="${product.productDetail.cpu != null ? product.productDetail.cpu : 'Đang cập nhật'}"></td></tr>
+                <tr><td>RAM (Bộ nhớ trong)</td><td th:text="${product.productDetail.ram != null ? product.productDetail.ram : 'Đang cập nhật'}"></td></tr>
+                <tr><td>Storage (Ổ cứng)</td><td th:text="${product.productDetail.storage != null ? product.productDetail.storage : 'Đang cập nhật'}"></td></tr>
+                <tr><td>Card đồ họa</td><td th:text="${product.productDetail.gpu != null ? product.productDetail.gpu : 'Đang cập nhật'}"></td></tr>
+                <tr><td>Màn hình</td><td th:text="${product.productDetail.screen != null ? product.productDetail.screen : 'Đang cập nhật'}"></td></tr>
+                <tr><td>Pin</td><td th:text="${product.productDetail.battery != null ? product.productDetail.battery : 'Đang cập nhật'}"></td></tr>
+                <tr><td>Âm thanh</td><td th:text="${product.productDetail.audio != null ? product.productDetail.audio : 'Đang cập nhật'}"></td></tr>
+                <tr><td>Cổng kết nối vật lý</td><td th:text="${product.productDetail.ports != null ? product.productDetail.ports : 'Đang cập nhật'}"></td></tr>
+                <tr><td>Kết nối không dây</td><td th:text="${product.productDetail.wireless != null ? product.productDetail.wireless : 'Đang cập nhật'}"></td></tr>
+                <tr><td>Trọng lượng</td><td th:text="${product.productDetail.weight != null ? product.productDetail.weight : 'Đang cập nhật'}"></td></tr>
+                <tr><td>Màu sắc</td><td th:text="${product.productDetail.color != null ? product.productDetail.color : 'Đang cập nhật'}"></td></tr>
+                <tr><td>Tình trạng sản phẩm</td><td th:text="${product.productDetail.conditionStatus != null ? product.productDetail.conditionStatus : 'Đang cập nhật'}"></td></tr>
+                <tr><td>Bảo Hành</td><td th:text="${product.productDetail.warranty != null ? product.productDetail.warranty : 'Đang cập nhật'}"></td></tr>
             </table>
         </div>
         

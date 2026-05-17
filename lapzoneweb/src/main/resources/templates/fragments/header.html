@@ -5,7 +5,7 @@
 </head>
 <body>
 
-<div th:fragment="header_lapzone" class="header_lapzone_new">
+<div th:fragment="header_lapzone" class="header_lapzone_new" style="position: sticky; top: 0; z-index: 1000;">
     
     <style>
         .lapzone-nav-link { text-decoration: none; color: #333; font-weight: 600; font-size: 15px; transition: color 0.3s ease, transform 0.2s; }
@@ -22,6 +22,8 @@
 
         .lapzone-menu2-link { padding: 10px 20px; text-decoration: none; color: #333; border: 1px solid #eee; border-radius: 5px; transition: all 0.3s ease; }
         .lapzone-menu2-link:hover { background: #0884d1; color: #fff; border-color: #0884d1; }
+        
+        .lapzone-dropdown:hover .lapzone-dropdown-content { display: block !important; }
     </style>
 
     <div style="display: flex; flex-direction: column; width: 100%; max-width: 1400px; margin: 0 auto; background: #fff; padding: 10px 20px; box-sizing: border-box; box-shadow: 0 2px 10px rgba(0,0,0,0.05);">
@@ -74,9 +76,102 @@
             </div>
         </div>
 
-        <div style="width: 100%; border-top: 1px solid #eee; padding-top: 10px;">
+        <div style="width: 100%; border-top: 1px solid #eee; padding-top: 10px; padding-bottom: 10px;">
             <nav style="display: flex; justify-content: center; gap: 15px;">
-                <a href="#" style="background: #034b94; color: white; padding: 10px 30px; text-decoration: none; font-weight: bold; border-radius: 5px; transition: background 0.3s;" onmouseover="this.style.backgroundColor='#022f5e'" onmouseout="this.style.backgroundColor='#034b94'">&#128187; DANH MỤC</a>
+                <div class="lapzone-dropdown" style="position: relative; display: inline-block;">
+                    <a href="#" style="background: #034b94; color: white; padding: 10px 30px; text-decoration: none; font-weight: bold; border-radius: 5px; transition: background 0.3s; display: inline-block;" onmouseover="this.style.backgroundColor='#022f5e'" onmouseout="this.style.backgroundColor='#034b94'">&#128187; DANH MỤC</a>
+                    <div class="lapzone-dropdown-content" style="display: none; position: absolute; background-color: #f5f5f5; min-width: 250px; box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2); z-index: 1001; border-radius: 5px; top: 100%; left: 0;">
+                        <nav class="menu3" style="flex: auto; padding: 0;">
+                            <ul style="padding-left: 0; margin: 0; width: 100%;">
+                                <li><a href="#">Máy Tính xách tay &#10217;</a>
+                                    <ul style="left: 100%; top: 0;">
+                                        <li><a href="#" style="font-weight: bold; background: #e0e0e0;">Laptop theo hãng</a></li>
+                                        <li th:each="cat : ${globalCategories}">
+                                            <a th:href="@{/(categoryId=${cat.id})}" th:text="${cat.name}">Tên Hãng</a>
+                                        </li>
+                                        <li><a href="#">Tình Trạng</a></li>
+                                        <li><a href="#">Brand New 100%</a></li>
+                                        <li><a href="#">Outlet/Referbished</a></li>
+                                        <li><a href="#">Like New</a></li>
+                                    </ul>
+                                </li>
+                                <li><a href="#">Laptop Gaming &#10217;</a>
+                                    <ul style="left: 100%; top: 0;">
+                                        <li><a href="#">Laptop gaming Acer &#10217; </a>
+                                            <ul style="left: 100%; top: 0;">
+                                                <li><a href="#">Acer Nitro</a></li>
+                                                <li><a href="#">Acer Predator</a></li>
+                                            </ul>
+                                        </li>
+                                        <li><a href="#">Laptop gaming Lenovo &#10217; </a>
+                                            <ul style="left: 100%; top: 0;">
+                                                <li><a href="#">Lenovo Legion</a></li>
+                                                <li><a href="#">Lenovo Ideapad Gaming</a></li>
+                                                <li><a href="#">Lenovo LOQ</a></li>
+                                            </ul>
+                                        </li>
+                                        <li><a href="#">Laptop gaming HP &#10217; </a>
+                                            <ul style="left: 100%; top: 0;">
+                                                <li><a href="#">HP Omen</a></li>
+                                                <li><a href="#">HP Victus</a></li>
+                                            </ul>
+                                        </li>
+                                        <li><a href="#">Laptop gaming ASUS &#10217; </a>
+                                            <ul style="left: 100%; top: 0;">
+                                                <li><a href="#">Asus ROG</a></li>
+                                                <li><a href="#">Asus TUF</a></li>
+                                            </ul>
+                                        </li>
+                                        <li><a href="#">Laptop gaming DELL &#10217;</a>
+                                            <ul style="left: 100%; top: 0;">
+                                                <li><a href="#">Dell Alienware</a></li>
+                                                <li><a href="#">Dell Gaming</a></li>
+                                            </ul>
+                                        </li>
+                                    </ul>
+                                </li>
+                                <li><a href="#">Laptop Văn Phòng &#10217;</a>
+                                    <ul style="left: 100%; top: 0;">
+                                        <li><a href="#">Acer &#10217; </a>
+                                            <ul style="left: 100%; top: 0;">
+                                                <li><a href="#">Acer Aspire</a></li>
+                                                <li><a href="#">Acer Swift</a></li>
+                                            </ul>
+                                        </li>
+                                        <li><a href="#">Dell &#10217;</a>
+                                            <ul style="left: 100%; top: 0;">
+                                                <li><a href="#">Dell Ispiron</a></li>
+                                                <li><a href="#">Dell Latitude</a></li>
+                                                <li><a href="#">Dell Vostro</a></li>
+                                                <li><a href="#">Dell XPS</a></li>
+                                            </ul>
+                                        </li>
+                                        <li><a href="#">Asus &#10217;</a>
+                                            <ul style="left: 100%; top: 0;">
+                                                <li><a href="#">Asus Zenbook</a></li>
+                                                <li><a href="#">Asus Vivobook</a></li>
+                                            </ul>
+                                        </li>
+                                        <li><a href="#">Apple &#10217;</a>
+                                            <ul style="left: 100%; top: 0;">
+                                                <li><a href="#">Macbook Air</a></li>
+                                                <li><a href="#">Macbook Pro</a></li>
+                                            </ul>
+                                        </li>
+                                    </ul>
+                                </li>
+                                <li><a href="#">Laptop Lập Trình</a></li>
+                                <li><a href="#">Laptop Đồ họa</a></li>
+                                <li><a href="#">Laptop Cao cấp</a></li>
+                                <li><a href="#">Apple MacBook</a></li>
+                                <li><a href="#">Ram-SSD</a></li>
+                                <li><a href="#">Kho Phụ Kiện</a></li>
+                                <li><a href="#">Cổng Chuyển</a></li>
+                                <li><a href="#">Tản Nhiệt Laptop</a></li>
+                            </ul>
+                        </nav>
+                    </div>
+                </div>
                 <a th:href="@{/datlich}" class="lapzone-menu2-link">Đặt Lịch hẹn để được hỗ trợ</a>
                 <a href="#" class="lapzone-menu2-link">LEGION 2025 LINE-UP</a>
                 <a href="#" class="lapzone-menu2-link">LENOVO IDEAPAD 2024-2025</a>

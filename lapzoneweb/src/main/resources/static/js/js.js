@@ -8,7 +8,7 @@ slider.addEventListener("click",function(){
 });
 }
 function CountTime(){
-     let endDate=new Date("Dec 31,2025 23:59:59").getTime();
+     let endDate=new Date("Dec 31, 2026 23:59:59").getTime();
     let x=setInterval(function(){
         let now=new Date().getTime();
         let distance=endDate-now;

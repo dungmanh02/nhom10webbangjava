@@ -25,7 +25,7 @@ public class AdminService {
     public long countProducts() { return productRepository.count(); }
     public long countUsers() { return userRepository.count(); }
     public List<Category> getAllCategories() { return categoryRepository.findAll(); }
-    public List<Product> getAllProducts() { return productRepository.findAll(); }
+    public List<Product> getAllProducts() { return productRepository.findAll(org.springframework.data.domain.Sort.by(org.springframework.data.domain.Sort.Direction.DESC, "id")); }
     public Product getProductById(Long id) { return productRepository.findById(id).orElse(null); }
 
 

@@ -5,6 +5,9 @@ import com.lapzone.lapzoneweb.model.entity.User;
 import com.lapzone.lapzoneweb.model.service.CartService;
 import jakarta.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
+import com.lapzone.lapzoneweb.model.repository.CategoryRepository;
+import com.lapzone.lapzoneweb.model.entity.Category;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ModelAttribute;
 
@@ -15,6 +18,14 @@ public class CartBadgeAdvice {
 
     @Autowired
     private CartService cartService;
+    
+    @Autowired
+    private CategoryRepository categoryRepository;
+    
+    @ModelAttribute("globalCategories")
+    public List<Category> getGlobalCategories() {
+        return categoryRepository.findAll();
+    }
 
     @ModelAttribute("cartItemCount")
     public int getCartItemCount(HttpSession session) {
