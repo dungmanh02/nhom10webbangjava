@@ -30,21 +30,7 @@ public class AuthController {
         model.addAttribute("registerDTO", new UserRegisterDTO());
         return "dangki";
     }
-    @PostMapping("/dangnhap")
-    public String handleLogin(@RequestParam String emailOrPhone, 
-                              @RequestParam String password, 
-                              HttpSession session, Model model) {
-        
-        User user = authService.authenticate(emailOrPhone, password);
 
-        if (user != null) {
-            session.setAttribute("currentUser", user);
-            return "ADMIN".equals(user.getRole()) ? "redirect:/admin/dashboard" : "redirect:/";
-        }
-        
-        model.addAttribute("error", "Sai tài khoản hoặc mật khẩu!");
-        return "dangnhap";
-    }
     @PostMapping("/dangki")
     public String handleRegister(@Valid @ModelAttribute("registerDTO") UserRegisterDTO registerDTO, 
                                  BindingResult result, 
@@ -70,9 +56,5 @@ public class AuthController {
         model.addAttribute("error", "Email hoặc Số điện thoại đã tồn tại!");
         return "dangki";
     }
-    @GetMapping("/logout")
-    public String logout(HttpSession session) {
-        session.invalidate(); 
-        return "redirect:/"; 
-    }
+
 }

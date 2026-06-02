@@ -10,19 +10,18 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
+import org.springframework.security.access.prepost.PreAuthorize;
+
 @Controller
 @RequestMapping("/admin")
+@PreAuthorize("hasRole('ADMIN')")
 public class AdminController {
 
     @Autowired
     private AdminService adminService;
 
     @GetMapping("/dashboard")
-    public String showDashboard(Model model, HttpSession session) {
-
-        if (session.getAttribute("currentUser") == null) {
-            return "redirect:/login";
-        }
+    public String showDashboard(Model model) {
 
         model.addAttribute("countProducts", adminService.countProducts());
         model.addAttribute("countUsers", adminService.countUsers());
@@ -34,11 +33,7 @@ public class AdminController {
 
     
    @GetMapping("/products")
-    public String listProducts(Model model, HttpSession session) {
-       
-        if (session.getAttribute("currentUser") == null) {
-            return "redirect:/login";
-        }
+    public String listProducts(Model model) {
 
         model.addAttribute("products", adminService.getAllProducts());
         model.addAttribute("categories", adminService.getAllCategories());
