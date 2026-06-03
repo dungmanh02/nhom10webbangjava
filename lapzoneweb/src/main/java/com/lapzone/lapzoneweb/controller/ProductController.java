@@ -44,10 +44,34 @@ public class ProductController {
             @RequestParam(value = "minPrice", required = false) Double minPrice,
             @RequestParam(value = "maxPrice", required = false) Double maxPrice,
             @RequestParam(value = "cpu", required = false) String cpu,     
-            @RequestParam(value = "gpu", required = false) String gpu,     
+            @RequestParam(value = "gpu", required = false) String gpu,
+            @RequestParam(value = "ram", required = false) String ram,
+            @RequestParam(value = "storage", required = false) String storage,
+            @RequestParam(value = "screen", required = false) String screen,
+            @RequestParam(value = "sort", defaultValue = "newest") String sort,
+            @RequestParam(value = "page", defaultValue = "0") int page,
             Model model) {
-        List<Product> searchResults = productService.searchProducts(query, categoryId, minPrice, maxPrice, cpu, gpu);
-        model.addAttribute("products", searchResults);
+        
+        int pageSize = 9;
+        
+        org.springframework.data.domain.Sort sortObj;
+        if ("price_asc".equals(sort)) {
+            sortObj = org.springframework.data.domain.Sort.by(org.springframework.data.domain.Sort.Direction.ASC, "price");
+        } else if ("price_desc".equals(sort)) {
+            sortObj = org.springframework.data.domain.Sort.by(org.springframework.data.domain.Sort.Direction.DESC, "price");
+        } else {
+            sortObj = org.springframework.data.domain.Sort.by(org.springframework.data.domain.Sort.Direction.DESC, "id");
+        }
+        
+        org.springframework.data.domain.Pageable pageable = org.springframework.data.domain.PageRequest.of(page, pageSize, sortObj);
+        org.springframework.data.domain.Page<Product> productPage = productService.searchProducts(
+                query, categoryId, minPrice, maxPrice, cpu, gpu, ram, storage, screen, pageable);
+        
+        model.addAttribute("productPage", productPage);
+        model.addAttribute("products", productPage.getContent());
+        model.addAttribute("currentPage", page);
+        model.addAttribute("totalPages", productPage.getTotalPages());
+        
         model.addAttribute("keyword", query);
         model.addAttribute("categories", categoryRepository.findAll());
         model.addAttribute("selectedCategoryId", categoryId);
@@ -55,6 +79,10 @@ public class ProductController {
         model.addAttribute("selectedMaxPrice", maxPrice);
         model.addAttribute("selectedCpu", cpu); 
         model.addAttribute("selectedGpu", gpu); 
+        model.addAttribute("selectedRam", ram); 
+        model.addAttribute("selectedStorage", storage); 
+        model.addAttribute("selectedScreen", screen); 
+        model.addAttribute("selectedSort", sort); 
         return "search_results"; 
     }
 }

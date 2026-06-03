@@ -34,12 +34,18 @@ public class ProductService {
         return productRepository.findById(id).orElse(null);
     }
 
-   public List<Product> searchProducts(String keyword, Long categoryId, Double minPrice, Double maxPrice, String cpu, String gpu) {
+   public org.springframework.data.domain.Page<Product> searchProducts(
+           String keyword, Long categoryId, Double minPrice, Double maxPrice, 
+           String cpu, String gpu, String ram, String storage, String screen, 
+           org.springframework.data.domain.Pageable pageable) {
         String kw = (keyword != null) ? keyword : ""; 
         String cpuFilter = (cpu != null && !cpu.trim().isEmpty()) ? cpu : null;
         String gpuFilter = (gpu != null && !gpu.trim().isEmpty()) ? gpu : null;
+        String ramFilter = (ram != null && !ram.trim().isEmpty()) ? ram : null;
+        String storageFilter = (storage != null && !storage.trim().isEmpty()) ? storage : null;
+        String screenFilter = (screen != null && !screen.trim().isEmpty()) ? screen : null;
         
-        return productRepository.searchAndFilterProducts(kw, categoryId, minPrice, maxPrice, cpuFilter, gpuFilter);
+        return productRepository.searchAndFilterProducts(kw, categoryId, minPrice, maxPrice, cpuFilter, gpuFilter, ramFilter, storageFilter, screenFilter, pageable);
     }
     @Transactional
     public void saveProduct(Product product) {

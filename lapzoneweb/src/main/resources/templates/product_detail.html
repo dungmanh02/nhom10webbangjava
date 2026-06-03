@@ -3,195 +3,122 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" th:href="@{/css/css.css}">
-    <link rel="stylesheet" th:href="@{/css/product.css}">
-    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" th:href="@{/css/app.css}">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <title th:text="${product.name}">Chi Tiết Sản Phẩm</title>
 </head>
 <body>
-    
-<div>
-    <div class="container1">
-     
-        <div th:replace="~{fragments/header :: header_lapzone}"></div>
-    </div>
 
-    <div class="desc_of_product_page">
-     
-       <div class="desc_img_product">
-          <h3 th:text="${product.name}">Tên Laptop</h3>
+<!-- Header -->
+<div th:replace="~{fragments/header :: header_lapzone}"></div>
+
+<main class="container">
+    <div class="product-detail-layout">
+        <!-- Left: Image Gallery -->
+        <div class="product-gallery">
+            <img id="mainImage" th:src="@{'/' + ${product.image}}" alt="Main Image" class="product-gallery-main">
             
-       
-            <img id="desc_img_0" th:src="@{'/' + ${product.image}}" alt="Main Image">
-            
-           
-          <div class="list_desc_img_product" th:if="${product.images != null and !product.images.isEmpty()}">
-               
-                <img th:each="imgObj, iterStat : ${product.images}" 
+            <div class="product-thumbnails" th:if="${product.images != null and !product.images.isEmpty()}">
+                <!-- Add main image as first thumbnail -->
+                <img class="product-thumb active" 
+                     th:src="@{'/' + ${product.image}}" 
+                     onclick="changeMainImage(this.src, this)">
+                
+                <!-- Additional thumbnails -->
+                <img th:each="imgObj : ${product.images}" 
                      th:if="${!#strings.equals(imgObj.imageUrl, product.image)}"
-                     th:id="'desc_img_' + ${iterStat.count}" 
+                     class="product-thumb" 
                      th:src="@{'/' + ${imgObj.imageUrl}}" 
-                     th:alt="'Image ' + ${iterStat.count}">
+                     onclick="changeMainImage(this.src, this)">
             </div>
-             
-            <div class="list_social_media">
-                <ul class="icon-list">
-                    <li><a href="#"><i class="fa-brands fa-youtube"></i><br>Video Review</a></li>
-                    <li><a href="#"><i class="fa-regular fa-image"></i><br>Thư Viện Ảnh</a></li>
-                    <li><a href="#"><i class="fa-solid fa-camera"></i><br>Ảnh Khách Hàng</a></li>
-                    <li><a href="#"><i class="fa-solid fa-heart"></i><br>Yêu thích</a></li>
-                </ul>
-            </div>
-            <div class="share_group">
-                <ul class="share_group_Fb_Yt">
-                    <li><a href="#"><img th:src="@{/assets/FaceBook.jpg}">Tham gia group khách hàng</a></li>
-                    <li><a href="#"><img th:src="@{/assets/YouTube.jpg}">Subscribe kênh D-computer</a></li>
-                </ul>
-            </div>
-            <div class="video_mota">
-                <p style="text-align: center;font-size: 30px;color:#2d5cf7;">video chi tiết đánh giá sản phẩm</p>
-                <iframe width="560" height="315"
-                        src="https://www.youtube.com/embed/461A_5xd68w?si=l91l2CyEH8HRnbAY"
-                        title="YouTube video player"
-                        frameborder="0"
-                        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-                        allowfullscreen>
-                </iframe>
-            </div>
+            
+            <script>
+                function changeMainImage(src, element) {
+                    document.getElementById('mainImage').src = src;
+                    document.querySelectorAll('.product-thumb').forEach(thumb => thumb.classList.remove('active'));
+                    element.classList.add('active');
+                }
+            </script>
         </div>
 
-    
-        <div class="right_sale">
-            <h2>Ưu đãi sẽ kết thúc trong</h2>
-            <div id="counttime" class="counttime"></div>
+        <!-- Right: Product Info & Actions -->
+        <div class="product-info">
+            <h1 th:text="${product.name}">Tên Sản Phẩm</h1>
             
-            <h1 th:text="${#numbers.formatDecimal(product.price, 0, 'COMMA', 0, 'POINT')} + ' VND'">Giá VND</h1>
-            
-            <h2>Lựa chọn cấu hình khác</h2>
-            <div class="option_configuration">
-                <a href="#">
-                    <p th:text="${product.name}"></p>
-                    <div class="product_price" th:text="${#numbers.formatDecimal(product.price, 0, 'COMMA', 0, 'POINT')} + ' VND'"></div>
-                    <!-- Đảm bảo productDetail không bị null trước khi gọi để tránh lỗi -->
-                    <p class="guarantee_promise" th:if="${product.productDetail != null}" 
-                       th:text="${(product.productDetail.conditionStatus != null ? product.productDetail.conditionStatus : 'Mới 100%') + ' - Bảo hành ' + (product.productDetail.warranty != null ? product.productDetail.warranty : '12 tháng chính hãng')}"></p>
-                    <div class="amount_of_product" th:text="${product.stock} + ' phiên bản'"></div>
-                </a>
+            <div class="product-meta" style="font-size: 1rem; margin-bottom: 24px;">
+                <span th:if="${product.productDetail != null}" th:text="${product.productDetail.conditionStatus != null ? product.productDetail.conditionStatus : 'Mới 100%'}">Tình trạng</span>
+                <span style="color: var(--accent-neon);"><i class="fas fa-check-circle"></i> Bảo hành chính hãng</span>
+                <span th:text="'Kho: ' + ${product.stock} + ' máy'">Số lượng</span>
             </div>
-            <br><br>
-      
-            <div class="promotion_subsidy">
-                <div class="promotion">
-                    <span class="label-uu-dai">ƯU ĐÃI</span>
-                    <p>Gói 15 ngày bao test</p>
-                    <p>Balo chống sốc chắc chắn</p>
-                    <p>Gói cài đặt window và phần mềm trọn đời</p>
+
+            <div class="product-price-large" th:text="${#numbers.formatDecimal(product.price, 0, 'COMMA', 0, 'POINT')} + ' ₫'">Giá VND</div>
+
+            <!-- Specs Summary -->
+            <div class="product-specs-list" th:if="${product.productDetail != null}">
+                <div class="spec-item">
+                    <span class="spec-label"><i class="fas fa-microchip"></i> CPU</span>
+                    <span class="spec-value" th:text="${product.productDetail.cpu}">Đang cập nhật</span>
                 </div>
-                <div class="subsidy">
-                    <span class="label-tro-gia">TRỢ GIÁ 5%</span>
-                    <p>Khi mua phụ kiện theo máy</p>
-                    <p>Khi mua ram và nâng cấp ram</p>
-                    <p>Khi sử dụng dịch vụ sửa chữa bảo hành</p>
+                <div class="spec-item">
+                    <span class="spec-label"><i class="fas fa-memory"></i> RAM</span>
+                    <span class="spec-value" th:text="${product.productDetail.ram}">Đang cập nhật</span>
+                </div>
+                <div class="spec-item">
+                    <span class="spec-label"><i class="fas fa-hdd"></i> Ổ cứng</span>
+                    <span class="spec-value" th:text="${product.productDetail.storage}">Đang cập nhật</span>
+                </div>
+                <div class="spec-item">
+                    <span class="spec-label"><i class="fas fa-desktop"></i> Màn hình</span>
+                    <span class="spec-value" th:text="${product.productDetail.screen}">Đang cập nhật</span>
+                </div>
+                <div class="spec-item">
+                    <span class="spec-label"><i class="fas fa-gamepad"></i> VGA</span>
+                    <span class="spec-value" th:text="${product.productDetail.gpu}">Đang cập nhật</span>
+                </div>
+                <div class="spec-item">
+                    <span class="spec-label"><i class="fas fa-weight-hanging"></i> Trọng lượng</span>
+                    <span class="spec-value" th:text="${product.productDetail.weight}">Đang cập nhật</span>
                 </div>
             </div>
 
-          
-                    <div class="container_buy_now">
-                <a class="buy_now" href="javascript:void(0);" onclick="handleBuyNow()">
-                    Mua Ngay<br>
-                    <span>(Giao tận nơi hoặc nhận tại cửa hàng)</span>
-                </a>
-                
-                <div class="payment_method">
-                    <a class="tragop" href="#">
-                        Trả góp nhanh<br>
-                        <span>(Không thẩm định giấy tờ)</span>
-                    </a>
-                    <a class="tragopquathe" href="#">
-                        Trả Góp qua thẻ<br>
-                        <span>(Visa,Master Card,JCB,Amex)</span>
-                    </a>
-                </div>
+            <!-- Purchase Actions -->
+            <div style="background: rgba(0,0,0,0.03); border: 1px solid var(--border-glass); padding: 24px; border-radius: var(--radius-lg);">
+                <form id="addToCartForm" th:action="@{/cart/add}" method="post" class="add-to-cart-form">
+                    <input type="hidden" name="productId" th:value="${product.id}">
+                    
+                    <div class="qty-selector">
+                        <label for="quantity" style="font-weight: 500;">Số lượng:</label>
+                        <input type="number" id="quantity" name="quantity" value="1" min="1" th:max="${product.stock}">
+                    </div>
+                    
+                    <button type="submit" class="btn-primary btn-buy-now">
+                        <i class="fas fa-shopping-cart"></i> THÊM VÀO GIỎ HÀNG
+                    </button>
+                    
+                    <button type="button" class="btn-danger btn-buy-now" onclick="handleBuyNow()" style="margin-top: -8px;">
+                        MUA NGAY (Thanh toán an toàn)
+                    </button>
+                </form>
 
                 <form id="buyNowForm" th:action="@{/buy-now}" method="POST" style="display: none;">
                     <input type="hidden" name="productId" th:value="${product.id}">
                     <input type="hidden" name="quantity" id="buyNowQty" value="1">
                 </form>
-            </div>
 
                 <script>
                     function handleBuyNow() {
-                        // Tìm ô nhập số lượng trên trang của bạn (đảm bảo ô đó có id="quantity")
-                        var quantityInput = document.getElementById('quantity');
-                        var buyNowQty = document.getElementById('buyNowQty');
-                        
-                        if (quantityInput) {
-                            buyNowQty.value = quantityInput.value;
-                        } else {
-                            // Nếu không tìm thấy ô id="quantity", mặc định là 1
-                            buyNowQty.value = 1;
-                        }
-                        
-                        // Gửi lệnh xuống Server
+                        const qty = document.getElementById('quantity').value;
+                        document.getElementById('buyNowQty').value = qty;
                         document.getElementById('buyNowForm').submit();
                     }
                 </script>
-            
-            <form th:action="@{/cart/add}" method="post" id="addToCartForm" style="margin-top: 15px;">
-                <input type="hidden" name="productId" th:value="${product.id}">
-                <div class="quantity-group">
-                    <label for="quantity">Số lượng:</label>
-                    <input type="number" id="quantity" name="quantity"
-                           class="quantity-input"
-                           value="1" min="1" th:max="${product.stock}">
-                    <span th:text="'(Còn ' + ${product.stock} + ' sản phẩm)'"
-                          style="font-size:13px; color:#888;"></span>
-                </div>
-                <button type="submit" class="add-to-cart-standalone-btn">
-                    <i class="fa fa-shopping-cart"></i> Thêm vào giỏ hàng
-                </button>
-            </form>
-             
-        
-            <div class="send_cmt">
-                <input type="text" placeholder="Để lại số điện thoại để được tư vấn">
-                <button type="submit">Gửi</button>
             </div>
-          
         </div>
     </div>
+</main>
 
-
-    <div class="configuration_rating">
-        <div class="detail_configuration" th:if="${product.productDetail != null}">
-            <span>Thông số kỹ thuật</span>
-            <table>
-                <tr><td>CPU (Bộ xử lý)</td><td th:text="${product.productDetail.cpu != null ? product.productDetail.cpu : 'Đang cập nhật'}"></td></tr>
-                <tr><td>RAM (Bộ nhớ trong)</td><td th:text="${product.productDetail.ram != null ? product.productDetail.ram : 'Đang cập nhật'}"></td></tr>
-                <tr><td>Storage (Ổ cứng)</td><td th:text="${product.productDetail.storage != null ? product.productDetail.storage : 'Đang cập nhật'}"></td></tr>
-                <tr><td>Card đồ họa</td><td th:text="${product.productDetail.gpu != null ? product.productDetail.gpu : 'Đang cập nhật'}"></td></tr>
-                <tr><td>Màn hình</td><td th:text="${product.productDetail.screen != null ? product.productDetail.screen : 'Đang cập nhật'}"></td></tr>
-                <tr><td>Pin</td><td th:text="${product.productDetail.battery != null ? product.productDetail.battery : 'Đang cập nhật'}"></td></tr>
-                <tr><td>Âm thanh</td><td th:text="${product.productDetail.audio != null ? product.productDetail.audio : 'Đang cập nhật'}"></td></tr>
-                <tr><td>Cổng kết nối vật lý</td><td th:text="${product.productDetail.ports != null ? product.productDetail.ports : 'Đang cập nhật'}"></td></tr>
-                <tr><td>Kết nối không dây</td><td th:text="${product.productDetail.wireless != null ? product.productDetail.wireless : 'Đang cập nhật'}"></td></tr>
-                <tr><td>Trọng lượng</td><td th:text="${product.productDetail.weight != null ? product.productDetail.weight : 'Đang cập nhật'}"></td></tr>
-                <tr><td>Màu sắc</td><td th:text="${product.productDetail.color != null ? product.productDetail.color : 'Đang cập nhật'}"></td></tr>
-                <tr><td>Tình trạng sản phẩm</td><td th:text="${product.productDetail.conditionStatus != null ? product.productDetail.conditionStatus : 'Đang cập nhật'}"></td></tr>
-                <tr><td>Bảo Hành</td><td th:text="${product.productDetail.warranty != null ? product.productDetail.warranty : 'Đang cập nhật'}"></td></tr>
-            </table>
-        </div>
-        
-
-    </div>
-</div>
-<br><br>
-
-
+<!-- Footer -->
 <div th:replace="~{fragments/footer :: footer_lapzone}"></div>
 
-
-<script th:src="@{/js/product.js}"></script>
 </body>
 </html>
