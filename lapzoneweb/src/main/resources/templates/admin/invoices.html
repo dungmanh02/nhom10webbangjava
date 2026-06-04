@@ -90,9 +90,14 @@
             <div class="card shadow border-0">
                 <div class="card-header bg-white py-3 d-flex justify-content-between align-items-center">
                     <h5 class="m-0 fw-bold text-success"><i class="fas fa-file-invoice-dollar me-2"></i> CHỨNG TỪ KẾ TOÁN</h5>
-                    <a th:href="@{/admin/invoices/export-excel(startDate=${startDate}, endDate=${endDate})}" class="btn btn-success fw-bold">
-                        <i class="fas fa-file-excel me-2"></i> Xuất Excel báo cáo
-                    </a>
+                    <div>
+                        <a th:href="@{/admin/invoices/print(startDate=${startDate}, endDate=${endDate})}" target="_blank" class="btn btn-outline-success fw-bold me-2">
+                            <i class="fas fa-print me-2"></i> In Báo Cáo
+                        </a>
+                        <a th:href="@{/admin/invoices/export-excel(startDate=${startDate}, endDate=${endDate})}" class="btn btn-success fw-bold">
+                            <i class="fas fa-file-excel me-2"></i> Xuất Excel báo cáo
+                        </a>
+                    </div>
                 </div>
                 <div class="card-body">
                     <div th:if="${success}" class="alert alert-success alert-dismissible fade show" role="alert">

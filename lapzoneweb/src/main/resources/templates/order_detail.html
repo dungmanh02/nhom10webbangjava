@@ -42,12 +42,16 @@
                 <td colspan="2" style="padding-bottom: 20px;">
                     <table style="width: 100%;">
                         <tr>
-                            <td class="title" style="font-size: 40px; line-height: 45px; color: #0d6efd; font-weight: bold;">
-                                LAPZONE
+                            <td class="title" style="vertical-align: top;">
+                                <span style="font-size: 32px; color: #0d6efd; font-weight: bold;">LAPZONE</span><br>
+                                <span style="font-size: 14px; color: #333; font-weight: bold;">CÔNG TY TNHH CÔNG NGHỆ LAPZONE</span><br>
+                                <span style="font-size: 13px; color: #555;">📍 Số 3 Ngõ 117 Thái Hà, Đống Đa, HN</span><br>
+                                <span style="font-size: 13px; color: #555;">📞 Bán hàng: 093.669.3388 - 🌐 www.lapzone.vn</span>
                             </td>
-                            <td style="text-align: right;">
-                                Hóa đơn số: <strong>#[[${order.id}]]</strong><br>
-                                Ngày tạo: [[${#dates.format(order.orderDate, 'dd/MM/yyyy HH:mm')}]]<br>
+                            <td style="text-align: right; vertical-align: top;">
+                                <strong style="font-size: 18px; color: #333;">HÓA ĐƠN BÁN LẺ</strong><br>
+                                Mã đơn hàng: <strong>#[[${order.id}]]</strong><br>
+                                Ngày lập: [[${#dates.format(order.orderDate, 'dd/MM/yyyy HH:mm')}]]<br>
                                 Trạng thái: <strong th:text="${order.status}" class="text-danger"></strong>
                             </td>
                         </tr>
@@ -89,9 +93,32 @@
             </tr>
             
             <tr class="total">
-                <td></td>
-                <td style="text-align: right; padding-top: 20px; font-size: 22px; color: #d32f2f; font-weight: bold;">
+                <td style="padding-top: 20px;">
+                    <strong style="color: #333;">CHÍNH SÁCH BẢO HÀNH</strong><br>
+                    <ul style="font-size: 13px; margin-top: 5px; padding-left: 15px; color: #555; margin-bottom: 0;">
+                        <li>Đổi mới trong 30 ngày nếu có lỗi từ NSX.</li>
+                        <li>Bảo hành phần cứng 24 tháng chính hãng.</li>
+                    </ul>
+                </td>
+                <td style="text-align: right; padding-top: 20px; font-size: 22px; color: #d32f2f; font-weight: bold; vertical-align: bottom;">
                    TỔNG CỘNG: [[${#numbers.formatDecimal(order.totalAmount, 0, 'COMMA', 0, 'POINT')}]] ₫
+                </td>
+            </tr>
+            <tr>
+                <td colspan="2" style="padding-top: 40px;">
+                    <table style="width: 100%; text-align: center; margin-top: 20px;">
+                        <tr>
+                            <td style="width: 50%;">
+                                <strong style="color: #333;">Khách hàng</strong><br>
+                                <em style="font-size: 13px;">(Ký, ghi rõ họ tên)</em><br><br><br><br><br>
+                            </td>
+                            <td style="width: 50%; vertical-align: top;">
+                                <strong style="color: #333;">Người bán hàng</strong><br>
+                                <em style="font-size: 13px;">(Ký, đóng dấu)</em><br><br><br><br><br>
+                                <strong style="font-size: 15px; color: #333; text-transform: uppercase;" th:text="${session.currentUser != null ? session.currentUser.fullName : 'NHÂN VIÊN BÁN HÀNG'}"></strong>
+                            </td>
+                        </tr>
+                    </table>
                 </td>
             </tr>
         </table>

@@ -208,8 +208,11 @@
                     <button type="submit" class="btn btn-primary me-2">
                         <i class="fas fa-filter"></i> Lọc số liệu
                     </button>
-                    <a th:href="@{/admin/dashboard/export(startDate=${startDate}, endDate=${endDate})}" class="btn btn-success">
-                        <i class="fas fa-file-excel"></i> Xuất Báo Cáo (CSV)
+                    <a th:href="@{/admin/invoices/print(startDate=${startDate}, endDate=${endDate})}" target="_blank" class="btn btn-outline-success fw-bold">
+                        <i class="fas fa-print"></i> In Báo Cáo
+                    </a>
+                    <a th:href="@{/admin/dashboard/export(startDate=${startDate}, endDate=${endDate})}" class="btn btn-success fw-bold ms-2">
+                        <i class="fas fa-file-csv"></i> Xuất (CSV)
                     </a>
                 </div>
             </form>

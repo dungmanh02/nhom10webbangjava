@@ -56,6 +56,57 @@ public class AdminInvoiceController {
         return "admin/invoices"; // Trỏ tới file HTML
     }
 
+    // 1.5. IN BÁO CÁO DOANH THU (HTML PRINT)
+    @GetMapping("/print")
+    public String printReport(
+            @RequestParam(value = "startDate", required = false) @org.springframework.format.annotation.DateTimeFormat(pattern = "yyyy-MM-dd") java.util.Date startDate,
+            @RequestParam(value = "endDate", required = false) @org.springframework.format.annotation.DateTimeFormat(pattern = "yyyy-MM-dd") java.util.Date endDate,
+            Model model) {
+            
+        if (endDate != null) {
+            java.util.Calendar cal = java.util.Calendar.getInstance();
+            cal.setTime(endDate);
+            cal.set(java.util.Calendar.HOUR_OF_DAY, 23);
+            cal.set(java.util.Calendar.MINUTE, 59);
+            cal.set(java.util.Calendar.SECOND, 59);
+            endDate = cal.getTime();
+        }
+
+        List<Order> invoices = orderService.getValidInvoices(startDate, endDate);
+        model.addAttribute("invoices", invoices);
+        
+        java.text.SimpleDateFormat sdf = new java.text.SimpleDateFormat("dd/MM/yyyy");
+        model.addAttribute("startDateStr", startDate != null ? sdf.format(startDate) : "Đầu kỳ");
+        model.addAttribute("endDateStr", endDate != null ? sdf.format(endDate) : sdf.format(new java.util.Date()));
+
+        // Tính tổng doanh thu
+        double totalRevenue = invoices.stream().mapToDouble(Order::getTotalAmount).sum();
+        model.addAttribute("totalRevenue", totalRevenue);
+        model.addAttribute("totalOrders", invoices.size());
+
+        // Thống kê theo hãng (giả lập duyệt qua order details)
+        java.util.Map<String, Double> brandRevenue = new java.util.HashMap<>();
+        java.util.Map<String, Integer> brandQuantity = new java.util.HashMap<>();
+        
+        for (Order order : invoices) {
+            if (order.getOrderDetails() != null) {
+                for (com.lapzone.lapzoneweb.model.entity.OrderDetail detail : order.getOrderDetails()) {
+                    String brandName = (detail.getProduct() != null && detail.getProduct().getCategory() != null) 
+                                       ? detail.getProduct().getCategory().getName() 
+                                       : "Khác";
+                    
+                    brandRevenue.put(brandName, brandRevenue.getOrDefault(brandName, 0.0) + (detail.getPrice() * detail.getQuantity()));
+                    brandQuantity.put(brandName, brandQuantity.getOrDefault(brandName, 0) + detail.getQuantity());
+                }
+            }
+        }
+        
+        model.addAttribute("brandRevenue", brandRevenue);
+        model.addAttribute("brandQuantity", brandQuantity);
+
+        return "admin/print_report"; 
+    }
+
     // 2. CHỨC NĂNG XUẤT EXCEL CỰC ĐỈNH
     @GetMapping("/export-excel")
     public void exportToExcel(
