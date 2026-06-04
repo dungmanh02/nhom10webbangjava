@@ -39,7 +39,7 @@
         <div th:if="${payMethod != null and payMethod != 'COD'}" class="mt-4 p-4 border rounded-4 bg-light shadow-sm mb-4">
             <h5 class="text-primary fw-bold mb-3"><i class="fas fa-qrcode me-2"></i> QUÉT MÃ ĐỂ THANH TOÁN</h5>
             <div class="qr-box">
-                <img th:src="@{'https://img.vietqr.io/image/MB-0328775956333-compact2.png?amount=' + ${totalAmount} + '&addInfo=LAPZONE%20' + ${successMessage} + '&accountName=NGUYEN%20MANH%20DUNG'}" 
+                <img loading="lazy" th:src="@{'https://img.vietqr.io/image/MB-0328775956333-compact2.png?amount=' + ${totalAmount} + '&addInfo=LAPZONE%20' + ${successMessage} + '&accountName=NGUYEN%20MANH%20DUNG'}" 
                 style="width: 250px; border-radius: 10px;" 
                 alt="QR Payment">
             </div>

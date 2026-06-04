@@ -35,4 +35,5 @@ public interface ProductRepository extends JpaRepository<Product, Long> {
             org.springframework.data.domain.Pageable pageable
     );
     List<Product> findByCategoryId(Long categoryId);
+    List<Product> findTop4ByCategoryIdAndIdNot(Long categoryId, Long productId);
 }

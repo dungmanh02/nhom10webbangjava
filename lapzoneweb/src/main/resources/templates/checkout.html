@@ -189,7 +189,7 @@
                 </div>
                 <div class="card-body">
                     <div th:each="item : ${cartItems}" class="product-item">
-                       <img th:src="${item.product.image}" alt="Product">
+                       <img loading="lazy" th:src="${item.product.image}" alt="Product">
                         <div class="flex-grow-1">
                             <h6 class="mb-0" th:text="${item.product.name}">Tên sản phẩm</h6>
                             <small class="text-muted" th:text="${#numbers.formatDecimal(item.product.price, 0, 'COMMA', 0, 'POINT')} + ' đ'"></small>

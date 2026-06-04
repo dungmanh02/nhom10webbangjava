@@ -194,6 +194,27 @@
                 style="position: absolute; right: 30px; top: -10px; font-size: 120px; opacity: 0.2;"></i>
         </div>
 
+        <div class="card shadow-sm border-0 rounded-3 mb-4 p-3 bg-white">
+            <form th:action="@{/admin/dashboard}" method="get" class="row g-3 align-items-end">
+                <div class="col-md-3">
+                    <label class="form-label text-muted fw-bold">Từ ngày:</label>
+                    <input type="date" class="form-control" name="startDate" th:value="${startDate}" required>
+                </div>
+                <div class="col-md-3">
+                    <label class="form-label text-muted fw-bold">Đến ngày:</label>
+                    <input type="date" class="form-control" name="endDate" th:value="${endDate}" required>
+                </div>
+                <div class="col-md-6">
+                    <button type="submit" class="btn btn-primary me-2">
+                        <i class="fas fa-filter"></i> Lọc số liệu
+                    </button>
+                    <a th:href="@{/admin/dashboard/export(startDate=${startDate}, endDate=${endDate})}" class="btn btn-success">
+                        <i class="fas fa-file-excel"></i> Xuất Báo Cáo (CSV)
+                    </a>
+                </div>
+            </form>
+        </div>
+
         <div class="stats-container">
             <div class="stat-card">
                 <div class="stat-value" th:text="${countProducts}">0</div>
@@ -206,13 +227,13 @@
                 <i class="fas fa-users stat-icon"></i>
             </div>
             <div class="stat-card">
-                <div class="stat-value">124</div>
-                <div class="stat-label">Đơn hàng tháng này</div>
+                <div class="stat-value" th:text="${countOrders}">0</div>
+                <div class="stat-label">Đơn hàng (Theo bộ lọc)</div>
                 <i class="fas fa-shopping-cart stat-icon"></i>
             </div>
             <div class="stat-card">
-                <div class="stat-value">85M</div>
-                <div class="stat-label">Doanh thu ước tính (VND)</div>
+                <div class="stat-value" th:text="${#numbers.formatDecimal(totalRevenue, 0, 'COMMA', 0, 'POINT')} + ' đ'">0 đ</div>
+                <div class="stat-label">Doanh thu (Theo bộ lọc)</div>
                 <i class="fas fa-hand-holding-usd stat-icon"></i>
             </div>
         </div>
@@ -237,6 +258,41 @@
                     <div class="card-body p-4 d-flex justify-content-center">
                         <canvas id="categoryChart"></canvas>
                     </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="card shadow-sm border-0 rounded-3 mb-4">
+            <div class="card-header bg-white fw-bold py-3">
+                <i class="fas fa-list text-primary me-2"></i> Chi tiết đơn hàng trong kỳ
+            </div>
+            <div class="card-body p-0">
+                <div class="table-responsive">
+                    <table class="table table-hover align-middle mb-0">
+                        <thead class="table-light">
+                            <tr>
+                                <th class="ps-4">Mã ĐH</th>
+                                <th>Khách Hàng</th>
+                                <th>Số điện thoại</th>
+                                <th>Ngày Lập</th>
+                                <th>Trạng Thái</th>
+                                <th class="text-end pe-4">Tổng Tiền</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr th:if="${orders.isEmpty()}">
+                                <td colspan="6" class="text-center py-4 text-muted">Không có đơn hàng nào trong khoảng thời gian này.</td>
+                            </tr>
+                            <tr th:each="order : ${orders}">
+                                <td class="ps-4 fw-bold text-primary">#[[${order.id}]]</td>
+                                <td th:text="${order.customerName}"></td>
+                                <td th:text="${order.customerPhone}"></td>
+                                <td th:text="${#dates.format(order.orderDate, 'dd/MM/yyyy HH:mm')}"></td>
+                                <td><span class="badge bg-success" th:text="${order.status}"></span></td>
+                                <td class="text-end pe-4 fw-bold text-danger" th:text="${#numbers.formatDecimal(order.totalAmount, 0, 'COMMA', 0, 'POINT')} + ' đ'"></td>
+                            </tr>
+                        </tbody>
+                    </table>
                 </div>
             </div>
         </div>

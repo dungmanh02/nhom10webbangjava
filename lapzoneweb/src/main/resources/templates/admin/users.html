@@ -127,11 +127,12 @@
                                     </form>
                                 </td>
                                 <td class="text-center">
-                                    <a th:href="@{/admin/users/delete/{id}(id=${user.id})}" 
-                                       class="btn btn-sm btn-danger px-3 shadow-sm"
-                                       onclick="return confirm('Bạn có chắc chắn muốn xóa người dùng này không?')">
-                                        <i class="fas fa-trash-alt me-1"></i> Xóa
-                                    </a>
+                                    <form th:action="@{/admin/users/delete}" method="post" onsubmit="return confirm('Bạn có chắc chắn muốn xóa người dùng này không? Hành động này không thể hoàn tác!')" class="m-0">
+                                        <input type="hidden" name="userId" th:value="${user.id}">
+                                        <button type="submit" class="btn btn-sm btn-danger px-3 shadow-sm">
+                                            <i class="fas fa-trash-alt me-1"></i> Xóa
+                                        </button>
+                                    </form>
                                 </td>
                             </tr>
                         </tbody>

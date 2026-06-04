@@ -99,6 +99,11 @@
                         <input type="text" th:field="*{productDetail.screen}" class="form-control" placeholder="14 inch, 2K...">
                     </div>
                     
+                    <div class="col-md-12">
+                        <label class="form-label fw-bold">Phân loại nhu cầu (Từ khóa tìm kiếm)</label>
+                        <input type="text" th:field="*{productDetail.moreInfo}" class="form-control text-primary fw-bold" placeholder="VD: Gaming, Văn Phòng, Cao Cấp, Đồ Họa (Dùng để phân loại trên trang chủ)">
+                    </div>
+                    
                     <div class="col-md-4">
                         <label class="form-label fw-bold text-primary">1. Ảnh đại diện chính</label>
                         <input type="file" name="imageFile" class="form-control" accept="image/*">
@@ -139,12 +144,12 @@
                 <tbody>
                     <tr th:each="p : ${products}">
                         <td>
-                            <img th:if="${p.image != null and !p.image.isEmpty()}"
+                            <img loading="lazy" th:if="${p.image != null and !p.image.isEmpty()}"
                                  th:src="@{${p.image.startsWith('assets/') ? '/' + p.image : '/assets/' + p.image}}"
                                  class="img-thumbnail-custom"
                                  alt="Ảnh Laptop">
 
-                            <img th:unless="${p.image != null and !p.image.isEmpty()}"
+                            <img loading="lazy" th:unless="${p.image != null and !p.image.isEmpty()}"
                                  th:src="@{/assets/no-image.png}"
                                  class="img-thumbnail-custom">
                         </td>

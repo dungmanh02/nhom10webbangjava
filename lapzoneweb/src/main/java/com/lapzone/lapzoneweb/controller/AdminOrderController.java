@@ -21,13 +21,29 @@ public class AdminOrderController {
     public String listOrders(
             @RequestParam(value = "keyword", required = false) String keyword,
             @RequestParam(value = "status", required = false) String status,
+            @RequestParam(value = "startDate", required = false) @org.springframework.format.annotation.DateTimeFormat(pattern = "yyyy-MM-dd") java.util.Date startDate,
+            @RequestParam(value = "endDate", required = false) @org.springframework.format.annotation.DateTimeFormat(pattern = "yyyy-MM-dd") java.util.Date endDate,
             Model model) {
         
-        List<Order> orders = orderService.searchOrders(keyword, status);
+        if (endDate != null) {
+            java.util.Calendar cal = java.util.Calendar.getInstance();
+            cal.setTime(endDate);
+            cal.set(java.util.Calendar.HOUR_OF_DAY, 23);
+            cal.set(java.util.Calendar.MINUTE, 59);
+            cal.set(java.util.Calendar.SECOND, 59);
+            endDate = cal.getTime();
+        }
+
+        List<Order> orders = orderService.searchOrders(keyword, status, startDate, endDate);
+        
+        java.text.SimpleDateFormat sdf = new java.text.SimpleDateFormat("yyyy-MM-dd");
+        if (startDate != null) model.addAttribute("startDate", sdf.format(startDate));
+        if (endDate != null) model.addAttribute("endDate", sdf.format(endDate));
+
         model.addAttribute("orders", orders);
         model.addAttribute("keyword", keyword);
         model.addAttribute("status", status);
-        return "admin/orders"; // Đường dẫn tới file admin_orders.html
+        return "admin/orders"; 
     }
 
     @PostMapping("/update-status")

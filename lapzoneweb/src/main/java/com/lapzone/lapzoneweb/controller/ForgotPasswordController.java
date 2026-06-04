@@ -15,6 +15,9 @@ public class ForgotPasswordController {
     @Autowired
     private UserRepository userRepository;
 
+    @Autowired
+    private org.springframework.security.crypto.password.PasswordEncoder passwordEncoder;
+
     // 1. Hiện form nhập Email & Số điện thoại
     @GetMapping("/forgot-password")
     public String showForgotForm() {
@@ -48,9 +51,8 @@ public class ForgotPasswordController {
         User user = userRepository.findByEmail(email);
         
         if (user != null) {
-            // LƯU Ý: Nếu đồ án của bạn dùng mã hóa BCrypt, nhớ thay bằng dòng này:
-            // user.setPassword(bCryptPasswordEncoder.encode(newPassword));
-            user.setPassword(newPassword); 
+            // Đã kích hoạt mã hóa BCrypt
+            user.setPassword(passwordEncoder.encode(newPassword)); 
             userRepository.save(user);
             
             model.addAttribute("message", "Đổi mật khẩu thành công! Bạn có thể đăng nhập ngay.");

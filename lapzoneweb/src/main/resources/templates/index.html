@@ -18,7 +18,7 @@
         <div style="display: grid; grid-template-columns: 2fr 1fr; gap: 24px;">
             <!-- Main Banner -->
             <div style="border-radius: var(--radius-lg); overflow: hidden; position: relative;">
-                <img th:src="@{/assets/reviewimage.webp}" alt="Banner" style="width: 100%; height: 100%; object-fit: cover;">
+                <img loading="lazy" th:src="@{/assets/reviewimage.webp}" alt="Banner" style="width: 100%; height: 100%; object-fit: cover;">
                 <div style="position: absolute; bottom: 0; left: 0; right: 0; background: linear-gradient(transparent, rgba(0,0,0,0.8)); padding: 40px;">
                     <h2 style="color: white; font-size: 2.5rem; margin-bottom: 10px;">Thế Hệ Laptop Mới</h2>
                     <p style="color: rgba(255,255,255,0.8);">Trang bị card đồ họa RTX 40 Series mạnh mẽ</p>
@@ -49,23 +49,23 @@
         <h2 class="section-title">Laptop theo nhu cầu</h2>
         <div style="display: grid; grid-template-columns: repeat(5, 1fr); gap: 20px;">
             <a th:href="@{/search(query='Văn Phòng')}" style="background: var(--bg-card); border: 1px solid var(--border-glass); border-radius: var(--radius-lg); padding: 20px; text-align: center; transition: var(--transition-normal);" onmouseover="this.style.borderColor='var(--accent-blue)'; this.style.transform='translateY(-5px)';" onmouseout="this.style.borderColor='var(--border-glass)'; this.style.transform='translateY(0)';">
-                <img th:src="@{/assets/vanphonghoctap.webp}" alt="Văn phòng" style="height: 100px; margin: 0 auto 16px;">
+                <img loading="lazy" th:src="@{/assets/vanphonghoctap.webp}" alt="Văn phòng" style="height: 100px; margin: 0 auto 16px;">
                 <h4 style="color: var(--text-primary);">Học Tập, Văn Phòng</h4>
             </a>
             <a th:href="@{/search(query='Đồ Họa')}" style="background: var(--bg-card); border: 1px solid var(--border-glass); border-radius: var(--radius-lg); padding: 20px; text-align: center; transition: var(--transition-normal);" onmouseover="this.style.borderColor='var(--accent-blue)'; this.style.transform='translateY(-5px)';" onmouseout="this.style.borderColor='var(--border-glass)'; this.style.transform='translateY(0)';">
-                <img th:src="@{/assets/dohoakythuat.webp}" alt="Đồ họa" style="height: 100px; margin: 0 auto 16px;">
+                <img loading="lazy" th:src="@{/assets/dohoakythuat.webp}" alt="Đồ họa" style="height: 100px; margin: 0 auto 16px;">
                 <h4 style="color: var(--text-primary);">Đồ Họa, Kỹ Thuật</h4>
             </a>
             <a th:href="@{/search(query='Lập Trình')}" style="background: var(--bg-card); border: 1px solid var(--border-glass); border-radius: var(--radius-lg); padding: 20px; text-align: center; transition: var(--transition-normal);" onmouseover="this.style.borderColor='var(--accent-blue)'; this.style.transform='translateY(-5px)';" onmouseout="this.style.borderColor='var(--border-glass)'; this.style.transform='translateY(0)';">
-                <img th:src="@{/assets/laptoplaptrinh.webp}" alt="Lập trình" style="height: 100px; margin: 0 auto 16px;">
+                <img loading="lazy" th:src="@{/assets/laptoplaptrinh.webp}" alt="Lập trình" style="height: 100px; margin: 0 auto 16px;">
                 <h4 style="color: var(--text-primary);">Lập Trình</h4>
             </a>
             <a th:href="@{/search(query='Gaming')}" style="background: var(--bg-card); border: 1px solid var(--border-glass); border-radius: var(--radius-lg); padding: 20px; text-align: center; transition: var(--transition-normal);" onmouseover="this.style.borderColor='var(--accent-blue)'; this.style.transform='translateY(-5px)';" onmouseout="this.style.borderColor='var(--border-glass)'; this.style.transform='translateY(0)';">
-                <img th:src="@{/assets/gamelaptop.webp}" alt="Gaming" style="height: 100px; margin: 0 auto 16px;">
+                <img loading="lazy" th:src="@{/assets/gamelaptop.webp}" alt="Gaming" style="height: 100px; margin: 0 auto 16px;">
                 <h4 style="color: var(--text-primary);">Gaming</h4>
             </a>
             <a th:href="@{/search(minPrice=30000000)}" style="background: var(--bg-card); border: 1px solid var(--border-glass); border-radius: var(--radius-lg); padding: 20px; text-align: center; transition: var(--transition-normal);" onmouseover="this.style.borderColor='var(--accent-blue)'; this.style.transform='translateY(-5px)';" onmouseout="this.style.borderColor='var(--border-glass)'; this.style.transform='translateY(0)';">
-                <img th:src="@{/assets/sieuphamlaptop.webp}" alt="Siêu Phẩm" style="height: 100px; margin: 0 auto 16px;">
+                <img loading="lazy" th:src="@{/assets/sieuphamlaptop.webp}" alt="Siêu Phẩm" style="height: 100px; margin: 0 auto 16px;">
                 <h4 style="color: var(--text-primary);">Cao Cấp (Premium)</h4>
             </a>
         </div>
@@ -84,7 +84,7 @@
                     <div class="badge" th:if="${product.stock > 0}">HOT!</div>
                     <a th:href="@{/product_detail(id=${product.id})}">
                         <div class="product-img-wrapper">
-                            <img class="product-img" th:src="@{'/' + ${product.image}}" alt="Laptop">
+                            <img loading="lazy" class="product-img" th:src="@{'/' + ${product.image}}" alt="Laptop">
                         </div>
                         <h3 class="product-title" th:text="${product.name}">Tên Sản Phẩm</h3>
                         <div class="product-price" th:text="${#numbers.formatDecimal(product.price, 0, 'COMMA', 0, 'POINT')} + ' đ'">Giá</div>
@@ -111,7 +111,7 @@
                     <div class="badge" style="background: linear-gradient(135deg, #111, #333);"><i class="fab fa-apple"></i> Mac</div>
                     <a th:href="@{/product_detail(id=${product.id})}">
                         <div class="product-img-wrapper">
-                            <img class="product-img" th:src="@{'/' + ${product.image}}" alt="Macbook">
+                            <img loading="lazy" class="product-img" th:src="@{'/' + ${product.image}}" alt="Macbook">
                         </div>
                         <h3 class="product-title" th:text="${product.name}">Macbook</h3>
                         <div class="product-price" th:text="${#numbers.formatDecimal(product.price, 0, 'COMMA', 0, 'POINT')} + ' đ'">Giá</div>

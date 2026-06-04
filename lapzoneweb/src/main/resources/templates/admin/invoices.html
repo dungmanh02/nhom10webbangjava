@@ -69,10 +69,28 @@
                 </div>
             </div>
 
+            <div class="card shadow-sm border-0 rounded-3 mb-4 p-3 bg-white">
+                <form th:action="@{/admin/invoices}" method="get" class="row g-3 align-items-end">
+                    <div class="col-md-3">
+                        <label class="form-label text-muted fw-bold">Từ ngày:</label>
+                        <input type="date" class="form-control" name="startDate" th:value="${startDate}" title="Từ ngày">
+                    </div>
+                    <div class="col-md-3">
+                        <label class="form-label text-muted fw-bold">Đến ngày:</label>
+                        <input type="date" class="form-control" name="endDate" th:value="${endDate}" title="Đến ngày">
+                    </div>
+                    <div class="col-md-6">
+                        <button type="submit" class="btn btn-primary">
+                            <i class="fas fa-filter"></i> Lọc hóa đơn
+                        </button>
+                    </div>
+                </form>
+            </div>
+
             <div class="card shadow border-0">
                 <div class="card-header bg-white py-3 d-flex justify-content-between align-items-center">
                     <h5 class="m-0 fw-bold text-success"><i class="fas fa-file-invoice-dollar me-2"></i> CHỨNG TỪ KẾ TOÁN</h5>
-                    <a th:href="@{/admin/invoices/export-excel}" class="btn btn-success fw-bold">
+                    <a th:href="@{/admin/invoices/export-excel(startDate=${startDate}, endDate=${endDate})}" class="btn btn-success fw-bold">
                         <i class="fas fa-file-excel me-2"></i> Xuất Excel báo cáo
                     </a>
                 </div>

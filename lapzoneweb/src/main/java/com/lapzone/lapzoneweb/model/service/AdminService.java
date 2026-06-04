@@ -20,6 +20,8 @@ public class AdminService {
     private CategoryRepository categoryRepository;
     @Autowired
     private UserRepository userRepository;
+    @Autowired
+    private OrderRepository orderRepository;
 
   
     public long countProducts() { return productRepository.count(); }
@@ -27,6 +29,15 @@ public class AdminService {
     public List<Category> getAllCategories() { return categoryRepository.findAll(); }
     public List<Product> getAllProducts() { return productRepository.findAll(org.springframework.data.domain.Sort.by(org.springframework.data.domain.Sort.Direction.DESC, "id")); }
     public Product getProductById(Long id) { return productRepository.findById(id).orElse(null); }
+
+    public List<Order> getCompletedOrdersBetweenDates(java.util.Date startDate, java.util.Date endDate) {
+        return orderRepository.findCompletedOrdersBetweenDates(startDate, endDate);
+    }
+    
+    public Double calculateRevenueBetweenDates(java.util.Date startDate, java.util.Date endDate) {
+        Double revenue = orderRepository.calculateRevenueBetweenDates(startDate, endDate);
+        return revenue != null ? revenue : 0.0;
+    }
 
 
     @Transactional

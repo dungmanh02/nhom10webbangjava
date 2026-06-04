@@ -100,10 +100,10 @@ public class OrderService {
                 .orElseThrow(() -> new RuntimeException("Không tìm thấy hóa đơn số: #" + orderId));
     }
     // Hàm tìm kiếm và lọc đơn hàng
-        public List<Order> searchOrders(String keyword, String status) {
+        public List<Order> searchOrders(String keyword, String status, java.util.Date startDate, java.util.Date endDate) {
             if (status != null && status.isEmpty()) status = null;
             if (keyword != null && keyword.isEmpty()) keyword = null;
-            return orderRepository.searchOrders(keyword, status);
+            return orderRepository.searchOrders(keyword, status, startDate, endDate);
         }
 
         // Hàm cập nhật trạng thái
@@ -115,8 +115,8 @@ public class OrderService {
             orderRepository.save(order);
         }
         // Lấy hóa đơn hợp lệ
-        public List<Order> getValidInvoices() {
-            return orderRepository.findByStatusInOrderByOrderDateDesc(List.of("ĐÃ THANH TOÁN", "HOÀN THÀNH"));
+        public List<Order> getValidInvoices(java.util.Date startDate, java.util.Date endDate) {
+            return orderRepository.findValidInvoicesBetweenDates(startDate, endDate);
         }
 
         // Lấy doanh thu tháng này

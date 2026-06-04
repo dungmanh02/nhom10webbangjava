@@ -15,7 +15,6 @@ public class UserRegisterDTO {
     @Pattern(regexp = "^[0-9]{10}$", message = "Số điện thoại phải gồm 10 chữ số")
     private String phone;
 
-    @NotBlank(message = "Địa chỉ không được để trống")
     private String address;
 
     @NotBlank(message = "Mật khẩu không được để trống")

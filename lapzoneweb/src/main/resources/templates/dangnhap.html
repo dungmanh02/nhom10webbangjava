@@ -148,6 +148,9 @@
         <h2>ĐĂNG NHẬP</h2>
         <p>vui lòng điền tài khoản và mật khẩu của bạn</p>
 
+        <div th:if="${param.error}" class="alert alert-error">
+            <i class="fas fa-exclamation-circle"></i> Tài khoản hoặc mật khẩu không chính xác!
+        </div>
         <div th:if="${error != null}" class="alert alert-error">
             <i class="fas fa-exclamation-circle"></i> <span th:text="${error}"></span>
         </div>
@@ -155,19 +158,65 @@
             <i class="fas fa-check-circle"></i> <span th:text="${success}"></span>
         </div>
 
-        <form th:action="@{/dangnhap}" method="post">
+        <form th:action="@{/dangnhap}" method="post" id="loginForm">
             <div class="form-group">
                 <label>Tài khoản</label>
-                <input type="text" name="emailOrPhone" placeholder="Email hoặc Số điện thoại" required>
+                <input type="text" name="emailOrPhone" id="emailOrPhone" placeholder="Email hoặc Số điện thoại">
+                <small id="emailError" style="color: var(--error-text); display: none; margin-top: 5px; font-size: 13px;"><i class="fas fa-exclamation-circle"></i> Vui lòng nhập tài khoản!</small>
             </div>
             
             <div class="form-group">
                 <label>Mật khẩu</label>
-                <input type="password" name="password" placeholder="Nhập mật khẩu" required>
+                <input type="password" name="password" id="password" placeholder="Nhập mật khẩu">
+                <small id="passwordError" style="color: var(--error-text); display: none; margin-top: 5px; font-size: 13px;"><i class="fas fa-exclamation-circle"></i> Vui lòng nhập mật khẩu!</small>
             </div>
 
             <button type="submit" class="btn-login">ĐĂNG NHẬP</button>
         </form>
+
+        <script>
+            document.getElementById('loginForm').addEventListener('submit', function(e) {
+                let isValid = true;
+                const email = document.getElementById('emailOrPhone');
+                const pass = document.getElementById('password');
+                const emailError = document.getElementById('emailError');
+                const passError = document.getElementById('passwordError');
+
+                // Validate tài khoản
+                if (!email.value.trim()) {
+                    emailError.style.display = 'block';
+                    email.style.borderColor = 'red';
+                    isValid = false;
+                } else {
+                    emailError.style.display = 'none';
+                    email.style.borderColor = '#ddd';
+                }
+
+                // Validate mật khẩu
+                if (!pass.value.trim()) {
+                    passError.style.display = 'block';
+                    pass.style.borderColor = 'red';
+                    isValid = false;
+                } else {
+                    passError.style.display = 'none';
+                    pass.style.borderColor = '#ddd';
+                }
+
+                if (!isValid) {
+                    e.preventDefault(); // Ngăn chặn submit form nếu có lỗi
+                }
+            });
+
+            // Tự động ẩn lỗi khi người dùng bắt đầu gõ
+            document.getElementById('emailOrPhone').addEventListener('input', function() {
+                document.getElementById('emailError').style.display = 'none';
+                this.style.borderColor = '#ddd';
+            });
+            document.getElementById('password').addEventListener('input', function() {
+                document.getElementById('passwordError').style.display = 'none';
+                this.style.borderColor = '#ddd';
+            });
+        </script>
 
         <div class="extra-links">
             Chưa có tài khoản? <a th:href="@{/dangki}">Tham gia Lapzone ngay</a>

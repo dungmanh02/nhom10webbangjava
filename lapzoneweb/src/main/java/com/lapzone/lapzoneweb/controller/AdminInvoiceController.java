@@ -32,22 +32,61 @@ public class AdminInvoiceController {
 
     // 1. HIỂN THỊ GIAO DIỆN HÓA ĐƠN VÀ THỐNG KÊ
     @GetMapping
-    public String listInvoices(Model model) {
-        model.addAttribute("invoices", orderService.getValidInvoices());
+    public String listInvoices(
+            @RequestParam(value = "startDate", required = false) @org.springframework.format.annotation.DateTimeFormat(pattern = "yyyy-MM-dd") java.util.Date startDate,
+            @RequestParam(value = "endDate", required = false) @org.springframework.format.annotation.DateTimeFormat(pattern = "yyyy-MM-dd") java.util.Date endDate,
+            Model model) {
+            
+        if (endDate != null) {
+            java.util.Calendar cal = java.util.Calendar.getInstance();
+            cal.setTime(endDate);
+            cal.set(java.util.Calendar.HOUR_OF_DAY, 23);
+            cal.set(java.util.Calendar.MINUTE, 59);
+            cal.set(java.util.Calendar.SECOND, 59);
+            endDate = cal.getTime();
+        }
+
+        model.addAttribute("invoices", orderService.getValidInvoices(startDate, endDate));
+        
+        java.text.SimpleDateFormat sdf = new java.text.SimpleDateFormat("yyyy-MM-dd");
+        if (startDate != null) model.addAttribute("startDate", sdf.format(startDate));
+        if (endDate != null) model.addAttribute("endDate", sdf.format(endDate));
+
         model.addAttribute("monthlyRevenue", orderService.getCurrentMonthRevenue());
         return "admin/invoices"; // Trỏ tới file HTML
     }
 
     // 2. CHỨC NĂNG XUẤT EXCEL CỰC ĐỈNH
     @GetMapping("/export-excel")
-    public void exportToExcel(HttpServletResponse response) throws IOException {
+    public void exportToExcel(
+            @RequestParam(value = "startDate", required = false) @org.springframework.format.annotation.DateTimeFormat(pattern = "yyyy-MM-dd") java.util.Date startDate,
+            @RequestParam(value = "endDate", required = false) @org.springframework.format.annotation.DateTimeFormat(pattern = "yyyy-MM-dd") java.util.Date endDate,
+            HttpServletResponse response) throws IOException {
+            
+        if (endDate != null) {
+            java.util.Calendar cal = java.util.Calendar.getInstance();
+            cal.setTime(endDate);
+            cal.set(java.util.Calendar.HOUR_OF_DAY, 23);
+            cal.set(java.util.Calendar.MINUTE, 59);
+            cal.set(java.util.Calendar.SECOND, 59);
+            endDate = cal.getTime();
+        }
+
         // Cấu hình file trả về là Excel (Dùng chuẩn Jakarta)
         response.setContentType("application/octet-stream");
-        String headerKey = "Content-Disposition";
-        String headerValue = "attachment; filename=DoanhThu_Lapzone_" + new SimpleDateFormat("yyyyMMdd").format(new java.util.Date()) + ".xlsx";
-        response.setHeader(headerKey, headerValue);
+        
+        String fileName = "ChungTu_Lapzone";
+        java.text.SimpleDateFormat fileSdf = new java.text.SimpleDateFormat("ddMMyyyy");
+        if (startDate != null && endDate != null) {
+            fileName += "_Tu_" + fileSdf.format(startDate) + "_Den_" + fileSdf.format(endDate);
+        } else {
+            fileName += "_" + fileSdf.format(new java.util.Date());
+        }
+        fileName += ".xlsx";
+        
+        response.setHeader("Content-Disposition", "attachment; filename=\"" + fileName + "\"");
 
-        List<Order> invoices = orderService.getValidInvoices();
+        List<Order> invoices = orderService.getValidInvoices(startDate, endDate);
 
         // Tạo file Excel
         Workbook workbook = new XSSFWorkbook();

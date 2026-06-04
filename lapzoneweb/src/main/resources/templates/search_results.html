@@ -60,7 +60,7 @@
         </div>
 
         <div style="text-align: center; margin-bottom: 40px;">
-            <h1 class="section-title" th:text="'Sản Phẩm: ' + ${keyword != '' ? keyword : 'Tất cả'}">Kết Quả</h1>
+            <h1 class="section-title" th:text="'Sản Phẩm: ' + (${keyword != '' ? keyword : (selectedCategoryName != null ? selectedCategoryName : 'Tất cả')})">Kết Quả</h1>
         </div>
 
         <div style="display: grid; grid-template-columns: 300px 1fr; gap: 40px;">
@@ -70,7 +70,7 @@
                 <form id="filterForm" th:action="@{/search}" method="get">
                     <input type="hidden" name="query" th:value="${keyword}">
                     
-                    <div class="filter-group">
+                    <div class="filter-group" th:if="${selectedCategoryName == null}">
                         <label>Hãng sản xuất:</label>
                         <select name="categoryId">
                             <option value="">-- Tất cả các hãng --</option>
@@ -80,6 +80,9 @@
                                     th:selected="${cat.id == selectedCategoryId}"></option>
                         </select>
                     </div>
+                    
+                    <!-- Ẩn thẻ select nhưng vẫn giữ lại categoryId để bộ lọc khác (như Giá, RAM) hoạt động đúng -->
+                    <input type="hidden" name="categoryId" th:value="${selectedCategoryId}" th:if="${selectedCategoryName != null}">
 
                     <div class="filter-group">
                         <label>Mức giá (VNĐ):</label>
@@ -181,7 +184,7 @@
                     <article class="product-card" th:each="p : ${products}">
                         <a th:href="@{/product_detail(id=${p.id})}">
                             <div class="product-img-wrapper">
-                                <img class="product-img" th:src="@{'/' + ${p.image}}" th:alt="${p.name}">
+                                <img loading="lazy" class="product-img" th:src="@{'/' + ${p.image}}" th:alt="${p.name}">
                             </div>
                             <h3 class="product-title" th:text="${p.name}">Tên SP</h3>
                             <div class="product-price" th:text="${#numbers.formatDecimal(p.price, 0, 'COMMA', 0, 'POINT')} + ' đ'">Giá</div>

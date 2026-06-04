@@ -28,7 +28,8 @@ public class ProductController {
         Product product = productService.getProductById(id);
         
         if (product != null) {
-   
+            List<Product> relatedProducts = productService.getRelatedProducts(product.getCategory().getId(), product.getId());
+            model.addAttribute("relatedProducts", relatedProducts);
             model.addAttribute("product", product);
             return "product_detail"; 
         } else {
@@ -75,6 +76,15 @@ public class ProductController {
         model.addAttribute("keyword", query);
         model.addAttribute("categories", categoryRepository.findAll());
         model.addAttribute("selectedCategoryId", categoryId);
+        
+        // Bổ sung logic lấy tên danh mục để hiển thị lên UI
+        if (categoryId != null) {
+            model.addAttribute("selectedCategoryName", categoryRepository.findById(categoryId)
+                .map(cat -> cat.getName())
+                .orElse(null));
+        } else {
+            model.addAttribute("selectedCategoryName", null);
+        }
         model.addAttribute("selectedMinPrice", minPrice);
         model.addAttribute("selectedMaxPrice", maxPrice);
         model.addAttribute("selectedCpu", cpu); 

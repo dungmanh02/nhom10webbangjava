@@ -39,8 +39,15 @@ public class UserService {
         return userRepository.save(user);
     }
 
+    @Autowired
+    private com.lapzone.lapzoneweb.model.repository.CartItemRepository cartItemRepository;
+
     // 3. Xóa user
+    @org.springframework.transaction.annotation.Transactional
     public void deleteUser(Long id) {
+        // Xóa tất cả các item trong giỏ hàng của user này trước (nếu có)
+        cartItemRepository.deleteByUserId(id);
+        // Sau đó mới xóa user (Nếu user đã có Order, hệ thống vẫn sẽ ném lỗi để controller bắt)
         userRepository.deleteById(id);
     }
 

@@ -10,6 +10,10 @@ import org.springframework.stereotype.Service;
 public class AuthService {
     @Autowired
     private UserRepository userRepository;
+
+    @Autowired
+    private org.springframework.security.crypto.password.PasswordEncoder passwordEncoder;
+
     public User authenticate(String emailOrPhone, String password) {
         User user = userRepository.findByEmailOrPhone(emailOrPhone, emailOrPhone);
         if (user != null && user.getPassword().equals(password)) {
@@ -30,7 +34,8 @@ public class AuthService {
         newUser.setEmail(registerDTO.getEmail());
         newUser.setPhone(registerDTO.getPhone());
         newUser.setAddress(registerDTO.getAddress());
-        newUser.setPassword(registerDTO.getPassword());
+        // Mã hóa mật khẩu trước khi lưu
+        newUser.setPassword(passwordEncoder.encode(registerDTO.getPassword()));
         
         // Thiết lập role mặc định
         newUser.setRole("USER"); 

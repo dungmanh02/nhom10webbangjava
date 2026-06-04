@@ -28,7 +28,9 @@ public class ProductService {
         return productRepository.findByCategory_Name(brand);
     }
 
-    
+    public List<Product> getRelatedProducts(Long categoryId, Long productId) {
+        return productRepository.findTop4ByCategoryIdAndIdNot(categoryId, productId);
+    }
 
     public Product getProductById(Long id) {
         return productRepository.findById(id).orElse(null);
