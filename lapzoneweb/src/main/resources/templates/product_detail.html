@@ -16,21 +16,19 @@
     <div class="product-detail-layout">
         <!-- Left: Image Gallery -->
         <div class="product-gallery">
-            <img loading="lazy" id="mainImage" th:src="@{'/' + ${product.image}}" alt="Main Image" class="product-gallery-main">
+            <img loading="lazy" id="mainImage" th:src="@{${product.image != null and product.image.startsWith('assets/') ? '/' + product.image : '/assets/' + product.image}}" alt="Main Image" class="product-gallery-main">
             
-            <div class="product-thumbnails" th:if="${product.images != null and !product.images.isEmpty()}">
-                <!-- Add main image as first thumbnail -->
-                <img loading="lazy" class="product-thumb active" 
-                     th:src="@{'/' + ${product.image}}" 
-                     onclick="changeMainImage(this.src, this)">
-                
-                <!-- Additional thumbnails -->
-                <img loading="lazy" th:each="imgObj : ${product.images}" 
-                     th:if="${!#strings.equals(imgObj.imageUrl, product.image)}"
-                     class="product-thumb" 
-                     th:src="@{'/' + ${imgObj.imageUrl}}" 
-                     onclick="changeMainImage(this.src, this)">
-            </div>
+         <div class="product-thumbnails" th:if="${product.images != null and !product.images.isEmpty()}">
+                <img loading="lazy" class="product-thumb active"
+                    th:src="@{${product.image != null and product.image.startsWith('assets/') ? '/' + product.image : '/assets/' + product.image}}"
+                    onclick="changeMainImage(this.src, this)">
+
+                <img loading="lazy" th:each="imgObj : ${product.images}"
+                    th:if="${!#strings.equals(imgObj.imageUrl, product.image)}"
+                    class="product-thumb"
+                    th:src="@{${imgObj.imageUrl != null and imgObj.imageUrl.startsWith('assets/') ? '/' + imgObj.imageUrl : '/assets/' + imgObj.imageUrl}}"
+                    onclick="changeMainImage(this.src, this)">
+        </div>
             
             <script>
                 function changeMainImage(src, element) {
